@@ -7,7 +7,17 @@
         mc:Ignorable="d"
         Title="Liusse" MinHeight="350" MinWidth="250"
         Height="500" Width="350">
+    
+    <!--#region Интерфейс-->
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="320*"/>
+        </Grid.RowDefinitions>
 
+        
+        
     </Grid>
+    <!--#endregion-->
 </Window>

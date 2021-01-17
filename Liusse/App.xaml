@@ -6,6 +6,10 @@
             <!-- StartupUri="DesignDocument.xaml"> -->
             <!-- StartupUri="View\MainWindow.xaml"> -->
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles\LiusseTemplate.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
