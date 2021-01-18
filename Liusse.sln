@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Liusse", "Liusse\Liusse.csproj", "{67DCB8B2-A7E1-464C-A8F3-1C6ECE4AAFB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Liusse", "Liusse\Liusse.csproj", "{67DCB8B2-A7E1-464C-A8F3-1C6ECE4AAFB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcParse", "CalcParse\CalcParse.csproj", "{57F05647-69EF-404A-8A72-0C19B23E61F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcParseTests", "CalcParseTests\CalcParseTests.csproj", "{1A88D114-8E3E-49AF-A29A-8E52621CE00F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{67DCB8B2-A7E1-464C-A8F3-1C6ECE4AAFB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67DCB8B2-A7E1-464C-A8F3-1C6ECE4AAFB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67DCB8B2-A7E1-464C-A8F3-1C6ECE4AAFB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57F05647-69EF-404A-8A72-0C19B23E61F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57F05647-69EF-404A-8A72-0C19B23E61F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57F05647-69EF-404A-8A72-0C19B23E61F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57F05647-69EF-404A-8A72-0C19B23E61F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A88D114-8E3E-49AF-A29A-8E52621CE00F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A88D114-8E3E-49AF-A29A-8E52621CE00F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A88D114-8E3E-49AF-A29A-8E52621CE00F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A88D114-8E3E-49AF-A29A-8E52621CE00F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
