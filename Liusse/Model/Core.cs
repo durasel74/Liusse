@@ -5,8 +5,10 @@ using CalcParse;
 
 namespace Liusse
 {
+	// | - - |
 	public class Core : INotifyPropertyChanged
 	{
+		private int openBracketLeft = 0;
 		private string currentExpression = "";
 		private string example = "";
 
@@ -32,11 +34,14 @@ namespace Liusse
 		// | - - |
 		public void Receiver(string symbol)
 		{
-			if (symbol == "C") { }
+			Example = "";
+			if (symbol == "C")
+				Clear();
 			else if (symbol == "⌫") { }
 			else if (symbol == "±") { }
 			else if (symbol == "=") { }
-			else if (symbol == "( )") { }
+			else if (symbol == "( )")
+				AddBracket();
 			else
 				AddSymbol(symbol);
 		}
@@ -50,6 +55,29 @@ namespace Liusse
 				charSymbol);
 			if (canAdd)
 				CurrentExpression += symbol;
+		}
+		// | - |
+		private void AddBracket()
+		{
+			char currentBracket;
+			currentBracket = CalcParse.Parse.WhatAddBracket(CurrentExpression);
+
+			if (openBracketLeft == 0)
+				currentBracket = '(';
+			if (CalcParse.Parse.CanAddBracket(CurrentExpression, currentBracket))
+			{
+				if (currentBracket == '(')
+					openBracketLeft++;
+				else
+					openBracketLeft--;
+				CurrentExpression += currentBracket;
+			}
+		}
+
+		// | - |
+		private void Clear()
+		{
+			CurrentExpression = "";
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;

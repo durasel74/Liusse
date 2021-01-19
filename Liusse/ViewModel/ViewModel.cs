@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace Liusse
 {
+	// | - - |
 	public class ViewModel : INotifyPropertyChanged
 	{
 
