@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Liusse", "Liusse\Liusse.csproj", "{67DCB8B2-A7E1-464C-A8F3-1C6ECE4AAFB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcParse", "CalcParse\CalcParse.csproj", "{57F05647-69EF-404A-8A72-0C19B23E61F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalcParse", "CalcParse\CalcParse.csproj", "{57F05647-69EF-404A-8A72-0C19B23E61F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcParseTests", "CalcParseTests\CalcParseTests.csproj", "{1A88D114-8E3E-49AF-A29A-8E52621CE00F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalcParseTests", "CalcParseTests\CalcParseTests.csproj", "{1A88D114-8E3E-49AF-A29A-8E52621CE00F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{DAFC872A-CEA9-419C-A2BF-3BE2459A800F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +32,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1A88D114-8E3E-49AF-A29A-8E52621CE00F} = {DAFC872A-CEA9-419C-A2BF-3BE2459A800F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3102323F-B048-4ECE-B1AB-61B1A47F6AF3}

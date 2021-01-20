@@ -8,10 +8,10 @@ namespace Liusse
 	// | - - |
 	public class Core : INotifyPropertyChanged
 	{
-		private int openBracketLeft = 0;
 		private string currentExpression = "";
 		private string example = "";
 
+		// | - |
 		public string CurrentExpression
 		{
 			get { return currentExpression; }
@@ -21,6 +21,7 @@ namespace Liusse
 				OnPropertyChanged("CurrentExpression");
 			}
 		}
+		// | - |
 		public string Example
 		{
 			get { return example; }
@@ -37,9 +38,12 @@ namespace Liusse
 			Example = "";
 			if (symbol == "C")
 				Clear();
-			else if (symbol == "⌫") { }
-			else if (symbol == "±") { }
-			else if (symbol == "=") { }
+			else if (symbol == "⌫")
+				DeleteSymbol();
+			else if (symbol == "±")
+				PlusMinus();
+			else if (symbol == "=")
+				Result();
 			else if (symbol == "( )")
 				AddBracket();
 			else
@@ -56,28 +60,41 @@ namespace Liusse
 			if (canAdd)
 				CurrentExpression += symbol;
 		}
+
 		// | - |
 		private void AddBracket()
 		{
-			char currentBracket;
-			currentBracket = CalcParse.Parse.WhatAddBracket(CurrentExpression);
-
-			if (openBracketLeft == 0)
-				currentBracket = '(';
-			if (CalcParse.Parse.CanAddBracket(CurrentExpression, currentBracket))
-			{
-				if (currentBracket == '(')
-					openBracketLeft++;
-				else
-					openBracketLeft--;
-				CurrentExpression += currentBracket;
-			}
+			string result = CalcParse.Parse.AddBracket(CurrentExpression);
+			CurrentExpression = result;
 		}
 
 		// | - |
 		private void Clear()
 		{
 			CurrentExpression = "";
+		}
+
+		// | - |
+		private void DeleteSymbol()
+		{
+			if (CurrentExpression.Length > 0)
+			{
+				CurrentExpression = CurrentExpression.Remove(
+					CurrentExpression.Length - 1);
+			}
+		}
+
+		// | - |
+		private void PlusMinus()
+		{
+			string result = CalcParse.Parse.InvertNumber(CurrentExpression);
+			CurrentExpression = result;
+		}
+
+		// | - |
+		private void Result()
+		{
+			
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
