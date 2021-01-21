@@ -11,7 +11,9 @@ namespace Liusse
 		private string currentExpression = "";
 		private string example = "";
 
-		// | - |
+		/// <summary>
+		/// Текущее выражение. Выражение над которым идет работа.
+		/// </summary>
 		public string CurrentExpression
 		{
 			get { return currentExpression; }
@@ -21,7 +23,10 @@ namespace Liusse
 				OnPropertyChanged("CurrentExpression");
 			}
 		}
-		// | - |
+
+		/// <summary>
+		/// Пример, который был посчитан. Сохраняется перед получением ответа
+		/// </summary>
 		public string Example
 		{
 			get { return example; }
@@ -51,23 +56,6 @@ namespace Liusse
 		}
 
 		// | - |
-		private void AddSymbol(string symbol)
-		{
-			string result;
-			char charSymbol = symbol[0];
-			result = CalcParse.Parse.AddSymbol(CurrentExpression, charSymbol);
-			if (CurrentExpression != result)
-				CurrentExpression += symbol;
-		}
-
-		// | - |
-		private void AddBracket()
-		{
-			string result = CalcParse.Parse.AddBracket(CurrentExpression);
-			CurrentExpression = result;
-		}
-
-		// | - |
 		private void Clear()
 		{
 			CurrentExpression = "";
@@ -93,7 +81,24 @@ namespace Liusse
 		// | - |
 		private void Result()
 		{
-			
+
+		}
+
+		// | - |
+		private void AddBracket()
+		{
+			string result = CalcParse.Parse.AddBracket(CurrentExpression);
+			CurrentExpression = result;
+		}
+
+		// | - |
+		private void AddSymbol(string symbol)
+		{
+			string result;
+			char charSymbol = symbol[0];
+			result = CalcParse.Parse.AddSymbol(CurrentExpression, charSymbol);
+			if (CurrentExpression != result)
+				CurrentExpression += symbol;
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
