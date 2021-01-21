@@ -53,11 +53,10 @@ namespace Liusse
 		// | - |
 		private void AddSymbol(string symbol)
 		{
-			bool canAdd = false;
+			string result;
 			char charSymbol = symbol[0];
-			canAdd = CalcParse.Parse.CanAddSymbol(CurrentExpression, 
-				charSymbol);
-			if (canAdd)
+			result = CalcParse.Parse.AddSymbol(CurrentExpression, charSymbol);
+			if (CurrentExpression != result)
 				CurrentExpression += symbol;
 		}
 

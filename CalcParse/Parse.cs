@@ -15,16 +15,18 @@ namespace CalcParse
 
 		//}
 
-		// | + - | !!!!!!
-		public static bool CanAddSymbol(string expression, char symbol)
+		// | + - |
+		public static string AddSymbol(string expression, char symbol)
 		{
-			char lastSymbol = '⁣';
+			string result = expression;
+			char lastSymbol = ' ';
 			if (expression.Length > 0)
 				lastSymbol = expression[expression.Length - 1];
 
 			if (ContainsToNumbers(lastSymbol) || ContainsToNumbers(symbol))
-				return true;
-			return false;
+				result = expression + symbol;
+			result = result.Replace(" ", "");
+			return result;
 		}
 
 		// | + - |
@@ -32,11 +34,11 @@ namespace CalcParse
 		{
 			int openBracketLeft = CountOpenBracket(expression);
 
-			char lastSymbol = '⁣';
+			char lastSymbol = ' ';
 			if (expression.Length > 0)
 				lastSymbol = expression[expression.Length - 1];
 
-			if (lastSymbol == '⁣')
+			if (lastSymbol == ' ')
 				return expression + '(';
 			else if (lastSymbol == '.' || lastSymbol == ',')
 				return expression;
@@ -54,30 +56,32 @@ namespace CalcParse
 			return expression;
 		}
 
-		// | - - |
-		public static int CountOpenBracket(string expression)
-		{
-			int openBracket = 0;
-			foreach (char symbol in expression)
-			{
-				if (symbol == '(')
-					openBracket++;
-				else if (symbol == ')')
-					openBracket--;
-			}
-			return openBracket;
-		}
-
-		// | - - |
+		// | + - |
 		public static string InvertNumber(string expression)
 		{
-			int operatorIndex = FindNearestOperator(expression);
 			string result;
-			if (expression[operatorIndex] == '+')
+			int operatorIndex = FindNearestOperator(expression);
+			if (operatorIndex == -1 || expression.Length == 0)
+				result = '-' + expression;
+			else if (expression[operatorIndex] == '+')
 				result = ReplaceOperator(expression, operatorIndex, '-');
-			if (expression[operatorIndex] == '-')
-				result = ReplaceOperator(expression, operatorIndex, '⁣');
-			result = expression.Insert(operatorIndex,"-");
+			else if (operatorIndex == 0)
+				result = ReplaceOperator(expression, operatorIndex, ' ');
+			else if (expression[operatorIndex - 1] == '(' &&
+					expression[operatorIndex] == '-')
+				result = ReplaceOperator(expression, operatorIndex, ' ');
+			else if (expression[operatorIndex - 1] == ')' &&
+					expression[operatorIndex] == '-')
+				result = ReplaceOperator(expression, operatorIndex, '+');
+			else if (ContainsToOperators(expression[operatorIndex - 1]) &&
+					expression[operatorIndex] == '-')
+				result = ReplaceOperator(expression, operatorIndex, ' ');
+			else if (ContainsToNumbers(expression[operatorIndex - 1]) &&
+					expression[operatorIndex] == '-')
+				result = ReplaceOperator(expression, operatorIndex, '+');
+			else
+				result = expression.Insert(operatorIndex + 1, "-");
+			result = result.Replace(" ", "");
 			return result;
 		}
 
@@ -99,11 +103,25 @@ namespace CalcParse
 		public static string ReplaceOperator(string expression, int index, 
 			char operat)
 		{
-			if (!ContainsToOperators(operat))
-				return expression;
+			if (!ContainsToOperators(operat) && operat != ' ')
+				throw new Exception("Переданный символ не является оператором.");
 			string temp = expression.Remove(index, 1);
 			string result = temp.Insert(index, ""+operat);
 			return result;
+		}
+
+		// | + - |
+		public static int CountOpenBracket(string expression)
+		{
+			int openBracket = 0;
+			foreach (char symbol in expression)
+			{
+				if (symbol == '(')
+					openBracket++;
+				else if (symbol == ')')
+					openBracket--;
+			}
+			return openBracket;
 		}
 
 		// | + - |
