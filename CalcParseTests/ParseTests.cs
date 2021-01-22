@@ -209,64 +209,6 @@ namespace CalcParseTests
 		}
 		#endregion
 
-		#region ContainsToNumbers
-		[TestCase('0')]
-		[TestCase('1')]
-		[TestCase('5')]
-		[TestCase('9')]
-		[Category("CalcParse.Parse.ContainsToNumbers")]
-		public void ContainsToNumbers_FindNumber_True(char symbol)
-		{
-			bool expected = true;
-
-			bool actual = CalcParse.Parse.ContainsToNumbers(symbol);
-
-			Assert.AreEqual(expected, actual);
-		}
-		[TestCase('*')]
-		[TestCase('-')]
-		[TestCase(')')]
-		[TestCase(',')]
-		[Category("CalcParse.Parse.ContainsToNumbers")]
-		public void ContainsToNumbers_FindNumber_False(char symbol)
-		{
-			bool expected = false;
-
-			bool actual = CalcParse.Parse.ContainsToNumbers(symbol);
-
-			Assert.AreEqual(expected, actual);
-		}
-		#endregion
-
-		#region ContainsToOperators
-		[TestCase('*')]
-		[TestCase('-')]
-		[TestCase(')')]
-		[TestCase(',')]
-		[Category("CalcParse.Parse.ContainsToOperators")]
-		public void ContainsToOperators_FindOperator_True(char symbol)
-		{
-			bool expected = true;
-
-			bool actual = CalcParse.Parse.ContainsToOperators(symbol);
-
-			Assert.AreEqual(expected, actual);
-		}
-		[TestCase('0')]
-		[TestCase('1')]
-		[TestCase('5')]
-		[TestCase('9')]
-		[Category("CalcParse.Parse.ContainsToOperators")]
-		public void ContainsToOperators_FindOperator_False(char symbol)
-		{
-			bool expected = false;
-
-			bool actual = CalcParse.Parse.ContainsToOperators(symbol);
-
-			Assert.AreEqual(expected, actual);
-		}
-		#endregion
-
 		#region FindNearestOperator
 		[Test]
 		[Category("CalcParse.Parse.FindNearestOperator")]

@@ -74,7 +74,7 @@ namespace Liusse
 		// | - |
 		private void PlusMinus()
 		{
-			string result = CalcParse.Parse.InvertNumber(CurrentExpression);
+			string result = Parse.InvertNumber(CurrentExpression);
 			CurrentExpression = result;
 		}
 
@@ -87,7 +87,7 @@ namespace Liusse
 		// | - |
 		private void AddBracket()
 		{
-			string result = CalcParse.Parse.AddBracket(CurrentExpression);
+			string result = Parse.AddBracket(CurrentExpression);
 			CurrentExpression = result;
 		}
 
@@ -96,7 +96,7 @@ namespace Liusse
 		{
 			string result;
 			char charSymbol = symbol[0];
-			result = CalcParse.Parse.AddSymbol(CurrentExpression, charSymbol);
+			result = Parse.AddSymbol(CurrentExpression, charSymbol);
 			if (CurrentExpression != result)
 				CurrentExpression += symbol;
 		}

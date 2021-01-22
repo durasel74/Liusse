@@ -5,15 +5,14 @@ namespace CalcParse
 	// | - - |
 	public static class Parse
 	{
-		private static char[] Numbers = {'0', '1', '2', '3', '4', '5',
-			'6', '7', '8', '9'};						// Все цифры
-		private static char[] Operators = {'*', '/', '+', '-', '÷', '×',
-			'(', ')', '.', ','};						// Все операторы
-
-		//public static bool IsCorrect(string expression)
-		//{
-
-		//}
+		public static char[] AllNumbers { get; set; } = {'0', '1', '2', '3', 
+			'4', '5', '6', '7', '8', '9'};				// Все цифры
+		public static char[] AllOperators { get; set; } = {'*', '/', '+', 
+			'-', '÷', '×', '(', ')', '.', ','};         // Все операторы
+		public static char[] MathOperators { get; set; } = { '*', '/', '+', 
+			'-', '÷', '×' };                // Все математические операторы
+		public static char[] brackets { get; set; } = { '(', ')' };   // Все скобки
+		public static char[] separators { get; set; } = { ',', '.' }; // Все разделители
 
 		// | + - |
 		public static string AddSymbol(string expression, char symbol)
@@ -23,7 +22,8 @@ namespace CalcParse
 			if (expression.Length > 0)
 				lastSymbol = expression[expression.Length - 1];
 
-			if (ContainsToNumbers(lastSymbol) || ContainsToNumbers(symbol))
+			if (ContainsTo(AllNumbers, lastSymbol) || 
+					ContainsTo(AllNumbers, symbol))
 				result = expression + symbol;
 			result = result.Replace(" ", "");
 			return result;
@@ -42,16 +42,16 @@ namespace CalcParse
 				return expression + '(';
 			else if (lastSymbol == '.' || lastSymbol == ',')
 				return expression;
-			else if (!ContainsToOperators(lastSymbol) &&
-					!ContainsToNumbers(lastSymbol))
+			else if (!ContainsTo(AllNumbers, lastSymbol) &&
+					!ContainsTo(AllOperators, lastSymbol))
 				return expression;
 			else if (openBracketLeft == 0)
 				return expression + '(';
-			else if (ContainsToNumbers(lastSymbol))
+			else if (ContainsTo(AllNumbers, lastSymbol))
 				return expression + ')';
 			else if (openBracketLeft > 0 && lastSymbol == ')')
 				return expression + ')';
-			else if (ContainsToOperators(lastSymbol))
+			else if (ContainsTo(AllOperators, lastSymbol))
 				return expression + '(';
 			return expression;
 		}
@@ -73,10 +73,10 @@ namespace CalcParse
 			else if (expression[operatorIndex - 1] == ')' &&
 					expression[operatorIndex] == '-')
 				result = ReplaceOperator(expression, operatorIndex, '+');
-			else if (ContainsToOperators(expression[operatorIndex - 1]) &&
+			else if (ContainsTo(AllOperators, expression[operatorIndex - 1]) &&
 					expression[operatorIndex] == '-')
 				result = ReplaceOperator(expression, operatorIndex, ' ');
-			else if (ContainsToNumbers(expression[operatorIndex - 1]) &&
+			else if (ContainsTo(AllNumbers, expression[operatorIndex - 1]) &&
 					expression[operatorIndex] == '-')
 				result = ReplaceOperator(expression, operatorIndex, '+');
 			else
@@ -90,7 +90,7 @@ namespace CalcParse
 		{
 			for (int i = expression.Length-1; i >= 0; i--)
 			{
-				if (ContainsToNumbers(expression[i]))
+				if (ContainsTo(AllNumbers, expression[i]))
 					continue;
 				if (expression[i] == '.' || expression[i] == ',')
 					continue;
@@ -103,11 +103,44 @@ namespace CalcParse
 		public static string ReplaceOperator(string expression, int index, 
 			char operat)
 		{
-			if (!ContainsToOperators(operat) && operat != ' ')
+			if (!ContainsTo(AllOperators, operat) && operat != ' ')
 				throw new Exception("Переданный символ не является оператором.");
 			string temp = expression.Remove(index, 1);
 			string result = temp.Insert(index, ""+operat);
 			return result;
+		}
+
+		// | - - |
+		public static bool IsCorrect(string expression)
+		{
+			bool isCorrect = false;
+			bool isCorrectBracket = true;
+			bool haveABracket = false;
+			for (int i = 0; i < expression.Length; i++)
+			{
+				if (expression[i] == '(' || expression[i] == ')')
+				{
+					haveABracket = true;
+					break;
+				}
+			}
+			if (haveABracket)
+				isCorrectBracket = IsCorrectBracket(expression);
+
+			if (isCorrectBracket)
+				isCorrect = true;
+			return isCorrect;
+		}
+
+		// | - - |
+		public static bool IsCorrectBracket(string expression)
+		{
+			for (int i = 0; i < expression.Length; i++)
+			{
+				if (expression[i] == '(' && CountOpenBracket(expression) == 0)
+					return true;
+			}
+			return false;
 		}
 
 		// | + - |
@@ -124,21 +157,10 @@ namespace CalcParse
 			return openBracket;
 		}
 
-		// | + - |
-		public static bool ContainsToNumbers(char findSymbol)
+		// | - - |
+		public static bool ContainsTo(char[] charCollection, char findSymbol)
 		{
-			foreach (char symbol in Numbers)
-			{
-				if (findSymbol == symbol)
-					return true;
-			}
-			return false;
-		}
-
-		// | + - |
-		public static bool ContainsToOperators(char findSymbol)
-		{
-			foreach (char symbol in Operators)
+			foreach (char symbol in charCollection)
 			{
 				if (findSymbol == symbol)
 					return true;
