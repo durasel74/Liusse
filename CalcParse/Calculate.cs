@@ -5,9 +5,9 @@ namespace CalcParse
 	// | - - |
 	public static class Calculate
 	{
-		private static string[] priorityOperators = { "×÷*/", "+-" };
+		private static readonly string[] priorityOperators = {"×÷*/", "+-"};
 
-		// | - - |
+		// | + - |
 		public static int PriorityOfOperations(string expression)
 		{
 			bool openBracket = false;

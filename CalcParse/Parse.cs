@@ -5,14 +5,14 @@ namespace CalcParse
 	// | - - |
 	public static class Parse
 	{
-		public static char[] AllNumbers { get; set; } = {'0', '1', '2', '3', 
+		public static char[] AllNumbers { get; } = {'0', '1', '2', '3', 
 			'4', '5', '6', '7', '8', '9'};				// Все цифры
-		public static char[] AllOperators { get; set; } = {'*', '/', '+', 
+		public static char[] AllOperators { get; } = {'*', '/', '+', 
 			'-', '÷', '×', '(', ')', '.', ','};         // Все операторы
-		public static char[] MathOperators { get; set; } = { '*', '/', '+', 
+		public static char[] MathOperators { get; } = { '*', '/', '+', 
 			'-', '÷', '×' };                // Все математические операторы
-		public static char[] brackets { get; set; } = { '(', ')' };   // Все скобки
-		public static char[] separators { get; set; } = { ',', '.' }; // Все разделители
+		public static char[] Brackets { get; } = { '(', ')' };   // Все скобки
+		public static char[] Separators { get; } = { ',', '.' }; // Все разделители
 
 		// | + - |
 		public static string AddSymbol(string expression, char symbol)
@@ -110,11 +110,14 @@ namespace CalcParse
 			return result;
 		}
 
-		// | - - |
+		// | + - |
 		public static bool IsCorrect(string expression)
 		{
 			bool isCorrect = false;
 			bool isCorrectBracket = true;
+			bool isCorrectSeparators = true;
+			bool isCorrectOperators = true;
+
 			bool haveABracket = false;
 			for (int i = 0; i < expression.Length; i++)
 			{
@@ -127,12 +130,42 @@ namespace CalcParse
 			if (haveABracket)
 				isCorrectBracket = IsCorrectBracket(expression);
 
-			if (isCorrectBracket)
+			for (int i = 0; i < expression.Length; i++)
+			{
+				if (ContainsTo(Separators, expression[i]) && i == 0)
+					isCorrectSeparators = false;
+				else if (ContainsTo(Separators, expression[i]) &&
+						!ContainsTo(AllNumbers, expression[i - 1]))
+					isCorrectSeparators = false;
+				if (ContainsTo(Separators, expression[i]) &&
+						expression.Length - 1 == i)
+					isCorrectSeparators = false;
+				else if (ContainsTo(Separators, expression[i]) &&
+						!ContainsTo(AllNumbers, expression[i + 1]))
+					isCorrectSeparators = false;
+
+				if (ContainsTo(MathOperators, expression[i]) &&
+						expression[i] != '-' && i == 0)
+					isCorrectOperators = false;
+				else if (ContainsTo(MathOperators, expression[i]) &&
+						expression[i] != '-' && !ContainsTo(AllNumbers, 
+						expression[i-1]) && expression[i-1] != ')')
+					isCorrectOperators = false;
+				if (ContainsTo(MathOperators, expression[i]) &&
+						expression[i] != '-' && expression.Length - 1 == i)
+					isCorrectOperators = false;
+				else if (ContainsTo(MathOperators, expression[i]) &&
+						expression[i + 1] != '-' && !ContainsTo(AllNumbers, 
+						expression[i + 1]) && expression[i+1] != '(')
+					isCorrectOperators = false;
+			}
+
+			if (isCorrectBracket && isCorrectSeparators && isCorrectOperators)
 				isCorrect = true;
 			return isCorrect;
 		}
 
-		// | - - |
+		// | + - |
 		public static bool IsCorrectBracket(string expression)
 		{
 			for (int i = 0; i < expression.Length; i++)

@@ -332,5 +332,109 @@ namespace CalcParseTests
 			Assert.AreEqual(expected, actual);
 		}
 		#endregion
+
+		#region IsCorrect
+		[TestCase("5,123")]
+		[TestCase("-3")]
+		[TestCase("5+5")]
+		[TestCase("5--5")]
+		[TestCase("5*-5")]
+		[TestCase("5+-5")]
+		[TestCase("-9.33333")]
+		[TestCase("(-10*(100/2))")]
+		[TestCase("5+5*10")]
+		[TestCase("(10/-2*(5+2))")]
+		[TestCase("(10/-(5+2))")]
+		[TestCase("(1+(1+(1+(1+(-1+(1-(5+5)))))))")]
+		[TestCase("(1+(1+(1+(1/(1*(1+-(-1+((5/-5)))))))))")]
+		[Category("CalcParse.Parse.IsCorrect")]
+		public void IsCorrect_CorrectExpression_True(string expression)
+		{
+			bool expected = true;
+
+			bool actual = Parse.IsCorrect(expression);
+
+			Assert.AreEqual(expected, actual);
+		}
+		[TestCase("-5.")]
+		[TestCase(".555")]
+		[TestCase("(10.-(4+4)/10)")]
+		[TestCase("(10-(4+4.)/10)")]
+		[TestCase("(10-(4+4),/10)")]
+		[TestCase("5..67")]
+		[TestCase("5.,67")]
+		[Category("CalcParse.Parse.IsCorrect")]
+		public void IsCorrect_NotCorrectSeparator_False(string expression)
+		{
+			bool expected = false;
+
+			bool actual = Parse.IsCorrect(expression);
+
+			Assert.AreEqual(expected, actual);
+		}
+		[TestCase(")")]
+		[TestCase("(5+5))")]
+		[TestCase("(((((()")]
+		[TestCase("(10/(10+10)")]
+		[TestCase("10(/(10+10))")]
+		[TestCase("5(+)5")]
+		[Category("CalcParse.Parse.IsCorrect")]
+		public void IsCorrect_NotCorrectBrackets_False(string expression)
+		{
+			bool expected = false;
+
+			bool actual = Parse.IsCorrect(expression);
+
+			Assert.AreEqual(expected, actual);
+		}
+		[TestCase("*")]
+		[TestCase("5*+5")]
+		[TestCase("5*/5")]
+		[TestCase("5-/5")]
+		[TestCase("5+5/")]
+		[TestCase("*5-10")]
+		[TestCase("(10/(/10*5))")]
+		[TestCase("(1+(1+(1+(1/(1*(+-(-1+((5/-5)))))))))")]
+		[Category("CalcParse.Parse.IsCorrect")]
+		public void IsCorrect_NotCorrectOperators_False(string expression)
+		{
+			bool expected = false;
+
+			bool actual = Parse.IsCorrect(expression);
+
+			Assert.AreEqual(expected, actual);
+		}
+		#endregion
+
+		#region IsCorrectBracket
+		[TestCase("()")]
+		[TestCase("(5+5)")]
+		[TestCase("(-10.3333*(100/2))")]
+		[TestCase("10/(5+(5+(5+(5+(5+5)))))")]
+		[Category("CalcParse.Parse.IsCorrectBracket")]
+		public void IsCorrectBracket_CorrectBracket_True(string expression)
+		{
+			bool expected = true;
+
+			bool actual = Parse.IsCorrectBracket(expression);
+
+			Assert.AreEqual(expected, actual);
+		}
+		[TestCase("")]
+		[TestCase("(")]
+		[TestCase("((5+5)")]
+		[TestCase("(((((5+5")]
+		[TestCase("(-10.3333*(100/2)")]
+		[TestCase("10/(5+(5+(5+(5+(5+5))))))")]
+		[Category("CalcParse.Parse.IsCorrectBracket")]
+		public void IsCorrectBracket_NotCorrectBracket_False(string expression)
+		{
+			bool expected = false;
+
+			bool actual = Parse.IsCorrectBracket(expression);
+
+			Assert.AreEqual(expected, actual);
+		}
+		#endregion
 	}
 }

@@ -44,6 +44,7 @@ namespace CalcParseTests
 		[TestCase("((10.666+5)/(10*5))", 8)]
 		[TestCase("(15.666/(10*5))", 11)]
 		[TestCase("(50+(-100/2))", 9)]
+		[TestCase("(50+(-100/-2))", 9)]
 		[TestCase("(50/(-100+2))", 9)]
 		[TestCase("(50/(-100+2*2))", 11)]
 		[TestCase("(1+(1+(1+(-1+(-1+(1-1))))))", 19)]
@@ -56,6 +57,21 @@ namespace CalcParseTests
 			int actual = Calculate.PriorityOfOperations(expression);
 
 			Assert.AreEqual(expected, actual);
+		}
+		[TestCase("(5+5")]
+		[TestCase("5*5/")]
+		[TestCase("(10/(5.+5))")]
+		[TestCase("((10.666+5)-/(10*5))")]
+		[TestCase("(15.666/(10*))")]
+		[TestCase("(50+-100/2))")]
+		[TestCase("(50+(-100/-2-))")]
+		[TestCase("(50,/(-100+2))")]
+		[TestCase("50/-100+2*2))")]
+		[TestCase("(1+(1+(1+(-+(-1+(1-1))))))")]
+		[Category("CalcParse.Calculate.PriorityOfOperations")]
+		public void PriorityOfOperations_IsCorrect_Exeption(string expression)
+		{
+			Assert.Throws<Exception>(() => Calculate.PriorityOfOperations(expression));
 		}
 		#endregion
 
