@@ -141,6 +141,46 @@ namespace CalcParseTests
 		}
 		#endregion
 
+		#region AddSeparator
+		[TestCase("-3")]
+		[TestCase("55555")]
+		[TestCase("*55555")]
+		[TestCase("5+5")]
+		[TestCase("(5+(1")]
+		[TestCase("(10+(5-3)*80")]
+		[TestCase("(.1.0+(.5.-.3)*80")]
+		[Category("CalcParse.Parse.AddSeparator")]
+		public void AddSeparator_CorrectExpression_SeparatorAdd(string expression)
+		{
+			char separator = '.';
+			string expected = expression + separator;
+
+			string actual = Parse.AddSeparator(expression, separator);
+
+			Assert.AreEqual(expected, actual);
+		}
+
+		[TestCase("")]
+		[TestCase("*")]
+		[TestCase("-3.")]
+		[TestCase("-3,")]
+		[TestCase("55/(5+5)")]
+		[TestCase("500.000")]
+		[TestCase("5+5+")]
+		[TestCase("(5+(1+")]
+		[TestCase("(10+(5.-3)*8.0")]
+		[Category("CalcParse.Parse.AddSeparator")]
+		public void AddSeparator_NotCorrectExpression_DontAddSeparator(string expression)
+		{
+			char separator = '.';
+			string expected = expression;
+
+			string actual = Parse.AddSeparator(expression, separator);
+
+			Assert.AreEqual(expected, actual);
+		}
+		#endregion
+
 		#region ReplaceOperator
 		[TestCase('-')]
 		[TestCase('+')]

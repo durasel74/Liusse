@@ -51,6 +51,8 @@ namespace Liusse
 				Result();
 			else if (symbol == "( )")
 				AddBracket();
+			else if (symbol == "," || symbol == ".")
+				AddSeparator(symbol);
 			else
 				AddSymbol(symbol);
 		}
@@ -89,6 +91,14 @@ namespace Liusse
 		{
 			string result = Parse.AddBracket(CurrentExpression);
 			CurrentExpression = result;
+		}
+
+		// | - |
+		private void AddSeparator(string symbol)
+		{
+			char charSymbol = symbol[0];
+			if (Parse.ContainsTo(Parse.Separators, charSymbol))
+				Parse.AddSeparator(CurrentExpression, charSymbol);
 		}
 
 		// | - |

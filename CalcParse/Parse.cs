@@ -57,6 +57,39 @@ namespace CalcParse
 		}
 
 		// | + - |
+		public static string AddSeparator(string expression, char separator)
+		{
+			string result = expression;
+			bool correctLast = false;
+
+			for (int i = expression.Length-1; i >= 0; i--)
+			{
+				if (!correctLast)
+				{
+					if (ContainsTo(AllNumbers, expression[expression.Length - 1]))
+						correctLast = true;
+					else
+						break;
+				}
+
+				if (correctLast)
+				{
+					if (ContainsTo(Separators, expression[i]))
+						break;
+					if (ContainsTo(AllOperators, expression[i]))
+					{
+						result += separator;
+						break;
+					}
+
+					if (i == 0 && ContainsTo(AllNumbers, expression[i]))
+						result += separator;
+				}
+			}
+			return result;
+		}
+
+		// | + - |
 		public static string InvertNumber(string expression)
 		{
 			string result;

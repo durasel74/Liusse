@@ -69,7 +69,7 @@ namespace CalcParseTests
 		[TestCase("50/-100+2*2))")]
 		[TestCase("(1+(1+(1+(-+(-1+(1-1))))))")]
 		[Category("CalcParse.Calculate.PriorityOfOperations")]
-		public void PriorityOfOperations_IsCorrect_Exeption(string expression)
+		public void PriorityOfOperations_NotCorrect_Exeption(string expression)
 		{
 			Assert.Throws<Exception>(() => Calculate.PriorityOfOperations(expression));
 		}

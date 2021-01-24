@@ -44,5 +44,19 @@ namespace CalcParse
 			}
 			return -1;
 		}
+
+		// | - - |
+		public static string Selector(string expression, int index)
+		{
+
+
+			if (!Parse.IsCorrect(expression))
+				throw new Exception("Выражение не корректно.");
+
+			return "";
+		}
+
+
+
 	}
 }
