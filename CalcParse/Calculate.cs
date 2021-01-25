@@ -53,6 +53,9 @@ namespace CalcParse
 			if (!Parse.IsCorrect(expression))
 				throw new Exception("Выражение не корректно.");
 
+
+
+
 			return "";
 		}
 

@@ -68,6 +68,12 @@ namespace CalcParse
 				{
 					if (ContainsTo(AllNumbers, expression[expression.Length - 1]))
 						correctLast = true;
+					else if (ContainsTo(MathOperators, expression[expression.Length - 1])
+							|| expression[expression.Length - 1] == '(')
+					{
+						result += "0" + separator;
+						break;
+					}
 					else
 						break;
 				}
