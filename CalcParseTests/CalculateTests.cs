@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using NUnit.Framework;
 using CalcParse;
 
@@ -119,7 +120,7 @@ namespace CalcParseTests
 		[TestCase("5---5", 2)]
 		[TestCase("/10", 0)]
 		[TestCase("(10*(5+5)", 3)]
-		[TestCase("5000.+10",5)]
+		[TestCase("5000.+10", 5)]
 		[TestCase("10-*5)", 2)]
 		[Category("CalcParse.Calculate.Selector")]
 		public void Selector_NotCorrectExpression_Exeption(string expression,
@@ -148,5 +149,69 @@ namespace CalcParseTests
 			Assert.Throws<Exception>(() => Calculate.Selector(expression, index));
 		}
 		#endregion
+
+		#region Converter
+		[TestCase("5+5", new object[] {'+', 5, 5})]
+		[TestCase("5--5", new object[] { '-', 5, -5 })]
+		[TestCase("-5--5", new object[] { '-', -5, -5 })]
+		[TestCase("-10.5*0.5", new object[] { '*', -10.5, 0.5})]
+		[TestCase("-5000.99999/0.123", new object[] { '/', -5000.99999, 0.123 })]
+		[Category("CalcParse.Calculate.Converter")]
+		public void Converter_CorrectExpression_Result(string expression, 
+			object[] results)
+		{
+			results[1] = Convert.ToDecimal(results[1]);
+			results[2] = Convert.ToDecimal(results[2]);
+			bool expected = true;
+
+			object[] temp = Calculate.Converter(expression);
+			bool[] equals = new bool[3];
+			for (int i = 0; i < results.Length; i++)
+			{
+				Type receivedType = temp[i].GetType();
+				Type requiredType = results[i].GetType();
+				if (receivedType == requiredType)
+				{
+					if (receivedType == typeof(char))
+					{
+						if (Convert.ToChar(temp[i]) ==
+							Convert.ToChar(results[i]))
+						{
+							equals[i] = true;
+						}
+					}
+					else if (receivedType == typeof(decimal))
+					{
+						if (Convert.ToDecimal(temp[i]) ==
+							Convert.ToDecimal(results[i]))
+						{
+							equals[i] = true;
+						}
+					}
+				}
+			}
+			bool actual = false;
+			if (equals[0] && equals[1] && equals[2])
+				actual = true;
+
+			Assert.AreEqual(expected, actual);
+		}
+		[TestCase("5")]
+		[TestCase("5+")]
+		[TestCase("3.")]
+		[TestCase("(5+5")]
+		[TestCase("5---5")]
+		[TestCase("10.2/.3")]
+		[TestCase("50000.0")]
+		[TestCase("5+5+5+5+5")]
+		[TestCase("(10+(5+5))")]
+		[Category("CalcParse.Calculate.Converter")]
+		public void Converter_NotCorrectExpression_Exeption(string expression)
+		{
+			Assert.Throws<Exception>(() => Calculate.Converter(expression));
+		}
+		#endregion
+
+
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace CalcParse
 {
@@ -45,7 +46,7 @@ namespace CalcParse
 			return -1;
 		}
 
-		// | - - |
+		// | + - |
 		public static string Selector(string expression, int index)
 		{
 			if (!Parse.IsCorrect(expression))
@@ -98,5 +99,56 @@ namespace CalcParse
 			string result = expression.Substring(firstIndex, subStringSize);
 			return result;
 		}
+
+		// | + - |
+		public static object[] Converter(string expression)
+		{
+			if (!Parse.IsCorrect(expression))
+				throw new Exception("Выражение не корректно.");
+			if (Parse.IsCorrectBracket(expression))
+				throw new Exception("Невозможно конвертировать выражение " +
+					"содержащее скобки");
+			int countOperators = 0;
+			for (int i = 0; i < expression.Length; i++)
+				if (Parse.ContainsTo(Parse.MathOperators, expression[i]) &&
+						expression[i + 1] != '-' && i != 0)
+					countOperators++;
+			if (countOperators < 1)
+				throw new Exception("Невозможно конвертировать выражение " +
+					"без операторов");
+			else if (countOperators > 1)
+				throw new Exception("Невозможно конвертировать выражение с " +
+					"более чем одним оператором");
+
+			char operator_ = ' ';
+			string unconvertedLeft = "";
+			string unconvertedRight = "";
+			object[] result = new object[3];
+
+			char sep = Convert.ToChar(NumberFormatInfo.CurrentInfo.CurrencyDecimalSeparator);
+			for (int i = 0; i < expression.Length; i++)
+			{
+				if (Parse.ContainsTo(Parse.MathOperators, expression[i]) &&
+					i != 0)
+				{
+					operator_ = expression[i];
+					unconvertedLeft = expression.Substring(0, i);
+					unconvertedRight = expression.Substring(i + 1,
+						expression.Length - i - 1);
+
+					unconvertedLeft = unconvertedLeft.Replace('.', sep).
+						Replace(',', sep);
+					unconvertedRight = unconvertedRight.Replace('.', sep).
+						Replace(',', sep);
+					break;
+				}
+			}
+
+			result[0] = operator_;
+			result[1] = Convert.ToDecimal(unconvertedLeft);
+			result[2] = Convert.ToDecimal(unconvertedRight);
+			return result;
+		}
+
 	}
 }
