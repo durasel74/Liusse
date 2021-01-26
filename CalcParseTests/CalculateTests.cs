@@ -72,7 +72,7 @@ namespace CalcParseTests
 		[TestCase("50/-100+2*2))")]
 		[TestCase("(1+(1+(1+(-+(-1+(1-1))))))")]
 		[Category("CalcParse.Calculate.PriorityOfOperations")]
-		public void PriorityOfOperations_NotCorrect_Exeption(string expression)
+		public void PriorityOfOperations_NotCorrect_Exception(string expression)
 		{
 			Assert.Throws<Exception>(() => Calculate.PriorityOfOperations(expression));
 		}
@@ -123,7 +123,7 @@ namespace CalcParseTests
 		[TestCase("5000.+10", 5)]
 		[TestCase("10-*5)", 2)]
 		[Category("CalcParse.Calculate.Selector")]
-		public void Selector_NotCorrectExpression_Exeption(string expression,
+		public void Selector_NotCorrectExpression_Exception(string expression,
 			int index)
 		{
 			Assert.Throws<Exception>(() => Calculate.Selector(expression, index));
@@ -134,7 +134,7 @@ namespace CalcParseTests
 		[TestCase("(10*(5+5))", 4)]
 		[TestCase("(10*-5.6)", 6)]
 		[Category("CalcParse.Calculate.Selector")]
-		public void Selector_NotCorrectIndex_Exeption(string expression,
+		public void Selector_NotCorrectIndex_Exception(string expression,
 			int index)
 		{
 			Assert.Throws<Exception>(() => Calculate.Selector(expression, index));
@@ -143,7 +143,7 @@ namespace CalcParseTests
 		[TestCase("(10/(-10+2))", 5)]
 		[TestCase("10/-10", 3)]
 		[Category("CalcParse.Calculate.Selector")]
-		public void Selector_NotCorrectOperator_Exeption(string expression,
+		public void Selector_NotCorrectOperator_Exception(string expression,
 			int index)
 		{
 			Assert.Throws<Exception>(() => Calculate.Selector(expression, index));
@@ -206,12 +206,39 @@ namespace CalcParseTests
 		[TestCase("5+5+5+5+5")]
 		[TestCase("(10+(5+5))")]
 		[Category("CalcParse.Calculate.Converter")]
-		public void Converter_NotCorrectExpression_Exeption(string expression)
+		public void Converter_NotCorrectExpression_Exception(string expression)
 		{
 			Assert.Throws<Exception>(() => Calculate.Converter(expression));
 		}
 		#endregion
 
+		#region Arithmetic
+		[TestCase(new object[] { '+', 5, 5 }, "10")]
+		[TestCase(new object[] { '-', 5, -5 }, "10")]
+		[TestCase(new object[] { '*', -10, 6 }, "-60")]
+		[TestCase(new object[] { '/', 100, 2 }, "50")]
+		[TestCase(new object[] { '+', 0.5, 4.5 }, "5,0")]
+		[TestCase(new object[] { '/', 10, 3 }, "3,3333333333333333333333333333")]
+		[Category("CalcParse.Calculate.Arithmetic")]
+		public void Arithmetic_CorrectExpression_Result(object[] expression, string result)
+		{
+			expression[1] = Convert.ToDecimal(expression[1]);
+			expression[2] = Convert.ToDecimal(expression[2]);
+			string expected = result;
 
+			string actual = Calculate.Arithmetic(expression);
+
+			Assert.AreEqual(expected, actual);
+		}
+		[TestCase(new object[] { '+', 5, 5, 5 })]
+		[TestCase(new object[] { '+', "5", "H" })]
+		[TestCase(new object[] { 5, 5, 5 })]
+		[TestCase(new object[] { '*' })]
+		[Category("CalcParse.Calculate.Arithmetic")]
+		public void Arithmetic_NotCorrectExpression_Exception(object[] expression)
+		{
+			Assert.Throws<Exception>(() => Calculate.Arithmetic(expression));
+		}
+		#endregion
 	}
 }

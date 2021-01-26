@@ -19,7 +19,7 @@ namespace CalcParseTests
 			string expression = "5+3*2/10+";
 			string expected = "5+3*2/10+" + symbol;
 
-			string actual = CalcParse.Parse.AddSymbol(expression, symbol);
+			string actual = Parse.AddSymbol(expression, symbol);
 
 			Assert.AreEqual(expected, actual);
 		}
@@ -35,7 +35,7 @@ namespace CalcParseTests
 			string expression = "5+3*2/10+";
 			string expected = "5+3*2/10+";
 
-			string actual = CalcParse.Parse.AddSymbol(expression, symbol);
+			string actual = Parse.AddSymbol(expression, symbol);
 
 			Assert.AreEqual(expected, actual);
 		}
@@ -54,7 +54,7 @@ namespace CalcParseTests
 			string expression = "1000/2*5";
 			string expected = "1000/2*5" + symbol;
 
-			string actual = CalcParse.Parse.AddSymbol(expression, symbol);
+			string actual = Parse.AddSymbol(expression, symbol);
 
 			Assert.AreEqual(expected, actual);
 		}
@@ -69,7 +69,7 @@ namespace CalcParseTests
 			string expression = "";
 			string expected = "" + symbol;
 
-			string actual = CalcParse.Parse.AddSymbol(expression, symbol);
+			string actual = Parse.AddSymbol(expression, symbol);
 
 			Assert.AreEqual(expected, actual);
 		}
@@ -85,7 +85,7 @@ namespace CalcParseTests
 			string expression = "";
 			string expected = "";
 
-			string actual = CalcParse.Parse.AddSymbol(expression, symbol);
+			string actual = Parse.AddSymbol(expression, symbol);
 
 			Assert.AreEqual(expected, actual);
 		}
@@ -105,7 +105,7 @@ namespace CalcParseTests
 		{
 			char expected = '(';
 
-			string temp = CalcParse.Parse.AddBracket(expression);
+			string temp = Parse.AddBracket(expression);
 			char actual = temp[temp.Length - 1];
 
 			Assert.AreEqual(expected, actual);
@@ -120,7 +120,7 @@ namespace CalcParseTests
 		{
 			char expected = ')';
 
-			string temp = CalcParse.Parse.AddBracket(expression);
+			string temp = Parse.AddBracket(expression);
 			char actual = temp[temp.Length - 1];
 
 			Assert.AreEqual(expected, actual);
@@ -134,7 +134,7 @@ namespace CalcParseTests
 		{
 			string expected = expression;
 
-			string temp = CalcParse.Parse.AddBracket(expression);
+			string temp = Parse.AddBracket(expression);
 			string actual = temp;
 
 			Assert.AreEqual(expected, actual);
@@ -205,7 +205,7 @@ namespace CalcParseTests
 			string expression = "5+3*2/10+";
 			string expected = "5+3*2/10" + symbol;
 
-			string actual = CalcParse.Parse.ReplaceOperator(expression, 
+			string actual = Parse.ReplaceOperator(expression, 
 				expression.Length - 1, symbol);
 
 			Assert.AreEqual(expected, actual);
@@ -222,7 +222,7 @@ namespace CalcParseTests
 			string expression = "5+3*2/10+";
 			string expected = "5+3" + symbol + "2/10+";
 
-			string actual = CalcParse.Parse.ReplaceOperator(expression, 3, 
+			string actual = Parse.ReplaceOperator(expression, 3, 
 				symbol);
 
 			Assert.AreEqual(expected, actual);
@@ -239,7 +239,7 @@ namespace CalcParseTests
 			string expression = "+5-9/2";
 			string expected = symbol + "5-9/2";
 
-			string actual = CalcParse.Parse.ReplaceOperator(expression, 0,
+			string actual = Parse.ReplaceOperator(expression, 0,
 				symbol);
 
 			Assert.AreEqual(expected, actual);
@@ -251,11 +251,11 @@ namespace CalcParseTests
 		[TestCase('f')]
 		[TestCase('h')]
 		[Category("CalcParse.Parse.ReplaceOperator")]
-		public void ReplaceOperator_NotOperator_Exeption(char symbol)
+		public void ReplaceOperator_NotOperator_Exception(char symbol)
 		{
 			string expression = "5+3*2/10+";
 
-			Assert.Throws<Exception>(() => CalcParse.Parse.ReplaceOperator(
+			Assert.Throws<Exception>(() => Parse.ReplaceOperator(
 				expression, expression.Length - 1, symbol));
 		}
 		#endregion
@@ -263,34 +263,34 @@ namespace CalcParseTests
 		#region FindNearestOperator
 		[Test]
 		[Category("CalcParse.Parse.FindNearestOperator")]
-		public void FindNearestOperator_EndOperator_index()
+		public void FindNearestOperator_EndOperator_Index()
 		{
 			string expression = "5+3*2/10+";
 			int expected = 8;
 
-			int actual = CalcParse.Parse.FindNearestOperator(expression);
+			int actual = Parse.FindNearestOperator(expression);
 
 			Assert.AreEqual(expected, actual);
 		}
 		[Test]
 		[Category("CalcParse.Parse.FindNearestOperator")]
-		public void FindNearestOperator_MiddleOperator_index()
+		public void FindNearestOperator_MiddleOperator_Index()
 		{
 			string expression = "5+3*200,00";
 			int expected = 3;
 
-			int actual = CalcParse.Parse.FindNearestOperator(expression);
+			int actual = Parse.FindNearestOperator(expression);
 
 			Assert.AreEqual(expected, actual);
 		}
 		[Test]
 		[Category("CalcParse.Parse.FindNearestOperator")]
-		public void FindNearestOperator_FirstOperator_index()
+		public void FindNearestOperator_FirstOperator_Index()
 		{
 			string expression = "+2000.000";
 			int expected = 0;
 
-			int actual = CalcParse.Parse.FindNearestOperator(expression);
+			int actual = Parse.FindNearestOperator(expression);
 
 			Assert.AreEqual(expected, actual);
 		}
@@ -301,7 +301,7 @@ namespace CalcParseTests
 			string expression = "2.000.000";
 			int expected = -1;
 
-			int actual = CalcParse.Parse.FindNearestOperator(expression);
+			int actual = Parse.FindNearestOperator(expression);
 
 			Assert.AreEqual(expected, actual);
 		}
@@ -312,7 +312,7 @@ namespace CalcParseTests
 			string expression = "";
 			int expected = -1;
 
-			int actual = CalcParse.Parse.FindNearestOperator(expression);
+			int actual = Parse.FindNearestOperator(expression);
 
 			Assert.AreEqual(expected, actual);
 		}
@@ -330,12 +330,12 @@ namespace CalcParseTests
 		[TestCase("((()((", 4)]
 		[TestCase("(()(()(", 3)]
 		[Category("CalcParse.Parse.CountOpenBracket")]
-		public void CountOpenBracket_EndOperator_index(string expression, 
+		public void CountOpenBracket_EndOperator_Index(string expression, 
 			int bracket)
 		{
 			int expected = bracket;
 
-			int actual = CalcParse.Parse.CountOpenBracket(expression);
+			int actual = Parse.CountOpenBracket(expression);
 
 			Assert.AreEqual(expected, actual);
 		}
@@ -359,7 +359,7 @@ namespace CalcParseTests
 		{
 			string expected = result;
 
-			string actual = CalcParse.Parse.InvertNumber(expression);
+			string actual = Parse.InvertNumber(expression);
 
 			Assert.AreEqual(expected, actual);
 		}
@@ -378,7 +378,7 @@ namespace CalcParseTests
 		{
 			string expected = result;
 
-			string actual = CalcParse.Parse.InvertNumber(expression);
+			string actual = Parse.InvertNumber(expression);
 
 			Assert.AreEqual(expected, actual);
 		}

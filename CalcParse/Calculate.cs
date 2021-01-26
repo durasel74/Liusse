@@ -53,9 +53,9 @@ namespace CalcParse
 				throw new Exception("Выражение не корректно.");
 			if (!Parse.ContainsTo(Parse.MathOperators, expression[index]))
 				throw new Exception("Переданный индекс не является " +
-					"математическим оператором");
+					"математическим оператором.");
 			if (Parse.ContainsTo(Parse.AllOperators, expression[index-1]))
-				throw new Exception("Переданный индекс оператора нельзя посчитать");
+				throw new Exception("Переданный индекс оператора нельзя посчитать.");
 
 			int firstIndex = 0;
 			int lastIndex = 0;
@@ -107,7 +107,7 @@ namespace CalcParse
 				throw new Exception("Выражение не корректно.");
 			if (Parse.IsCorrectBracket(expression))
 				throw new Exception("Невозможно конвертировать выражение " +
-					"содержащее скобки");
+					"содержащее скобки.");
 			int countOperators = 0;
 			for (int i = 0; i < expression.Length; i++)
 				if (Parse.ContainsTo(Parse.MathOperators, expression[i]) &&
@@ -115,10 +115,10 @@ namespace CalcParse
 					countOperators++;
 			if (countOperators < 1)
 				throw new Exception("Невозможно конвертировать выражение " +
-					"без операторов");
+					"без операторов.");
 			else if (countOperators > 1)
 				throw new Exception("Невозможно конвертировать выражение с " +
-					"более чем одним оператором");
+					"более чем одним оператором.");
 
 			char operator_ = ' ';
 			string unconvertedLeft = "";
@@ -150,5 +150,46 @@ namespace CalcParse
 			return result;
 		}
 
+		// | + - |
+		public static string Arithmetic(object[] operation)
+		{
+			if (operation.Length != 3)
+				throw new Exception("Входные данные имеют не верный формат.");
+			if (operation[0].GetType() != typeof(char) ||
+					operation[1].GetType() != typeof(decimal) ||
+					operation[2].GetType() != typeof(decimal))
+				throw new Exception("Входные данные имеют не верный формат.");
+
+			char operator_ = Convert.ToChar(operation[0]);
+			decimal number1 = Convert.ToDecimal(operation[1]);
+			decimal number2 = Convert.ToDecimal(operation[2]);
+			decimal result;
+
+			switch (operator_)
+			{
+				case '+':
+					result = number1 + number2;
+					break;
+				case '-':
+					result = number1 - number2;
+					break;
+				case '*':
+					result = number1 * number2;
+					break;
+				case '×':
+					result = number1 * number2;
+					break;
+				case '/':
+					result = number1 / number2;
+					break;
+				case '÷':
+					result = number1 / number2;
+					break;
+				default:
+					throw new Exception($"Операцию '{operator_}' не " +
+						$"получилось посчитать.");
+			}
+			return result.ToString();
+		}
 	}
 }
