@@ -438,10 +438,13 @@ namespace CalcParseTests
 
 			Assert.AreEqual(expected, actual);
 		}
+		[TestCase("")]
 		[TestCase("*")]
 		[TestCase("5*+5")]
 		[TestCase("5*/5")]
 		[TestCase("5-/5")]
+		[TestCase("5*/+5")]
+		[TestCase("5---5")]
 		[TestCase("5+5/")]
 		[TestCase("*5-10")]
 		[TestCase("(10/(/10*5))")]

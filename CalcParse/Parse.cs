@@ -152,6 +152,9 @@ namespace CalcParse
 		// | + - |
 		public static bool IsCorrect(string expression)
 		{
+			if (expression.Length == 0)
+				return false;
+
 			bool isCorrect = false;
 			bool isCorrectBracket = true;
 			bool isCorrectSeparators = true;
@@ -196,6 +199,12 @@ namespace CalcParse
 				else if (ContainsTo(MathOperators, expression[i]) &&
 						expression[i + 1] != '-' && !ContainsTo(AllNumbers, 
 						expression[i + 1]) && expression[i+1] != '(')
+					isCorrectOperators = false;
+
+				if (i != 0 && i != expression.Length - 1 &&
+						ContainsTo(MathOperators, expression[i - 1]) &&
+						ContainsTo(MathOperators, expression[i]) &&
+						ContainsTo(MathOperators, expression[i + 1]))
 					isCorrectOperators = false;
 			}
 

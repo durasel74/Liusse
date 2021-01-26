@@ -89,26 +89,31 @@ namespace Liusse
 		// | - |
 		private void AddBracket()
 		{
-			string result = Parse.AddBracket(CurrentExpression);
-			CurrentExpression = result;
+			string result = CurrentExpression;
+			result = Parse.AddBracket(CurrentExpression);
+			if (CurrentExpression != result)
+				CurrentExpression = result;
 		}
 
 		// | - |
 		private void AddSeparator(string symbol)
 		{
+			string result = CurrentExpression;
 			char charSymbol = symbol[0];
 			if (Parse.ContainsTo(Parse.Separators, charSymbol))
-				Parse.AddSeparator(CurrentExpression, charSymbol);
+				result = Parse.AddSeparator(CurrentExpression, charSymbol);
+			if (CurrentExpression != result)
+				CurrentExpression = result;
 		}
 
 		// | - |
 		private void AddSymbol(string symbol)
 		{
-			string result;
+			string result = CurrentExpression;
 			char charSymbol = symbol[0];
 			result = Parse.AddSymbol(CurrentExpression, charSymbol);
 			if (CurrentExpression != result)
-				CurrentExpression += symbol;
+				CurrentExpression = result;
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
