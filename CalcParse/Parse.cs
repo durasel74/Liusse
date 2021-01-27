@@ -233,11 +233,21 @@ namespace CalcParse
 			return openBracket;
 		}
 
+		/// <summary>
+		/// Удаляет пробелы из выражения.
+		/// </summary>
+		/// <param name="expression">Выражение.</param>
+		/// <returns>Возвращает строковое выражение без пробелов.</returns>
+		public static string DeleteSpace(string expression)
+		{
+			return expression.Replace(" ", "");
+		}
+
 		// | + - |
 		public static string Format(string expression)
 		{
-			string result = expression;
-			result = result.Replace(" ", "");
+			string currentExpression = expression;
+			currentExpression = DeleteSpace(currentExpression);
 			int openBracketIndex = -1;
 			int closeBracketIndex = -1;
 			List<int> deleteIndexes = new List<int>();
@@ -247,14 +257,15 @@ namespace CalcParse
 			{
 				clear = true;
 				deleteIndexes.Clear();
-				for (int i = 0; i < result.Length; i++)
+				for (int i = 0; i < currentExpression.Length; i++)
 				{
-					if (result[i] == '(')
+					if (currentExpression[i] == '(')
 						openBracketIndex = i;
-					else if (result[i] == ')' && openBracketIndex != -1)
+					else if (currentExpression[i] == ')' && openBracketIndex != -1)
 						closeBracketIndex = i;
-					else if (Contains.ToMathOperators(result[i]) && !(i != 
-						0 && result[i - 1] == '(' && result[i] == '-'))
+					else if (Contains.ToMathOperators(currentExpression[i]) && 
+						!(i != 0 && currentExpression[i - 1] == '(' && 
+						currentExpression[i] == '-'))
 					{
 						openBracketIndex = -1;
 						closeBracketIndex = -1;
@@ -272,8 +283,22 @@ namespace CalcParse
 
 				deleteIndexes.Reverse();
 				foreach (int index in deleteIndexes)
-					result = result.Remove(index, 1);
+					currentExpression = currentExpression.Remove(index, 1);
 			}
+
+			string result = currentExpression;
+			for (int i = 0; i < currentExpression.Length; i++)
+			{
+				if (i > 0 && currentExpression[i] == '-' && 
+					currentExpression[i - 1] == '-')
+				{
+					currentExpression = currentExpression.Remove(i - 1, 2);
+					result = currentExpression.Insert(i - 1, "+");
+					if (result[0] == '+')
+						result = result.Remove(0, 1);
+				}
+			}
+
 			return result;
 		}
 	}

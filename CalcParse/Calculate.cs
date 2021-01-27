@@ -9,7 +9,7 @@ namespace CalcParse
 		// | + - |
 		public static int PriorityOfOperations(string expression)
 		{
-			expression = Parse.Format(expression);
+			expression = Parse.DeleteSpace(expression);
 			if (!Parse.IsCorrect(expression))
 				throw new Exception("Выражение не корректно.");
 
@@ -49,7 +49,7 @@ namespace CalcParse
 		// | + - |
 		public static string Selector(string expression, int index)
 		{
-			expression = Parse.Format(expression);
+			expression = Parse.DeleteSpace(expression);
 			if (!Parse.IsCorrect(expression))
 				throw new Exception("Выражение не корректно.");
 			if (!Contains.ToMathOperators(expression[index]))
@@ -190,7 +190,63 @@ namespace CalcParse
 					throw new Exception($"Операцию '{operator_}' не " +
 						$"получилось посчитать.");
 			}
+			if (result == Convert.ToInt32(result))
+				result = Math.Truncate(result);
 			return result.ToString();
+		}
+
+		// | + - |
+		public static string Replacer(string expression, string resolve, 
+			string result)
+		{
+			expression = Parse.DeleteSpace(expression);
+			resolve = Parse.DeleteSpace(resolve);
+			if (!Parse.IsCorrect(expression))
+				throw new Exception("Выражение не корректно.");
+
+			int deleteIndex;
+			int deleteCount;
+
+			deleteIndex = expression.IndexOf(resolve);
+			deleteCount = resolve.Length;
+			expression = expression.Remove(deleteIndex, deleteCount);
+
+			result = expression.Insert(deleteIndex, result);
+			result = Parse.Format(result);
+			if (result == "-0")
+				result = "0";
+			result = Parse.Format(result);
+			return result;
+		}
+
+		// | + - |
+		public static string ALU(string expression)
+		{
+			string currentExpression = expression;
+			int priorityIndex;
+			string expressionFragment;
+			string result;
+
+			int i = 0;
+			while (i < Int32.MaxValue)
+			{
+				currentExpression = Parse.Format(currentExpression);
+
+				priorityIndex = PriorityOfOperations(currentExpression);
+				if (priorityIndex == -1)
+					return currentExpression;
+
+				expressionFragment = Selector(currentExpression, priorityIndex);
+
+				result = Arithmetic(Converter(expressionFragment));
+
+				currentExpression = Replacer(currentExpression,
+					expressionFragment, result);
+
+				i++;
+			}
+			throw new Exception("Количество попыток посчитать пример " +
+				"закончилось.");
 		}
 	}
 }
