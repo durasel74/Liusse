@@ -6,14 +6,14 @@ namespace CalcParse
 	// | - - |
 	public static class Calculate
 	{
-		private static readonly string[] priorityOperators = {"×÷*/", "+-"};
-
 		// | + - |
 		public static int PriorityOfOperations(string expression)
 		{
+			expression = Parse.Format(expression);
 			if (!Parse.IsCorrect(expression))
 				throw new Exception("Выражение не корректно.");
 
+			string[] priorityOperators = { "×÷*/", "+-" };
 			bool openBracket = false;
 			int firstIndex = 1;
 			int lastIndex = expression.Length - 1;
@@ -37,7 +37,7 @@ namespace CalcParse
 				for (int i = firstIndex; i < lastIndex + 1; i++)
 				{
 					if (operators.Contains(expression[i]) && 
-						Parse.ContainsTo(Parse.AllNumbers, expression[i-1]))
+						Contains.ToNumbers(expression[i-1]))
 					{
 						return i;
 					}
@@ -49,12 +49,13 @@ namespace CalcParse
 		// | + - |
 		public static string Selector(string expression, int index)
 		{
+			expression = Parse.Format(expression);
 			if (!Parse.IsCorrect(expression))
 				throw new Exception("Выражение не корректно.");
-			if (!Parse.ContainsTo(Parse.MathOperators, expression[index]))
+			if (!Contains.ToMathOperators(expression[index]))
 				throw new Exception("Переданный индекс не является " +
 					"математическим оператором.");
-			if (Parse.ContainsTo(Parse.AllOperators, expression[index-1]))
+			if (Contains.ToAllOperators(expression[index-1]))
 				throw new Exception("Переданный индекс оператора нельзя посчитать.");
 
 			int firstIndex = 0;
@@ -62,16 +63,16 @@ namespace CalcParse
 
 			for (int i = index - 1; i >= 0; i--)
 			{
-				if (i == 0 && !Parse.ContainsTo(Parse.Brackets, expression[i]))
+				if (i == 0 && !Contains.ToBrackets(expression[i]))
 				{
 					firstIndex = i;
 					break;
 				}
-				else if (expression[i] == '-' && Parse.ContainsTo(
-						Parse.AllOperators, expression[i - 1]))
+				else if (expression[i] == '-' && Contains.ToAllOperators(
+						expression[i - 1]))
 					continue;
-				else if (Parse.ContainsTo(Parse.AllOperators, expression[i]) &&
-					!Parse.ContainsTo(Parse.Separators, expression[i]))
+				else if (Contains.ToAllOperators(expression[i]) &&
+					!Contains.ToSeparators(expression[i]))
 				{
 					firstIndex = i + 1;
 					break;
@@ -87,8 +88,8 @@ namespace CalcParse
 				}
 				else if (i - index + 1 == 0 && expression[i] == '-')
 					continue;
-				else if (Parse.ContainsTo(Parse.AllOperators, expression[i + 1]) &&
-					!Parse.ContainsTo(Parse.Separators, expression[i + 1]))
+				else if (Contains.ToAllOperators(expression[i + 1]) &&
+					!Contains.ToSeparators(expression[i + 1]))
 				{
 					lastIndex = i;
 					break;
@@ -110,7 +111,7 @@ namespace CalcParse
 					"содержащее скобки.");
 			int countOperators = 0;
 			for (int i = 0; i < expression.Length; i++)
-				if (Parse.ContainsTo(Parse.MathOperators, expression[i]) &&
+				if (Contains.ToMathOperators(expression[i]) &&
 						expression[i + 1] != '-' && i != 0)
 					countOperators++;
 			if (countOperators < 1)
@@ -128,7 +129,7 @@ namespace CalcParse
 			char sep = Convert.ToChar(NumberFormatInfo.CurrentInfo.CurrencyDecimalSeparator);
 			for (int i = 0; i < expression.Length; i++)
 			{
-				if (Parse.ContainsTo(Parse.MathOperators, expression[i]) &&
+				if (Contains.ToMathOperators(expression[i]) &&
 					i != 0)
 				{
 					operator_ = expression[i];

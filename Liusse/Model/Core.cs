@@ -100,8 +100,7 @@ namespace Liusse
 		{
 			string result = CurrentExpression;
 			char charSymbol = symbol[0];
-			if (Parse.ContainsTo(Parse.Separators, charSymbol))
-				result = Parse.AddSeparator(CurrentExpression, charSymbol);
+			result = Parse.AddSeparator(CurrentExpression, charSymbol);
 			if (CurrentExpression != result)
 				CurrentExpression = result;
 		}

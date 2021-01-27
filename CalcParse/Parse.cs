@@ -1,19 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CalcParse
 {
 	// | - - |
 	public static class Parse
 	{
-		public static char[] AllNumbers { get; } = {'0', '1', '2', '3', 
-			'4', '5', '6', '7', '8', '9'};				// Все цифры
-		public static char[] AllOperators { get; } = {'*', '/', '+', 
-			'-', '÷', '×', '(', ')', '.', ','};         // Все операторы
-		public static char[] MathOperators { get; } = { '*', '/', '+', 
-			'-', '÷', '×' };                // Все математические операторы
-		public static char[] Brackets { get; } = { '(', ')' };   // Все скобки
-		public static char[] Separators { get; } = { ',', '.' }; // Все разделители
-
 		// | + - |
 		public static string AddSymbol(string expression, char symbol)
 		{
@@ -22,8 +14,8 @@ namespace CalcParse
 			if (expression.Length > 0)
 				lastSymbol = expression[expression.Length - 1];
 
-			if (ContainsTo(AllNumbers, lastSymbol) || 
-					ContainsTo(AllNumbers, symbol))
+			if (Contains.ToNumbers(lastSymbol) ||
+					Contains.ToNumbers(symbol))
 				result = expression + symbol;
 			result = result.Replace(" ", "");
 			return result;
@@ -42,16 +34,16 @@ namespace CalcParse
 				return expression + '(';
 			else if (lastSymbol == '.' || lastSymbol == ',')
 				return expression;
-			else if (!ContainsTo(AllNumbers, lastSymbol) &&
-					!ContainsTo(AllOperators, lastSymbol))
+			else if (!Contains.ToNumbers(lastSymbol) &&
+					!Contains.ToAllOperators(lastSymbol))
 				return expression;
 			else if (openBracketLeft == 0)
 				return expression + '(';
-			else if (ContainsTo(AllNumbers, lastSymbol))
+			else if (Contains.ToNumbers(lastSymbol))
 				return expression + ')';
 			else if (openBracketLeft > 0 && lastSymbol == ')')
 				return expression + ')';
-			else if (ContainsTo(AllOperators, lastSymbol))
+			else if (Contains.ToAllOperators(lastSymbol))
 				return expression + '(';
 			return expression;
 		}
@@ -59,6 +51,9 @@ namespace CalcParse
 		// | + - |
 		public static string AddSeparator(string expression, char separator)
 		{
+			if (!Contains.ToSeparators(separator))
+				throw new Exception("Символ не является разделителем дроби.");
+
 			string result = expression;
 			bool correctLast = false;
 
@@ -66,9 +61,9 @@ namespace CalcParse
 			{
 				if (!correctLast)
 				{
-					if (ContainsTo(AllNumbers, expression[expression.Length - 1]))
+					if (Contains.ToNumbers(expression[expression.Length - 1]))
 						correctLast = true;
-					else if (ContainsTo(MathOperators, expression[expression.Length - 1])
+					else if (Contains.ToMathOperators(expression[expression.Length - 1])
 							|| expression[expression.Length - 1] == '(')
 					{
 						result += "0" + separator;
@@ -80,15 +75,15 @@ namespace CalcParse
 
 				if (correctLast)
 				{
-					if (ContainsTo(Separators, expression[i]))
+					if (Contains.ToSeparators(expression[i]))
 						break;
-					if (ContainsTo(AllOperators, expression[i]))
+					if (Contains.ToAllOperators(expression[i]))
 					{
 						result += separator;
 						break;
 					}
 
-					if (i == 0 && ContainsTo(AllNumbers, expression[i]))
+					if (i == 0 && Contains.ToNumbers(expression[i]))
 						result += separator;
 				}
 			}
@@ -112,10 +107,10 @@ namespace CalcParse
 			else if (expression[operatorIndex - 1] == ')' &&
 					expression[operatorIndex] == '-')
 				result = ReplaceOperator(expression, operatorIndex, '+');
-			else if (ContainsTo(AllOperators, expression[operatorIndex - 1]) &&
+			else if (Contains.ToAllOperators(expression[operatorIndex - 1]) &&
 					expression[operatorIndex] == '-')
 				result = ReplaceOperator(expression, operatorIndex, ' ');
-			else if (ContainsTo(AllNumbers, expression[operatorIndex - 1]) &&
+			else if (Contains.ToNumbers(expression[operatorIndex - 1]) &&
 					expression[operatorIndex] == '-')
 				result = ReplaceOperator(expression, operatorIndex, '+');
 			else
@@ -129,7 +124,7 @@ namespace CalcParse
 		{
 			for (int i = expression.Length-1; i >= 0; i--)
 			{
-				if (ContainsTo(AllNumbers, expression[i]))
+				if (Contains.ToNumbers(expression[i]))
 					continue;
 				if (expression[i] == '.' || expression[i] == ',')
 					continue;
@@ -142,7 +137,7 @@ namespace CalcParse
 		public static string ReplaceOperator(string expression, int index, 
 			char operat)
 		{
-			if (!ContainsTo(AllOperators, operat) && operat != ' ')
+			if (!Contains.ToAllOperators(operat) && operat != ' ')
 				throw new Exception("Переданный символ не является оператором.");
 			string temp = expression.Remove(index, 1);
 			string result = temp.Insert(index, ""+operat);
@@ -174,37 +169,37 @@ namespace CalcParse
 
 			for (int i = 0; i < expression.Length; i++)
 			{
-				if (ContainsTo(Separators, expression[i]) && i == 0)
+				if (Contains.ToSeparators(expression[i]) && i == 0)
 					isCorrectSeparators = false;
-				else if (ContainsTo(Separators, expression[i]) &&
-						!ContainsTo(AllNumbers, expression[i - 1]))
+				else if (Contains.ToSeparators(expression[i]) &&
+						!Contains.ToNumbers(expression[i - 1]))
 					isCorrectSeparators = false;
-				if (ContainsTo(Separators, expression[i]) &&
+				if (Contains.ToSeparators(expression[i]) &&
 						expression.Length - 1 == i)
 					isCorrectSeparators = false;
-				else if (ContainsTo(Separators, expression[i]) &&
-						!ContainsTo(AllNumbers, expression[i + 1]))
+				else if (Contains.ToSeparators(expression[i]) &&
+						!Contains.ToNumbers(expression[i + 1]))
 					isCorrectSeparators = false;
 
-				if (ContainsTo(MathOperators, expression[i]) &&
+				if (Contains.ToMathOperators(expression[i]) &&
 						expression[i] != '-' && i == 0)
 					isCorrectOperators = false;
-				else if (ContainsTo(MathOperators, expression[i]) &&
-						expression[i] != '-' && !ContainsTo(AllNumbers, 
+				else if (Contains.ToMathOperators(expression[i]) &&
+						expression[i] != '-' && !Contains.ToNumbers( 
 						expression[i-1]) && expression[i-1] != ')')
 					isCorrectOperators = false;
-				if (ContainsTo(MathOperators, expression[i]) &&
-						expression[i] != '-' && expression.Length - 1 == i)
+				if (Contains.ToMathOperators(expression[i]) && expression[i] 
+					!= '-' && expression.Length - 1 == i)
 					isCorrectOperators = false;
-				else if (ContainsTo(MathOperators, expression[i]) &&
-						expression[i + 1] != '-' && !ContainsTo(AllNumbers, 
+				else if (Contains.ToMathOperators(expression[i]) &&
+						expression[i + 1] != '-' && !Contains.ToNumbers( 
 						expression[i + 1]) && expression[i+1] != '(')
 					isCorrectOperators = false;
 
 				if (i != 0 && i != expression.Length - 1 &&
-						ContainsTo(MathOperators, expression[i - 1]) &&
-						ContainsTo(MathOperators, expression[i]) &&
-						ContainsTo(MathOperators, expression[i + 1]))
+						Contains.ToMathOperators(expression[i - 1]) &&
+						Contains.ToMathOperators(expression[i]) &&
+						Contains.ToMathOperators(expression[i + 1]))
 					isCorrectOperators = false;
 			}
 
@@ -238,15 +233,48 @@ namespace CalcParse
 			return openBracket;
 		}
 
-		// | - - |
-		public static bool ContainsTo(char[] charCollection, char findSymbol)
+		// | + - |
+		public static string Format(string expression)
 		{
-			foreach (char symbol in charCollection)
+			string result = expression;
+			result = result.Replace(" ", "");
+			int openBracketIndex = -1;
+			int closeBracketIndex = -1;
+			List<int> deleteIndexes = new List<int>();
+			bool clear = false;
+
+			while (!clear)
 			{
-				if (findSymbol == symbol)
-					return true;
+				clear = true;
+				deleteIndexes.Clear();
+				for (int i = 0; i < result.Length; i++)
+				{
+					if (result[i] == '(')
+						openBracketIndex = i;
+					else if (result[i] == ')' && openBracketIndex != -1)
+						closeBracketIndex = i;
+					else if (Contains.ToMathOperators(result[i]) && !(i != 
+						0 && result[i - 1] == '(' && result[i] == '-'))
+					{
+						openBracketIndex = -1;
+						closeBracketIndex = -1;
+					}
+
+					if (openBracketIndex != -1 && closeBracketIndex != -1)
+					{
+						deleteIndexes.Add(openBracketIndex);
+						deleteIndexes.Add(closeBracketIndex);
+						openBracketIndex = -1;
+						closeBracketIndex = -1;
+						clear = false;
+					}
+				}
+
+				deleteIndexes.Reverse();
+				foreach (int index in deleteIndexes)
+					result = result.Remove(index, 1);
 			}
-			return false;
+			return result;
 		}
 	}
 }

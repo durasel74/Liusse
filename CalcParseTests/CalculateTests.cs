@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using NUnit.Framework;
 using CalcParse;
 
@@ -14,6 +13,7 @@ namespace CalcParseTests
 		[TestCase("5+5/2", 3)]
 		[TestCase("5+5/-2", 3)]
 		[TestCase("10/2*5-2+5", 2)]
+		[TestCase("10÷2*5-2+5", 2)]
 		[TestCase("10+2-5/2*5", 6)]
 		[TestCase("10-2+5+2-5", 2)]
 		[TestCase("654+20-10*0", 9)]
@@ -88,6 +88,7 @@ namespace CalcParseTests
 		[TestCase("10+2--5/2*5", 7, "-5/2")]
 		[TestCase("10-2.0+5+2-5", 2, "10-2.0")]
 		[TestCase("654+20-10*0", 9, "10*0")]
+		[TestCase("654+20-10×0", 9, "10×0")]
 		[TestCase("654+2.99/10+0*20", 8, "2.99/10")]
 		[TestCase("10+2--5/2*5", 4, "2--5")]
 		[Category("CalcParse.Calculate.Selector")]
@@ -155,7 +156,9 @@ namespace CalcParseTests
 		[TestCase("5--5", new object[] { '-', 5, -5 })]
 		[TestCase("-5--5", new object[] { '-', -5, -5 })]
 		[TestCase("-10.5*0.5", new object[] { '*', -10.5, 0.5})]
+		[TestCase("-10.5×0.5", new object[] { '×', -10.5, 0.5})]
 		[TestCase("-5000.99999/0.123", new object[] { '/', -5000.99999, 0.123 })]
+		[TestCase("-5000.99999÷0.123", new object[] { '÷', -5000.99999, 0.123 })]
 		[Category("CalcParse.Calculate.Converter")]
 		public void Converter_CorrectExpression_Result(string expression, 
 			object[] results)
@@ -216,7 +219,9 @@ namespace CalcParseTests
 		[TestCase(new object[] { '+', 5, 5 }, "10")]
 		[TestCase(new object[] { '-', 5, -5 }, "10")]
 		[TestCase(new object[] { '*', -10, 6 }, "-60")]
+		[TestCase(new object[] { '×', -10, 6 }, "-60")]
 		[TestCase(new object[] { '/', 100, 2 }, "50")]
+		[TestCase(new object[] { '÷', 100, 2 }, "50")]
 		[TestCase(new object[] { '+', 0.5, 4.5 }, "5,0")]
 		[TestCase(new object[] { '/', 10, 3 }, "3,3333333333333333333333333333")]
 		[Category("CalcParse.Calculate.Arithmetic")]

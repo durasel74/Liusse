@@ -190,6 +190,18 @@ namespace CalcParseTests
 
 			Assert.AreEqual(expected, actual);
 		}
+		[TestCase("-3", '+')]
+		[TestCase("55555", 'g')]
+		[TestCase("*55555", '5')]
+		[TestCase("5+5", 'd')]
+		[TestCase("(5+(1", '-')]
+		[TestCase("(10+(5-3)*80", 'a')]
+		[Category("CalcParse.Calculate.AddSeparator")]
+		public void AddSeparator_NotCorrectSeparator_Exception(string expression,
+			char separator)
+		{
+			Assert.Throws<Exception>(() => Parse.AddSeparator(expression, separator));
+		}
 		#endregion
 
 		#region ReplaceOperator
@@ -486,6 +498,33 @@ namespace CalcParseTests
 			bool expected = false;
 
 			bool actual = Parse.IsCorrectBracket(expression);
+
+			Assert.AreEqual(expected, actual);
+		}
+		#endregion
+
+		#region Format
+		[TestCase("", "")]
+		[TestCase("+", "+")]
+		[TestCase("6", "6")]
+		[TestCase("()", "")]
+		[TestCase("5 + 5", "5+5")]
+		[TestCase("10 * 2.55 / 3+2", "10*2.55/3+2")]
+		[TestCase("(10 + (5 + 5 ) )", "(10+(5+5))")]
+		[TestCase(" ( 5+5)", "(5+5)")]
+		[TestCase("((5)+(5))", "(5+5)")]
+		[TestCase("(100) + (5 - (-1) + 1)", "100+(5--1+1)")]
+		[TestCase("(-100.555) + (10-(-0.111))", "-100.555+(10--0.111)")]
+		[TestCase("(((5)))", "5")]
+		[TestCase("((10 + (((1)))) + ((2+2)) - ((4)))", "((10+1)+((2+2))-4)")]
+		[TestCase("((10 + (((1)))) + ((2+2)) - ((4))", "((10+1)+((2+2))-4")]
+		[Category("CalcParse.Parse.Format")]
+		public void Format_CorrectExpression_FormatExpression(string expression,
+			string result)
+		{
+			string expected = result;
+
+			string actual = Parse.Format(expression);
 
 			Assert.AreEqual(expected, actual);
 		}
