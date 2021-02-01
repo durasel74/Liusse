@@ -14,13 +14,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Globalization;
 
-namespace Liusse.View
+namespace Liusse.Templates
 {
-	public partial class MainWindow : Window
+	public partial class StandartInput : UserControl
 	{
-		public MainWindow()
+		public StandartInput()
 		{
 			InitializeComponent();
+			SeparatorBtn.Content = NumberFormatInfo.CurrentInfo.CurrencyDecimalSeparator;
 		}
 	}
 }

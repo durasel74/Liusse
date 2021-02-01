@@ -1,0 +1,34 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Liusse.Resources">
+    
+    <!--#region Плюс/Минус -->
+    <PathGeometry x:Key="PlusMinusSymbol" Figures="
+            M 0,6 L 6,6  M 3 3 L 3 9
+            M 9 2 L 4 14
+            M 7 11 L 11 11"/>
+    <!--#endregion-->
+    
+    <!--#region Backspace-->
+    <GeometryGroup x:Key="BackspaceSymbol">
+        <PathGeometry Figures="
+                m62.933 53.333h-44.8c-.315 0-.613-.139-.816-.38l-17.066
+                -20.266c-.334-.397-.334-.977 0-1.374l17.067-20.267c.203
+                -.241.501-.38.816-.38h44.8c.589 0 1.067.478 1.067 
+                1.067v40.533c-.001.589-.479 1.067-1.068 1.067zm-44.304
+                -2.133h43.237v-38.4h-43.237l-16.168 19.2z"/>
+        <PathGeometry Figures="
+                m46.933 41.6c-.273 0-.546-.105-.754-.313l-17.066-17.066c
+                -.417-.417-.417-1.091 0-1.508.416-.417 1.092-.417 1.508 
+                0l17.067 17.067c.417.417.417 1.091 0 1.508-.209.207
+                -.482.312-.755.312z"/>
+        <PathGeometry Figures="
+                m29.867 41.6c-.273 0-.546-.105-.754-.313-.417-.417-.417
+                -1.091 0-1.508l17.067-17.067c.416-.417 1.092-.417 1.508 
+                0 .417.417.417 1.091 0 1.508l-17.067 17.067c-.208.208
+                -.481.313-.754.313z"/>
+        <PathGeometry Figures="m40.0 32.4c-.0 0.-5-0-.50-1"/>
+    </GeometryGroup>
+    <!--#endregion-->
+    
+</ResourceDictionary>

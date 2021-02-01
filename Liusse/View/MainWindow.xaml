@@ -1,14 +1,125 @@
-﻿<Window x:Class="Liusse.MainWindow"
+﻿<Window x:Class="Liusse.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Liusse"
+        xmlns:local="clr-namespace:Liusse.View"
+        xmlns:Templ="clr-namespace:Liusse.Templates"
         mc:Ignorable="d"
         Title="Liusse" MinHeight="350" MinWidth="250"
-        Height="500" Width="350">
-    
-    <!--#region Интерфейс-->
+        Height="500" Width="350" Background="#F5F5F5">
+
+    <Window.Resources>
+
+        <!--#region Стандартные цвета-->
+        <SolidColorBrush x:Key="MainColor" Opacity="1" Color="#1C1C1C"/>
+        <!--#region Тема 1-->
+        <!--<SolidColorBrush x:Key="AccentColor" Opacity="1" Color="#5B70E1"/>--><!--
+        <LinearGradientBrush x:Key="AccentColor" Opacity="1" 
+                             StartPoint="1, 0" EndPoint="0.5, 1">
+            <GradientStop Offset="0.1" Color="#1469CC"/>
+            <GradientStop Offset="0.6" Color="#5514CC"/>
+            <GradientStop Offset="1" Color="#8414CC"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="СomplementaryColor" Opacity="1" 
+                         Color="#191919"/>
+        <SolidColorBrush x:Key="ButtonSymbolColor" Opacity="1"
+                         Color="#5606EA"/>
+        <SolidColorBrush x:Key="Text1Color" Opacity="1" Color="#1469CC"/>
+        <SolidColorBrush x:Key="Text2Color" Opacity="1" Color="#1469CC"/>-->
+        <!--#endregion-->
+
+        <!--#region Тема 2-->
+        <!--<LinearGradientBrush x:Key="AccentColor" Opacity="1" 
+                             StartPoint="0, 0.5" EndPoint="1, 0.5">
+            <GradientStop Offset="0.1" Color="#191919"/>
+            <GradientStop Offset="0.9" Color="#931D1A"/>
+            <GradientStop Offset="1" Color="#D4213A"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="СomplementaryColor" Opacity="1" 
+                         Color="#191919"/>
+        <SolidColorBrush x:Key="ButtonSymbolColor" Opacity="1"
+                         Color="#B9201D"/>
+        <SolidColorBrush x:Key="Text1Color" Opacity="1" Color="#B9201D"/>
+        <SolidColorBrush x:Key="Text2Color" Opacity="1" Color="#B9201D"/>-->
+        <!--#endregion-->
+
+        <!--#region Тема 3-->
+        <!--<LinearGradientBrush x:Key="AccentColor" Opacity="1" 
+                             StartPoint="0, 0.5" EndPoint="1, 0.5">
+            <GradientStop Offset="0.1" Color="#191919"/>
+            <GradientStop Offset="0.9" Color="#931D1A"/>
+            <GradientStop Offset="1" Color="#D4213A"/>
+        </LinearGradientBrush>--><!--
+        <LinearGradientBrush x:Key="AccentColor" Opacity="1"
+                             StartPoint="1,0.5" EndPoint="0,0.5">
+            <GradientStop Offset="0.2" Color="#A7AFB4"/>
+            <GradientStop Offset="0.2" Color="#0D0D0D"/>
+            <GradientStop Offset="0.25" Color="#A7AFB4"/>
+            <GradientStop Offset="0.25" Color="#0D0D0D"/>
+            <GradientStop Offset="0.25" Color="#A7AFB4"/>
+            <GradientStop Offset="0.30" Color="#A7AFB4"/>
+            <GradientStop Offset="0.30" Color="#0D0D0D"/>
+            <GradientStop Offset="0.70" Color="#0D0D0D"/>
+            <GradientStop Offset="0.70" Color="#A7AFB4"/>
+            <GradientStop Offset="0.75" Color="#A7AFB4"/>
+            <GradientStop Offset="0.75" Color="#0D0D0D"/>
+            <GradientStop Offset="0.75" Color="#A7AFB4"/>
+            <GradientStop Offset="0.8" Color="#0D0D0D"/>
+            <GradientStop Offset="0.8" Color="#A7AFB4"/>
+            <GradientStop Offset="1" Color="#A7AFB4"/>
+        </LinearGradientBrush>
+        --><!--<SolidColorBrush x:Key="СomplementaryColor" Opacity="1" 
+                         Color="#4287B3"/>--><!--
+        <LinearGradientBrush x:Key="СomplementaryColor" Opacity="1"
+                             StartPoint="0.5,1" EndPoint="0.5,0">
+            <GradientStop Offset="0" Color="#450D87"/>
+            <GradientStop Offset="0.1" Color="#0D0D0D"/>
+            <GradientStop Offset="0.5" Color="#0D0D0D"/>
+            <GradientStop Offset="0.9" Color="#0D0D0D"/>
+            <GradientStop Offset="1" Color="#450D87"/>
+        </LinearGradientBrush>
+        
+        <SolidColorBrush x:Key="ButtonSymbolColor" Opacity="1"
+                         Color="#999999"/>
+        <SolidColorBrush x:Key="Text1Color" Opacity="1" Color="#999999"/>
+        <SolidColorBrush x:Key="Text2Color" Opacity="1" Color="#999999"/>-->
+        <!--#endregion-->
+        
+        <!--#region Тема 4-->
+        <SolidColorBrush x:Key="AccentColor" Opacity="1" Color="#3F25D0"/>
+        <!--<SolidColorBrush x:Key="ComplementaryColor" Opacity="1" 
+                         Color="#12107F"/>-->
+        <LinearGradientBrush x:Key="ComplementaryColor" Opacity="1"
+                             StartPoint="0, 0.5" EndPoint="1, 0.5">
+            <GradientStop Offset="0" Color="#191919"/>
+            <GradientStop Offset="0.06" Color="#12107F"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="ButtonSymbolColor" Opacity="1"
+                         Color="#4A47EB"/>
+        <SolidColorBrush x:Key="Text1Color" Opacity="1" Color="#1B16E3"/>
+        <SolidColorBrush x:Key="Text2Color" Opacity="1" Color="#1B16E3"/>
+        <!--#endregion-->
+        <!--#endregion-->
+
+        <Style TargetType="Button">
+            <Setter Property="Template" Value="{StaticResource InputButton}"/>
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="Background" 
+                    Value="{DynamicResource ComplementaryColor}"/>
+            <Setter Property="BorderBrush" 
+                    Value="{DynamicResource AccentColor}"/>
+            <Setter Property="Foreground" 
+                    Value="{DynamicResource ButtonSymbolColor}"/>
+        </Style>
+        <Style TargetType="Path">
+            <Setter Property="Stroke" 
+                    Value="{DynamicResource ButtonSymbolColor}"/>
+            <Setter Property="Fill" 
+                    Value="{DynamicResource ButtonSymbolColor}"/>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
@@ -16,8 +127,35 @@
             <RowDefinition Height="320*"/>
         </Grid.RowDefinitions>
 
-        
-        
+        <!--#region Поле выходных значений-->
+        <Grid Grid.Row="1" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="7*"/>
+            </Grid.RowDefinitions>
+
+            <Viewbox Grid.Row="1" HorizontalAlignment="Right"
+                     VerticalAlignment="Top">
+                <TextBox Style="{StaticResource OutputTextBox}"
+                         SelectionBrush="{DynamicResource СomplementaryColor}" 
+                         Foreground="{DynamicResource Text1Color}" 
+                         Margin="0,-2,0,-2" TextWrapping="Wrap"
+                         MaxWidth="200" Text="244 200"/>
+            </Viewbox>
+
+            <Viewbox Grid.Row="0" HorizontalAlignment="Right"
+                     VerticalAlignment="Center">
+                <TextBox Style="{StaticResource OutputTextBox}" 
+                         SelectionBrush="{DynamicResource СomplementaryColor}" 
+                         Foreground="{DynamicResource Text1Color}" 
+                         Margin="0,-2,0,0" TextWrapping="Wrap" Opacity="0.8"
+                         MaxWidth="200" Text="5 + 5 * 88 / 2 * 555="/>
+            </Viewbox>
+        </Grid>
+        <!--#endregion-->
+        <Templ:StandartOutput Grid.Row="1" Margin="5"/>
+
+        <Templ:StandartInput Grid.Row="2" Margin="2"/>
+
     </Grid>
-    <!--#endregion-->
 </Window>

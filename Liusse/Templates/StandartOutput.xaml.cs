@@ -12,13 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Globalization;
 
-namespace Liusse.View
+namespace Liusse.Templates
 {
-	public partial class MainWindow : Window
+	/// <summary>
+	/// Логика взаимодействия для StandartOutput.xaml
+	/// </summary>
+	public partial class StandartOutput : UserControl
 	{
-		public MainWindow()
+		public StandartOutput()
 		{
 			InitializeComponent();
 		}

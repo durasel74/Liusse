@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using CalcParse;
 
-namespace Liusse
+namespace Liusse.Model
 {
 	// | - - |
 	public class Core : INotifyPropertyChanged

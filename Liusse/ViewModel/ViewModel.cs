@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Liusse
+namespace Liusse.ViewModel
 {
 	// | - - |
 	public class ViewModel : INotifyPropertyChanged
