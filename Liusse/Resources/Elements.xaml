@@ -1,6 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Liusse">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--#region Кнопка ввода-->
     <ControlTemplate x:Key="InputButton" TargetType="Button">
@@ -24,17 +23,8 @@
             <Trigger Property="IsPressed" Value="true">
                 <Setter TargetName="buttonField" 
                             Property="Margin" Value="3"/>
-                <!--<Setter TargetName="buttonField" Property="Background"
-                            Value="#DFB55F"/>-->
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <!--#endregion-->
-
-    <Style x:Key="OutputTextBox" TargetType="TextBox">
-        <Setter Property="TextAlignment" Value="Right"/>
-        <Setter Property="IsReadOnly" Value="True"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Background" Value="Transparent"/>
-    </Style>
 </ResourceDictionary>
