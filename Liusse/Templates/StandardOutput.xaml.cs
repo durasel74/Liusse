@@ -18,9 +18,9 @@ namespace Liusse.Templates
 	/// <summary>
 	/// Логика взаимодействия для StandartOutput.xaml
 	/// </summary>
-	public partial class StandartOutput : UserControl
+	public partial class StandardOutput : UserControl
 	{
-		public StandartOutput()
+		public StandardOutput()
 		{
 			InitializeComponent();
 		}

@@ -153,9 +153,9 @@
             </Viewbox>
         </Grid>
         <!--#endregion-->
-        <Templ:StandartOutput Grid.Row="1" Margin="5"/>
+        <Templ:StandardOutput Grid.Row="1" Margin="5"/>
 
-        <Templ:StandartInput Grid.Row="2" Margin="2"/>
+        <Templ:StandardInput Grid.Row="2" Margin="2"/>
 
     </Grid>
 </Window>

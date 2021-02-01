@@ -16,9 +16,9 @@ using System.Globalization;
 
 namespace Liusse.Templates
 {
-	public partial class StandartInput : UserControl
+	public partial class StandardInput : UserControl
 	{
-		public StandartInput()
+		public StandardInput()
 		{
 			InitializeComponent();
 			SeparatorBtn.Content = NumberFormatInfo.CurrentInfo.CurrencyDecimalSeparator;
