@@ -16,13 +16,13 @@
                      VerticalAlignment="Top">
             <TextBox Margin="0,-1,0,-2" MaxWidth="200" TextWrapping="Wrap"
                      TextAlignment="Right" IsReadOnly="True"
-                     Text="244 200"/>
+                     Text="{Binding CurrentExpression}"/>
         </Viewbox>
         <Viewbox Grid.Row="0" HorizontalAlignment="Right"
                      VerticalAlignment="Center">
             <TextBox Margin="0,-2,0,0" MaxWidth="200" TextWrapping="Wrap" 
                      TextAlignment="Right" IsReadOnly="True" Opacity="0.8" 
-                     Text="5 + 5 * 88 / 2 * 555="/>
+                     Text="{Binding Example}"/>
         </Viewbox>
     </Grid>
 </UserControl>

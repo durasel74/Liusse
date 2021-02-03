@@ -89,6 +89,78 @@ namespace CalcParseTests
 
 			Assert.AreEqual(expected, actual);
 		}
+		[TestCase('0')]
+		[TestCase('1')]
+		[TestCase('2')]
+		[TestCase('5')]
+		[TestCase('9')]
+		[Category("CalcParse.Parse.AddSymbol")]
+		public void AddSymbol_AddToOpenBrackets_AddSymbol(char symbol)
+		{
+			string expression = "10+10-(";
+			string expected = "10+10-(" + symbol;
+
+			string actual = Parse.AddSymbol(expression, symbol);
+
+			Assert.AreEqual(expected, actual);
+		}
+		[TestCase('.')]
+		[TestCase(',')]
+		[TestCase('+')]
+		[TestCase('/')]
+		[TestCase('×')]
+		[TestCase('÷')]
+		[Category("CalcParse.Parse.AddSymbol")]
+		public void AddSymbol_AddToOpenBrackets_DontAddSymbol(char symbol)
+		{
+			string expression = "10+10-(";
+			string expected = "10+10-(";
+
+			string actual = Parse.AddSymbol(expression, symbol);
+
+			Assert.AreEqual(expected, actual);
+		}
+		[TestCase('+')]
+		[TestCase('/')]
+		[TestCase('×')]
+		[TestCase('÷')]
+		[Category("CalcParse.Parse.AddSymbol")]
+		public void AddSymbol_AddToCloseBrackets_AddSymbol(char symbol)
+		{
+			string expression = "(5+5)";
+			string expected = "(5+5)" + symbol;
+
+			string actual = Parse.AddSymbol(expression, symbol);
+
+			Assert.AreEqual(expected, actual);
+		}
+		[TestCase('0')]
+		[TestCase('1')]
+		[TestCase('2')]
+		[TestCase('5')]
+		[TestCase('9')]
+		[Category("CalcParse.Parse.AddSymbol")]
+		public void AddSymbol_AddToCloseBrackets_AddSymbolAndMultiply(char symbol)
+		{
+			string expression = "(5+5)";
+			string expected = "(5+5)" + '×'+ symbol;
+
+			string actual = Parse.AddSymbol(expression, symbol);
+
+			Assert.AreEqual(expected, actual);
+		}
+		[TestCase('.')]
+		[TestCase(',')]
+		[Category("CalcParse.Parse.AddSymbol")]
+		public void AddSymbol_AddToCloseBrackets_DontAddSymbol(char symbol)
+		{
+			string expression = "(5+5)";
+			string expected = "(5+5)";
+
+			string actual = Parse.AddSymbol(expression, symbol);
+
+			Assert.AreEqual(expected, actual);
+		}
 		#endregion
 
 		#region AddBracket
@@ -136,6 +208,21 @@ namespace CalcParseTests
 
 			string temp = Parse.AddBracket(expression);
 			string actual = temp;
+
+			Assert.AreEqual(expected, actual);
+		}
+		[TestCase(")")]
+		[TestCase("(5+5)")]
+		[TestCase("5")]
+		[TestCase("5+5")]
+		[TestCase("(10+(5+5))")]
+		[Category("CalcParse.Parse.AddBracket")]
+		public void AddBracket_AssumedLeftBracketAndMultiply_LastSymbolEqualRightBracketAndMultiply(string expression)
+		{
+			string expected = "×(";
+
+			string temp = Parse.AddBracket(expression);
+			string actual = temp.Substring(temp.Length - 2, 2);
 
 			Assert.AreEqual(expected, actual);
 		}
@@ -208,9 +295,6 @@ namespace CalcParseTests
 		[TestCase('-')]
 		[TestCase('+')]
 		[TestCase('*')]
-		[TestCase('.')]
-		[TestCase('(')]
-		[TestCase(')')]
 		[Category("CalcParse.Parse.ReplaceOperator")]
 		public void ReplaceOperator_EndOperator_True(char symbol)
 		{
@@ -225,9 +309,6 @@ namespace CalcParseTests
 		[TestCase('-')]
 		[TestCase('+')]
 		[TestCase('*')]
-		[TestCase('.')]
-		[TestCase('(')]
-		[TestCase(')')]
 		[Category("CalcParse.Parse.ReplaceOperator")]
 		public void ReplaceOperator_MiddleOperator_True(char symbol)
 		{
@@ -242,9 +323,6 @@ namespace CalcParseTests
 		[TestCase('-')]
 		[TestCase('+')]
 		[TestCase('*')]
-		[TestCase('.')]
-		[TestCase('(')]
-		[TestCase(')')]
 		[Category("CalcParse.Parse.ReplaceOperator")]
 		public void ReplaceOperator_FirstOperator_True(char symbol)
 		{
@@ -362,6 +440,7 @@ namespace CalcParseTests
 		[TestCase("10/", "10/-")]
 		[TestCase("10/2", "10/-2")]
 		[TestCase("10/+2", "10/-2")]
+		[TestCase("(", "(-")]
 		[TestCase("(10+(", "(10+(-")]
 		[TestCase("(10+5)", "(10+5)-")]
 		[TestCase("5.", "-5.")]
@@ -452,6 +531,9 @@ namespace CalcParseTests
 		}
 		[TestCase("")]
 		[TestCase("*")]
+		[TestCase("-")]
+		[TestCase("5*-")]
+		[TestCase("5*+")]
 		[TestCase("5*+5")]
 		[TestCase("5*/5")]
 		[TestCase("5-/5")]
@@ -508,14 +590,15 @@ namespace CalcParseTests
 		[TestCase("+", "+")]
 		[TestCase("6", "6")]
 		[TestCase("()", "")]
+		[TestCase("5.55", "5,55")]
 		[TestCase("5 + 5", "5+5")]
 		[TestCase("5---2", "5+-2")]
-		[TestCase("10 * 2.55 / 3+2", "10*2.55/3+2")]
+		[TestCase("10 * 2.55 / 3+2", "10*2,55/3+2")]
 		[TestCase("(10 + (5 + 5 ) )", "(10+(5+5))")]
 		[TestCase(" ( 5+5)", "(5+5)")]
 		[TestCase("((5)+(5))", "(5+5)")]
 		[TestCase("(100) + (5 - (-1) + 1)", "100+(5+1+1)")]
-		[TestCase("(-100.555) + (10-(-0.111))", "-100.555+(10+0.111)")]
+		[TestCase("(-100.555) + (10-(-0.111))", "-100,555+(10+0,111)")]
 		[TestCase("(((5)))", "5")]
 		[TestCase("((10 + (((1)))) + ((2+2)) - ((4)))", "((10+1)+((2+2))-4)")]
 		[TestCase("((10 + (((1)))) + ((2+2)) - ((4))", "((10+1)+((2+2))-4")]

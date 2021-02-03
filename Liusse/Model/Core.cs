@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using CalcParse;
 
-namespace Liusse.Model
+namespace Liusse
 {
 	// | - - |
 	public class Core : INotifyPropertyChanged
@@ -19,8 +19,11 @@ namespace Liusse.Model
 			get { return currentExpression; }
 			set
 			{
-				currentExpression = value;
-				OnPropertyChanged("CurrentExpression");
+				if (value.Length <= 60)
+				{
+					currentExpression = value;
+					OnPropertyChanged("CurrentExpression");
+				}
 			}
 		}
 
@@ -40,16 +43,22 @@ namespace Liusse.Model
 		// | - - |
 		public void Receiver(string symbol)
 		{
+			if (CurrentExpression == "Деление на ноль невозможно")
+				CurrentExpression = "";
+			if (Example != "" && symbol == "=")
+				return;
+
 			Example = "";
+
 			if (symbol == "C")
 				Clear();
-			else if (symbol == "⌫")
+			else if (symbol == "Backspace")
 				DeleteSymbol();
 			else if (symbol == "±")
 				PlusMinus();
 			else if (symbol == "=")
 				Result();
-			else if (symbol == "( )")
+			else if (symbol == "()")
 				AddBracket();
 			else if (symbol == "," || symbol == ".")
 				AddSeparator(symbol);
@@ -77,13 +86,29 @@ namespace Liusse.Model
 		private void PlusMinus()
 		{
 			string result = Parse.InvertNumber(CurrentExpression);
-			CurrentExpression = result;
+			if (CurrentExpression != result)
+				CurrentExpression = result;
 		}
 
 		// | - |
 		private void Result()
 		{
-
+			try
+			{
+				string result = Calculate.ALU(CurrentExpression);
+				if (CurrentExpression != result)
+				{
+					Example = CurrentExpression + '=';
+					CurrentExpression = result;
+				}
+			}
+			catch (NotCorrectException) { }
+			catch (OverflowException) { }
+			catch (DivideByZeroException)
+			{
+				Example = CurrentExpression + '=';
+				CurrentExpression = "Деление на ноль невозможно";
+			}
 		}
 
 		// | - |
@@ -108,9 +133,8 @@ namespace Liusse.Model
 		// | - |
 		private void AddSymbol(string symbol)
 		{
-			string result = CurrentExpression;
 			char charSymbol = symbol[0];
-			result = Parse.AddSymbol(CurrentExpression, charSymbol);
+			string result = Parse.AddSymbol(CurrentExpression, charSymbol);
 			if (CurrentExpression != result)
 				CurrentExpression = result;
 		}

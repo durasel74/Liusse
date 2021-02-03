@@ -14,13 +14,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Globalization;
 
-namespace Liusse.View
+namespace Liusse
 {
 	public partial class MainWindow : Window
 	{
 		public MainWindow()
 		{
 			InitializeComponent();
+			DataContext = new ViewModel();
 		}
 	}
 }

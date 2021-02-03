@@ -74,7 +74,8 @@ namespace CalcParseTests
 		[Category("CalcParse.Calculate.PriorityOfOperations")]
 		public void PriorityOfOperations_NotCorrect_Exception(string expression)
 		{
-			Assert.Throws<Exception>(() => Calculate.PriorityOfOperations(expression));
+			Assert.Throws<NotCorrectException>(() => 
+				Calculate.PriorityOfOperations(expression));
 		}
 		#endregion
 
@@ -127,7 +128,8 @@ namespace CalcParseTests
 		public void Selector_NotCorrectExpression_Exception(string expression,
 			int index)
 		{
-			Assert.Throws<Exception>(() => Calculate.Selector(expression, index));
+			Assert.Throws<NotCorrectException>(() => 
+				Calculate.Selector(expression, index));
 		}
 		[TestCase("5+5", 2)]
 		[TestCase("5--5", 0)]
@@ -138,7 +140,8 @@ namespace CalcParseTests
 		public void Selector_NotCorrectIndex_Exception(string expression,
 			int index)
 		{
-			Assert.Throws<Exception>(() => Calculate.Selector(expression, index));
+			Assert.Throws<Exception>(() => 
+				Calculate.Selector(expression, index));
 		}
 		[TestCase("5--5", 2)]
 		[TestCase("(10/(-10+2))", 5)]
@@ -147,7 +150,8 @@ namespace CalcParseTests
 		public void Selector_NotCorrectOperator_Exception(string expression,
 			int index)
 		{
-			Assert.Throws<Exception>(() => Calculate.Selector(expression, index));
+			Assert.Throws<Exception>(() => 
+				Calculate.Selector(expression, index));
 		}
 		#endregion
 
@@ -199,19 +203,26 @@ namespace CalcParseTests
 
 			Assert.AreEqual(expected, actual);
 		}
-		[TestCase("5")]
 		[TestCase("5+")]
 		[TestCase("3.")]
 		[TestCase("(5+5")]
 		[TestCase("5---5")]
 		[TestCase("10.2/.3")]
+		[Category("CalcParse.Calculate.Converter")]
+		public void Converter_NotCorrectExpression_Exception(string expression)
+		{
+			Assert.Throws<NotCorrectException>(() => 
+				Calculate.Converter(expression));
+		}
+		[TestCase("5")]
 		[TestCase("50000.0")]
 		[TestCase("5+5+5+5+5")]
 		[TestCase("(10+(5+5))")]
 		[Category("CalcParse.Calculate.Converter")]
-		public void Converter_NotCorrectExpression_Exception(string expression)
+		public void Converter_NotCorrectInput_Exception(string expression)
 		{
-			Assert.Throws<Exception>(() => Calculate.Converter(expression));
+			Assert.Throws<Exception>(() =>
+				Calculate.Converter(expression));
 		}
 		#endregion
 
@@ -274,13 +285,13 @@ namespace CalcParseTests
 		public void Replacer_NotCorrectExpression_Exception(string expression,
 			string resolve, string result)
 		{
-			Assert.Throws<Exception>(() => Calculate.Replacer(expression, 
+			Assert.Throws<NotCorrectException>(() => Calculate.Replacer(expression, 
 				resolve, result));
 		}
 		#endregion
 
 		#region ALU
-		[TestCase("-555.434", "-555.434")]
+		[TestCase("-555.434", "-555,434")]
 		[TestCase("5+5", "10")]
 		[TestCase("0/10", "0")]
 		[TestCase("5*-(5+5)", "-50")]
@@ -306,12 +317,13 @@ namespace CalcParseTests
 
 			Assert.AreEqual(expected, actual);
 		}
+		[TestCase("")]
 		[TestCase("(5+5")]
 		[TestCase("(5 - 5) + (10 - (5-2)")]
 		[Category("CalcParse.Calculate.ALU")]
 		public void ALU_NotCorrectExpression_Exception(string expression)
 		{
-			Assert.Throws<Exception>(() => Calculate.ALU(expression));
+			Assert.Throws<NotCorrectException>(() => Calculate.ALU(expression));
 		}
 		[TestCase("10/0")]
 		[TestCase("(10 * 0) / ((10-20) + 10)")]

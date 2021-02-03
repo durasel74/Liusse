@@ -15,14 +15,12 @@ using System.Windows.Shapes;
 
 namespace Liusse.Templates
 {
-	/// <summary>
-	/// Логика взаимодействия для StandartOutput.xaml
-	/// </summary>
 	public partial class StandardOutput : UserControl
 	{
 		public StandardOutput()
 		{
 			InitializeComponent();
+			DataContext = new ViewModel();
 		}
 	}
 }

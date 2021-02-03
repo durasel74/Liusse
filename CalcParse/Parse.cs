@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace CalcParse
 {
@@ -14,9 +15,14 @@ namespace CalcParse
 			if (expression.Length > 0)
 				lastSymbol = expression[expression.Length - 1];
 
-			if (Contains.ToNumbers(lastSymbol) ||
+			if (lastSymbol == ')' && Contains.ToNumbers(symbol))
+				result = expression + '×' + symbol;
+			else if (lastSymbol == ')' && Contains.ToMathOperators(symbol))
+				result = expression + symbol;
+			else if (Contains.ToNumbers(lastSymbol) ||
 					Contains.ToNumbers(symbol))
 				result = expression + symbol;
+
 			result = result.Replace(" ", "");
 			return result;
 		}
@@ -37,6 +43,9 @@ namespace CalcParse
 			else if (!Contains.ToNumbers(lastSymbol) &&
 					!Contains.ToAllOperators(lastSymbol))
 				return expression;
+			else if (openBracketLeft <= 0 && (lastSymbol == ')' || 
+					Contains.ToNumbers(lastSymbol)))
+				return expression + '×' + '(';
 			else if (openBracketLeft == 0)
 				return expression + '(';
 			else if (Contains.ToNumbers(lastSymbol))
@@ -63,8 +72,9 @@ namespace CalcParse
 				{
 					if (Contains.ToNumbers(expression[expression.Length - 1]))
 						correctLast = true;
-					else if (Contains.ToMathOperators(expression[expression.Length - 1])
-							|| expression[expression.Length - 1] == '(')
+					else if (Contains.ToMathOperators(
+						expression[expression.Length - 1]) || 
+						expression[expression.Length - 1] == '(')
 					{
 						result += "0" + separator;
 						break;
@@ -87,6 +97,8 @@ namespace CalcParse
 						result += separator;
 				}
 			}
+			if (expression.Length == 0)
+				result = "0" + separator;
 			return result;
 		}
 
@@ -99,6 +111,8 @@ namespace CalcParse
 				result = '-' + expression;
 			else if (expression[operatorIndex] == '+')
 				result = ReplaceOperator(expression, operatorIndex, '-');
+			else if (operatorIndex == 0 && expression[operatorIndex] == '(')
+				result = expression + '-';
 			else if (operatorIndex == 0)
 				result = ReplaceOperator(expression, operatorIndex, ' ');
 			else if (expression[operatorIndex - 1] == '(' &&
@@ -126,7 +140,7 @@ namespace CalcParse
 			{
 				if (Contains.ToNumbers(expression[i]))
 					continue;
-				if (expression[i] == '.' || expression[i] == ',')
+				if (Contains.ToSeparators(expression[i]))
 					continue;
 				return i;
 			}
@@ -137,7 +151,7 @@ namespace CalcParse
 		public static string ReplaceOperator(string expression, int index, 
 			char operat)
 		{
-			if (!Contains.ToAllOperators(operat) && operat != ' ')
+			if (!Contains.ToMathOperators(operat) && operat != ' ')
 				throw new Exception("Переданный символ не является оператором.");
 			string temp = expression.Remove(index, 1);
 			string result = temp.Insert(index, ""+operat);
@@ -188,8 +202,8 @@ namespace CalcParse
 						expression[i] != '-' && !Contains.ToNumbers( 
 						expression[i-1]) && expression[i-1] != ')')
 					isCorrectOperators = false;
-				if (Contains.ToMathOperators(expression[i]) && expression[i] 
-					!= '-' && expression.Length - 1 == i)
+				if (Contains.ToMathOperators(expression[i]) && 
+						i == expression.Length - 1)
 					isCorrectOperators = false;
 				else if (Contains.ToMathOperators(expression[i]) &&
 						expression[i + 1] != '-' && !Contains.ToNumbers( 
@@ -298,6 +312,9 @@ namespace CalcParse
 						result = result.Remove(0, 1);
 				}
 			}
+			char sep = Convert.ToChar(NumberFormatInfo.CurrentInfo.
+				CurrencyDecimalSeparator);
+			result = result.Replace('.', sep).Replace(',', sep);
 
 			return result;
 		}

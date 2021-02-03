@@ -11,7 +11,7 @@ namespace CalcParse
 		{
 			expression = Parse.DeleteSpace(expression);
 			if (!Parse.IsCorrect(expression))
-				throw new Exception("Выражение не корректно.");
+				throw new NotCorrectException("Выражение не корректно.");
 
 			string[] priorityOperators = { "×÷*/", "+-" };
 			bool openBracket = false;
@@ -51,7 +51,7 @@ namespace CalcParse
 		{
 			expression = Parse.DeleteSpace(expression);
 			if (!Parse.IsCorrect(expression))
-				throw new Exception("Выражение не корректно.");
+				throw new NotCorrectException("Выражение не корректно.");
 			if (!Contains.ToMathOperators(expression[index]))
 				throw new Exception("Переданный индекс не является " +
 					"математическим оператором.");
@@ -105,7 +105,7 @@ namespace CalcParse
 		public static object[] Converter(string expression)
 		{
 			if (!Parse.IsCorrect(expression))
-				throw new Exception("Выражение не корректно.");
+				throw new NotCorrectException("Выражение не корректно.");
 			if (Parse.IsCorrectBracket(expression))
 				throw new Exception("Невозможно конвертировать выражение " +
 					"содержащее скобки.");
@@ -190,7 +190,8 @@ namespace CalcParse
 					throw new Exception($"Операцию '{operator_}' не " +
 						$"получилось посчитать.");
 			}
-			if (result == Convert.ToInt32(result))
+
+			if (result == Math.Truncate(result))
 				result = Math.Truncate(result);
 			return result.ToString();
 		}
@@ -202,7 +203,7 @@ namespace CalcParse
 			expression = Parse.DeleteSpace(expression);
 			resolve = Parse.DeleteSpace(resolve);
 			if (!Parse.IsCorrect(expression))
-				throw new Exception("Выражение не корректно.");
+				throw new NotCorrectException("Выражение не корректно.");
 
 			int deleteIndex;
 			int deleteCount;
@@ -234,7 +235,12 @@ namespace CalcParse
 
 				priorityIndex = PriorityOfOperations(currentExpression);
 				if (priorityIndex == -1)
+				{
+					decimal temp = Convert.ToDecimal(currentExpression);
+					temp = Decimal.Round(temp, 15);
+					currentExpression = temp.ToString("G29");
 					return currentExpression;
+				}
 
 				expressionFragment = Selector(currentExpression, priorityIndex);
 
