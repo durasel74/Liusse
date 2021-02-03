@@ -25,15 +25,25 @@ namespace CalcParseTests
 		}
 		[TestCase('.')]
 		[TestCase(',')]
-		[TestCase('+')]
-		[TestCase('/')]
-		[TestCase('×')]
-		[TestCase('÷')]
 		[Category("CalcParse.Parse.AddSymbol")]
 		public void AddSymbol_AddToOperator_DontAddSymbol(char symbol)
 		{
 			string expression = "5+3*2/10+";
 			string expected = "5+3*2/10+";
+
+			string actual = Parse.AddSymbol(expression, symbol);
+
+			Assert.AreEqual(expected, actual);
+		}
+		[TestCase('+')]
+		[TestCase('/')]
+		[TestCase('×')]
+		[TestCase('÷')]
+		[Category("CalcParse.Parse.AddSymbol")]
+		public void AddSymbol_AddToOperator_ReplaceLastSymbol(char symbol)
+		{
+			string expression = "5+3*2/10+";
+			string expected = "5+3*2/10" + symbol;
 
 			string actual = Parse.AddSymbol(expression, symbol);
 
@@ -246,7 +256,6 @@ namespace CalcParseTests
 
 			Assert.AreEqual(expected, actual);
 		}
-		[TestCase("")]
 		[TestCase("-3.")]
 		[TestCase("-3,")]
 		[TestCase("0.")]
@@ -595,6 +604,8 @@ namespace CalcParseTests
 		[TestCase("5---2", "5+-2")]
 		[TestCase("10 * 2.55 / 3+2", "10*2,55/3+2")]
 		[TestCase("(10 + (5 + 5 ) )", "(10+(5+5))")]
+		[TestCase("-(-(-5))", "-5")]
+		[TestCase("-(-(-(-(-(-5)))))", "5")]
 		[TestCase(" ( 5+5)", "(5+5)")]
 		[TestCase("((5)+(5))", "(5+5)")]
 		[TestCase("(100) + (5 - (-1) + 1)", "100+(5+1+1)")]

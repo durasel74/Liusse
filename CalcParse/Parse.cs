@@ -22,7 +22,13 @@ namespace CalcParse
 			else if (Contains.ToNumbers(lastSymbol) ||
 					Contains.ToNumbers(symbol))
 				result = expression + symbol;
-
+			else if (Contains.ToMathOperators(lastSymbol) &&
+				Contains.ToMathOperators(symbol))
+			{
+				result = ReplaceOperator(expression, expression.Length-1, 
+					symbol);
+			}
+				
 			result = result.Replace(" ", "");
 			return result;
 		}
@@ -111,6 +117,10 @@ namespace CalcParse
 				result = '-' + expression;
 			else if (expression[operatorIndex] == '+')
 				result = ReplaceOperator(expression, operatorIndex, '-');
+			else if (expression[operatorIndex] == '(' &&
+					expression.Length - 1 > operatorIndex &&
+					Contains.ToNumbers(expression[operatorIndex + 1]))
+				result = expression.Insert(operatorIndex + 1, "-");
 			else if (operatorIndex == 0 && expression[operatorIndex] == '(')
 				result = expression + '-';
 			else if (operatorIndex == 0)
@@ -252,16 +262,44 @@ namespace CalcParse
 		/// </summary>
 		/// <param name="expression">Выражение.</param>
 		/// <returns>Возвращает строковое выражение без пробелов.</returns>
-		public static string DeleteSpace(string expression)
+		public static string RemoveSpace(string expression)
 		{
 			return expression.Replace(" ", "");
 		}
 
-		// | + - |
+		// | - - |
 		public static string Format(string expression)
 		{
 			string currentExpression = expression;
-			currentExpression = DeleteSpace(currentExpression);
+			currentExpression = RemoveSpace(currentExpression);
+			bool clear = false;
+
+			string notClearExpression;
+			while (!clear)
+			{
+				clear = true;
+				notClearExpression = currentExpression;
+
+				currentExpression = RemoveUnnecessaryBrackets(currentExpression);
+				currentExpression = ReplaceMinusForPlus(currentExpression);
+
+				if (currentExpression != notClearExpression)
+					clear = false;
+			}
+			
+			currentExpression = RemoveUnnecessaryBrackets(currentExpression);
+
+			char sep = Convert.ToChar(NumberFormatInfo.CurrentInfo.
+				CurrencyDecimalSeparator);
+			string result = currentExpression.Replace('.', sep).Replace(',', sep);
+
+			return result;
+		}
+
+		// | - - |
+		public static string RemoveUnnecessaryBrackets(string expression)
+		{
+			string currentExpression = expression;
 			int openBracketIndex = -1;
 			int closeBracketIndex = -1;
 			List<int> deleteIndexes = new List<int>();
@@ -277,8 +315,8 @@ namespace CalcParse
 						openBracketIndex = i;
 					else if (currentExpression[i] == ')' && openBracketIndex != -1)
 						closeBracketIndex = i;
-					else if (Contains.ToMathOperators(currentExpression[i]) && 
-						!(i != 0 && currentExpression[i - 1] == '(' && 
+					else if (Contains.ToMathOperators(currentExpression[i]) &&
+						!(i != 0 && currentExpression[i - 1] == '(' &&
 						currentExpression[i] == '-'))
 					{
 						openBracketIndex = -1;
@@ -300,23 +338,27 @@ namespace CalcParse
 					currentExpression = currentExpression.Remove(index, 1);
 			}
 
-			string result = currentExpression;
+			return currentExpression;
+		}
+
+		// | - - |
+		public static string ReplaceMinusForPlus(string expression)
+		{
+			string currentExpression = expression;
 			for (int i = 0; i < currentExpression.Length; i++)
 			{
-				if (i > 0 && currentExpression[i] == '-' && 
+				if (i > 0 && currentExpression[i] == '-' &&
 					currentExpression[i - 1] == '-')
 				{
 					currentExpression = currentExpression.Remove(i - 1, 2);
-					result = currentExpression.Insert(i - 1, "+");
-					if (result[0] == '+')
-						result = result.Remove(0, 1);
+					currentExpression = currentExpression.Insert(i - 1, "+");
+					if (currentExpression[0] == '+')
+						currentExpression = currentExpression.Remove(0, 1);
+					if (i > 1 && Contains.ToAllOperators(currentExpression[i - 2]))
+						currentExpression = currentExpression.Remove(i - 1, 1);
 				}
 			}
-			char sep = Convert.ToChar(NumberFormatInfo.CurrentInfo.
-				CurrencyDecimalSeparator);
-			result = result.Replace('.', sep).Replace(',', sep);
-
-			return result;
+			return currentExpression;
 		}
 	}
 }

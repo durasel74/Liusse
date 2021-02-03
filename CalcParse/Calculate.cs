@@ -9,7 +9,7 @@ namespace CalcParse
 		// | + - |
 		public static int PriorityOfOperations(string expression)
 		{
-			expression = Parse.DeleteSpace(expression);
+			expression = Parse.RemoveSpace(expression);
 			if (!Parse.IsCorrect(expression))
 				throw new NotCorrectException("Выражение не корректно.");
 
@@ -49,7 +49,7 @@ namespace CalcParse
 		// | + - |
 		public static string Selector(string expression, int index)
 		{
-			expression = Parse.DeleteSpace(expression);
+			expression = Parse.RemoveSpace(expression);
 			if (!Parse.IsCorrect(expression))
 				throw new NotCorrectException("Выражение не корректно.");
 			if (!Contains.ToMathOperators(expression[index]))
@@ -200,8 +200,8 @@ namespace CalcParse
 		public static string Replacer(string expression, string resolve, 
 			string result)
 		{
-			expression = Parse.DeleteSpace(expression);
-			resolve = Parse.DeleteSpace(resolve);
+			expression = Parse.RemoveSpace(expression);
+			resolve = Parse.RemoveSpace(resolve);
 			if (!Parse.IsCorrect(expression))
 				throw new NotCorrectException("Выражение не корректно.");
 
