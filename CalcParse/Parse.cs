@@ -36,7 +36,7 @@ namespace CalcParse
 		// | + - |
 		public static string AddBracket(string expression)
 		{
-			int openBracketLeft = CountOpenBracket(expression);
+			int openBracketLeft = CountOpenBrackets(expression);
 
 			char lastSymbol = ' ';
 			if (expression.Length > 0)
@@ -237,14 +237,14 @@ namespace CalcParse
 		{
 			for (int i = 0; i < expression.Length; i++)
 			{
-				if (expression[i] == '(' && CountOpenBracket(expression) == 0)
+				if (expression[i] == '(' && CountOpenBrackets(expression) == 0)
 					return true;
 			}
 			return false;
 		}
 
 		// | + - |
-		public static int CountOpenBracket(string expression)
+		public static int CountOpenBrackets(string expression)
 		{
 			int openBracket = 0;
 			foreach (char symbol in expression)
@@ -274,6 +274,8 @@ namespace CalcParse
 			currentExpression = RemoveSpace(currentExpression);
 			bool clear = false;
 
+			currentExpression = AddingMissingBrackets(currentExpression);
+
 			string notClearExpression;
 			while (!clear)
 			{
@@ -286,8 +288,6 @@ namespace CalcParse
 				if (currentExpression != notClearExpression)
 					clear = false;
 			}
-			
-			currentExpression = RemoveUnnecessaryBrackets(currentExpression);
 
 			char sep = Convert.ToChar(NumberFormatInfo.CurrentInfo.
 				CurrencyDecimalSeparator);
@@ -359,6 +359,14 @@ namespace CalcParse
 				}
 			}
 			return currentExpression;
+		}
+
+		// | - - |
+		public static string AddingMissingBrackets(string expression)
+		{
+			int countOpenBrackets = CountOpenBrackets(expression);
+			string result = expression + new String(')', countOpenBrackets);
+			return result;
 		}
 	}
 }

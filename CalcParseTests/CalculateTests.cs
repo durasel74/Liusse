@@ -318,8 +318,8 @@ namespace CalcParseTests
 			Assert.AreEqual(expected, actual);
 		}
 		[TestCase("")]
-		[TestCase("(5+5")]
-		[TestCase("(5 - 5) + (10 - (5-2)")]
+		[TestCase("(5+5,")]
+		[TestCase("(5 - 5) + (10, - (5-2)")]
 		[Category("CalcParse.Calculate.ALU")]
 		public void ALU_NotCorrectExpression_Exception(string expression)
 		{

@@ -98,7 +98,7 @@ namespace Liusse
 				string result = Calculate.ALU(CurrentExpression);
 				if (CurrentExpression != result)
 				{
-					Example = CurrentExpression + '=';
+					Example = Parse.AddingMissingBrackets(CurrentExpression) + '=';
 					CurrentExpression = result;
 				}
 			}

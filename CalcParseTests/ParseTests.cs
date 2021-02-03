@@ -434,7 +434,7 @@ namespace CalcParseTests
 		{
 			int expected = bracket;
 
-			int actual = Parse.CountOpenBracket(expression);
+			int actual = Parse.CountOpenBrackets(expression);
 
 			Assert.AreEqual(expected, actual);
 		}
@@ -599,20 +599,22 @@ namespace CalcParseTests
 		[TestCase("+", "+")]
 		[TestCase("6", "6")]
 		[TestCase("()", "")]
+		[TestCase("(((((", "")]
+		[TestCase("(((5)))", "5")]
 		[TestCase("5.55", "5,55")]
 		[TestCase("5 + 5", "5+5")]
 		[TestCase("5---2", "5+-2")]
-		[TestCase("10 * 2.55 / 3+2", "10*2,55/3+2")]
-		[TestCase("(10 + (5 + 5 ) )", "(10+(5+5))")]
 		[TestCase("-(-(-5))", "-5")]
-		[TestCase("-(-(-(-(-(-5)))))", "5")]
 		[TestCase(" ( 5+5)", "(5+5)")]
 		[TestCase("((5)+(5))", "(5+5)")]
+		[TestCase("-(-(-(-(-(-5)))))", "5")]
+		[TestCase("(10+(5+5", "(10+(5+5))")]
+		[TestCase("10 * 2.55 / 3+2", "10*2,55/3+2")]
+		[TestCase("(10 + (5 + 5 ) )", "(10+(5+5))")]
 		[TestCase("(100) + (5 - (-1) + 1)", "100+(5+1+1)")]
 		[TestCase("(-100.555) + (10-(-0.111))", "-100,555+(10+0,111)")]
-		[TestCase("(((5)))", "5")]
 		[TestCase("((10 + (((1)))) + ((2+2)) - ((4)))", "((10+1)+((2+2))-4)")]
-		[TestCase("((10 + (((1)))) + ((2+2)) - ((4))", "((10+1)+((2+2))-4")]
+		[TestCase("((10 + (((1)))) + ((2+2)) - ((4))", "((10+1)+((2+2))-4)")]
 		[Category("CalcParse.Parse.Format")]
 		public void Format_CorrectExpression_FormatExpression(string expression,
 			string result)
