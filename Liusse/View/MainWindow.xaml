@@ -9,6 +9,7 @@
         Title="Liusse" MinHeight="350" MinWidth="250"
         Height="500" Width="350" Background="{DynamicResource MainColor}">
 
+    <!--#region Подключение всех шаблонов и стилей к окну-->
     <Window.Resources>
         <Style TargetType="TextBox">
             <Setter Property="BorderThickness" Value="0"/>
@@ -36,14 +37,34 @@
             <Setter Property="Fill" 
                     Value="{DynamicResource PrimaryTextColor}"/>
         </Style>
+        <Style TargetType="Button" x:Key="PanelButtonStyle">
+            <Setter Property="Template" Value="{StaticResource PanelButton}"/>
+            <Setter Property="Width" Value="35"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
     </Window.Resources>
-
+    <!--#endregion-->
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
             <RowDefinition Height="100*"/>
             <RowDefinition Height="320*"/>
         </Grid.RowDefinitions>
+        
+        <!--#region Кнопки панелей-->
+        <DockPanel LastChildFill="False" Panel.ZIndex="2">
+            <Button Style="{StaticResource PanelButtonStyle}"
+                    DockPanel.Dock="Left">
+                <Path Data="{StaticResource MenuSymbol}"/>
+            </Button>
+            <Button Style="{StaticResource PanelButtonStyle}" 
+                    DockPanel.Dock="Right">
+                <Path Data="{StaticResource HistorySymbol}"/>
+            </Button>
+        </DockPanel>
+        <!--#endregion-->
 
         <Templ:StandardOutput Grid.Row="1" Margin="5" 
                               DataContext="{Binding Parser}"/>
@@ -52,4 +73,3 @@
 
     </Grid>
 </Window>
-
