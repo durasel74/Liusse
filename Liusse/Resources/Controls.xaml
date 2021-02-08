@@ -31,8 +31,8 @@
     <!--#region Кнопка панели-->
     <ControlTemplate x:Key="PanelButton" TargetType="Button">
         <Border x:Name="buttonField" BorderThickness="1"
-                Background="Transparent" BorderBrush="Transparent"
-                SnapsToDevicePixels="True">
+                SnapsToDevicePixels="True" BorderBrush="Transparent"
+                Background="{TemplateBinding Background}">
             <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" 
                      Margin="{TemplateBinding Padding}">
                 <ContentControl x:Name="buttonContent" Focusable="False"

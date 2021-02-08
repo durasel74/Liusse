@@ -20,7 +20,6 @@ namespace Liusse.Templates
 		public StandardOutput()
 		{
 			InitializeComponent();
-			DataContext = new ViewModel();
 		}
 	}
 }
