@@ -97,13 +97,15 @@
         <Border x:Name="MenuPanel" Grid.RowSpan="3" Margin="-200,0,0,0"
                 Style="{StaticResource Panel}" HorizontalAlignment="Left"
                 BorderThickness="0,0,1,0">
-            <Button Width="50" Height="50"/>
+            <Button x:Name="slimeButton1" Width="50" Height="50"
+                    Click="SlimeButtonClickTest"/>
         </Border>
 
         <Border x:Name="JournalPanel" Grid.RowSpan="3" Margin="0,0,-200,0"
                 Style="{StaticResource Panel}" HorizontalAlignment="Right"
                 BorderThickness="1,0,0,0">
-            <Button Width="50" Height="50"/>
+            <Button x:Name="slimeButton2" Width="50" Height="50"
+                    Click="SlimeButtonClickTest"/>
         </Border>
         <!--#endregion-->
     </Grid>

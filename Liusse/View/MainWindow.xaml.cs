@@ -56,17 +56,17 @@ namespace Liusse
 		private void InitializeAnimation()
 		{
 			menuPanelOpenAnimation = new ThicknessAnimation();
-			menuPanelOpenAnimation.To = new Thickness(0,0,0,0);
+			menuPanelOpenAnimation.To = new Thickness(0, 0, 0, 0);
 			menuPanelOpenAnimation.AccelerationRatio = 0;
 			menuPanelOpenAnimation.DecelerationRatio = decelerationAnimation;
-			menuPanelOpenAnimation.Duration = 
+			menuPanelOpenAnimation.Duration =
 				TimeSpan.FromSeconds(panelOpenAnimationDuration);
 
 			menuPanelCloseAnimation = new ThicknessAnimation();
 			menuPanelCloseAnimation.To = new Thickness(-200, 0, 0, 0);
 			menuPanelCloseAnimation.AccelerationRatio = accelerationAnimation;
 			menuPanelCloseAnimation.DecelerationRatio = 0;
-			menuPanelCloseAnimation.Duration = 
+			menuPanelCloseAnimation.Duration =
 				TimeSpan.FromSeconds(panelCloseAnimationDuration);
 
 			journalPanelOpenAnimation = new ThicknessAnimation();
@@ -87,14 +87,14 @@ namespace Liusse
 			blackAreaOpenAnimation.To = 0.5;
 			blackAreaOpenAnimation.AccelerationRatio = 0;
 			blackAreaOpenAnimation.DecelerationRatio = decelerationAnimation;
-			blackAreaOpenAnimation.Duration = 
+			blackAreaOpenAnimation.Duration =
 				TimeSpan.FromSeconds(panelOpenAnimationDuration);
 
 			blackAreaCloseAnimation = new DoubleAnimation();
 			blackAreaCloseAnimation.To = 0;
 			blackAreaCloseAnimation.AccelerationRatio = accelerationAnimation;
 			blackAreaCloseAnimation.DecelerationRatio = 0;
-			blackAreaCloseAnimation.Duration = 
+			blackAreaCloseAnimation.Duration =
 				TimeSpan.FromSeconds(panelCloseAnimationDuration);
 			blackAreaCloseAnimation.Completed += BlackAreaAnimationComplited;
 		}
@@ -105,28 +105,28 @@ namespace Liusse
 		// | - |
 		private void MenuPanelOpenAnimation()
 		{
-			MenuPanel.BeginAnimation(MarginProperty, 
+			MenuPanel.BeginAnimation(MarginProperty,
 				menuPanelOpenAnimation);
 		}
 
 		// | - |
 		private void MenuPanelCloseAnimation()
 		{
-			MenuPanel.BeginAnimation(MarginProperty, 
+			MenuPanel.BeginAnimation(MarginProperty,
 				menuPanelCloseAnimation);
 		}
 
 		// | - |
 		private void JournalPanelOpenAnimation()
 		{
-			JournalPanel.BeginAnimation(MarginProperty, 
+			JournalPanel.BeginAnimation(MarginProperty,
 				journalPanelOpenAnimation);
 		}
 
 		// | - |
 		private void JournalPanelCloseAnimation()
 		{
-			JournalPanel.BeginAnimation(MarginProperty, 
+			JournalPanel.BeginAnimation(MarginProperty,
 				journalPanelCloseAnimation);
 		}
 
@@ -134,14 +134,14 @@ namespace Liusse
 		private void BlackAreaOpenAnimation()
 		{
 			BlackArea.Visibility = Visibility.Visible;
-			BlackArea.BeginAnimation(OpacityProperty, 
+			BlackArea.BeginAnimation(OpacityProperty,
 				blackAreaOpenAnimation);
 		}
 
 		// | - |
 		private void BlackAreaCloseAnimation()
 		{
-			BlackArea.BeginAnimation(Border.OpacityProperty, 
+			BlackArea.BeginAnimation(Border.OpacityProperty,
 				blackAreaCloseAnimation);
 		}
 
@@ -201,6 +201,77 @@ namespace Liusse
 			BlackAreaCloseAnimation();
 			MenuPanelCloseAnimation();
 			JournalPanelCloseAnimation();
+		}
+		#endregion
+
+		#region Временно !!!!!!
+		DoubleAnimation btnAnimationX;
+		DoubleAnimation btnAnimationY;
+		Button btn;
+		bool TestClicked = false;
+		public void SlimeButtonClickTest(object sender, RoutedEventArgs e)
+		{
+			btn = sender as Button;
+			if (btn != null && !TestClicked)
+			{
+				btnAnimationX = new DoubleAnimation();
+				btnAnimationX.To = 190;
+				btnAnimationX.DecelerationRatio = 1;
+				btnAnimationX.Duration =
+					TimeSpan.FromSeconds(0.5);
+				
+				btnAnimationY = new DoubleAnimation();
+				btnAnimationY.To = 200;
+				btnAnimationY.Duration =
+					TimeSpan.FromSeconds(0.5);
+				btnAnimationY.Completed += CompliteTestAnimation;
+
+				btn.BeginAnimation(WidthProperty, btnAnimationX);
+				btn.BeginAnimation(HeightProperty, btnAnimationY);
+
+				TestClicked = true;
+			}
+			else if (btn != null && TestClicked)
+			{
+				btnAnimationY = new DoubleAnimation();
+				btnAnimationY.To = 200;
+				btnAnimationY.Duration =
+					TimeSpan.FromSeconds(0.5);
+				btnAnimationY.Completed += CompliteTestAnimation;
+
+				btn.BeginAnimation(WidthProperty, btnAnimationX);
+				btn.BeginAnimation(HeightProperty, btnAnimationY);
+
+				TestClicked = false;
+			}
+		}
+
+		public void CompliteTestAnimation(object sender, EventArgs e)
+		{
+			if (TestClicked)
+			{
+				btnAnimationY.To = 410;
+				btnAnimationY.DecelerationRatio = 1;
+				btnAnimationY.Duration =
+					TimeSpan.FromSeconds(0.5);
+				btn.BeginAnimation(HeightProperty, btnAnimationY);
+			}
+			else
+			{
+				btnAnimationX.To = 50;
+				btnAnimationX.DecelerationRatio = 1;
+				btnAnimationX.Duration =
+					TimeSpan.FromSeconds(0.5);
+
+				btnAnimationY.To = 50;
+				btnAnimationY.DecelerationRatio = 1;
+				btnAnimationY.Duration =
+					TimeSpan.FromSeconds(0.5);
+
+				btn.BeginAnimation(WidthProperty, btnAnimationX);
+				btn.BeginAnimation(HeightProperty, btnAnimationY);
+			}
+			
 		}
 		#endregion
 	}
