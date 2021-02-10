@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -9,6 +10,8 @@ namespace Liusse
 	{
 		private Core parser;
 		private ButtonCommand inputCommand;
+
+		public ObservableCollection<JournalElement> Journal { get; set; }
 
 		/// <summary>
 		/// Команда ввода символа.
@@ -38,6 +41,7 @@ namespace Liusse
 		public ViewModel()
 		{
 			parser = new Core();
+			Journal = parser.Journal.GetJournal();
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;

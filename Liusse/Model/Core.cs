@@ -10,6 +10,7 @@ namespace Liusse
 	{
 		private string currentExpression = "";
 		private string example = "";
+		private Journal journal = new Journal();
 
 		/// <summary>
 		/// Текущее выражение. Выражение над которым идет работа.
@@ -38,6 +39,12 @@ namespace Liusse
 				example = value;
 				OnPropertyChanged("Example");
 			}
+		}
+
+		// | - |
+		public Journal Journal
+		{
+			get { return journal; }
 		}
 
 		// | - - |
@@ -100,6 +107,7 @@ namespace Liusse
 				{
 					Example = Parse.AddingMissingBrackets(CurrentExpression) + '=';
 					CurrentExpression = result;
+					journal.AddElement(CurrentExpression, Example);
 				}
 			}
 			catch (NotCorrectException) { }
