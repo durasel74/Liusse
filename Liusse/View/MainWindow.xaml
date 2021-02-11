@@ -47,7 +47,7 @@
             <Setter Property="Padding" Value="5"/>
             <Setter Property="Background" Value="{StaticResource MainColor}"/>
         </Style>
-        
+
         <Style TargetType="Border" x:Key="Panel">
             <Setter Property="Panel.ZIndex" Value="1"/>
             <Setter Property="Width" Value="200"/>
@@ -57,6 +57,34 @@
             <Setter Property="BorderBrush" 
                     Value="{StaticResource SecondaryTextColor}"/>
             <Setter Property="Visibility" Value="Collapsed"/>
+        </Style>
+
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Template" Value="{StaticResource ListBoxItem}"/>
+            <Setter Property="ListBoxItem.HorizontalContentAlignment"
+                    Value="Right"/>
+            <Setter Property="ListBoxItem.VerticalContentAlignment"
+                    Value="Center"/>
+            <Setter Property="ListBoxItem.Padding" Value="6"/>
+            <Setter Property="ListBoxItem.Margin" Value="0,0,0,10"/>
+            <Setter Property="ListBoxItem.BorderThickness" Value="1"/>
+            <Setter Property="ListBoxItem.Background" 
+                    Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="ListBoxItem.Foreground" 
+                    Value="{StaticResource SecondaryTextColor}"/>
+        </Style>
+
+        <Style TargetType="ScrollBar">
+            <Setter Property="Template" 
+                    Value="{StaticResource ScrollBar}"/>
+            <Setter Property="Padding" Value="4,0,4,0"/>
+            <Setter Property="Margin" Value="-2,4,-4,4"/>
+            <Setter Property="Width" Value="15"/>
+            <Setter Property="Background" 
+                    Value="{StaticResource ComplementaryColor}"/>
+            <Setter Property="Foreground" 
+                    Value="{StaticResource AccentColor}"/>
         </Style>
     </Window.Resources>
     <!--#endregion-->
@@ -104,8 +132,7 @@
         <Border x:Name="JournalPanel" Grid.RowSpan="3" Margin="0,0,-200,0"
                 Style="{StaticResource Panel}" HorizontalAlignment="Right"
                 BorderThickness="1,0,0,0">
-            <Button x:Name="slimeButton2" Width="50" Height="50"
-                    Click="SlimeButtonClickTest"/>
+            <Templ:JournalPanel/>
         </Border>
         <!--#endregion-->
     </Grid>

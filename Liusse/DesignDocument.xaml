@@ -17,7 +17,7 @@
 
         <SolidColorBrush x:Key="BtnFg" Color="#DFF"/>
         <SolidColorBrush x:Key="DopBtnFg" Opacity="0.6" Color="#1155CA"/>
-        <!--#endregion-->
+        <!--#endregion--> <!--X-->
         
         <!--#region Основные кнопки-->
         <ControlTemplate x:Key="CalcBtn" TargetType="Button">
@@ -49,7 +49,7 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
-        <!--#endregion-->
+        <!--#endregion--> <!--X-->
 
         <!--#region Дополнительные кнопки-->
         <ControlTemplate x:Key="DopBtn" TargetType="Button">
@@ -95,7 +95,7 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
-        <!--#endregion-->
+        <!--#endregion--> <!--X-->
 
         <!--#region Скроллбар-->
         <Style x:Key="ScrollBarPageButtonStyle" 
@@ -152,7 +152,7 @@
                 </Track>
             </Grid>
         </ControlTemplate>
-        <!--#endregion-->
+        <!--#endregion--> <!--X-->
 
         <!--#region Разные стили-->
         <Style TargetType="Button">
@@ -180,7 +180,7 @@
         <Style TargetType="{x:Type ScrollBar}">
             <Setter Property="Template" Value="{StaticResource VerticalScrollBar}"/>
         </Style>
-        <!--#endregion-->
+        <!--#endregion--> <!--X-->
     </Window.Resources>
 
 
@@ -199,7 +199,7 @@
                                  Opacity="0.2"/>
             </Border.Background>
         </Border>
-        <!--#endregion-->
+        <!--#endregion--> <!--X-->
 
         <!--#region Панель режимов-->
         <Border Grid.RowSpan="3" Panel.ZIndex="2" Width="200"  
@@ -384,7 +384,7 @@
                         FontFamily="Arial" FontWeight="Bold"/>
             </Grid>
         </Border>
-        <!--#endregion-->
+        <!--#endregion--> <!--X-->
 
         <!--#region Окно журнал-->
         <Border Grid.RowSpan="3" Panel.ZIndex="10"  
@@ -559,6 +559,6 @@
             <Button Grid.Row="4" Grid.Column="2" Content=","/>
             <Button Grid.Row="4" Grid.Column="3" Content="="/>
         </Grid>
-        <!--#endregion-->
+        <!--#endregion--> <!--X-->
     </Grid>
 </Window>

@@ -65,4 +65,87 @@
     </ControlTemplate>
     <!--#endregion-->
     
+    <!--#region Элемент списка-->
+    <ControlTemplate x:Key="ListBoxItem" TargetType="ListBoxItem">
+        <Border x:Name="ItemBorder" Padding="{TemplateBinding Padding}" 
+                Margin="{TemplateBinding Margin}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}">
+            <ContentPresenter
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+        </Border>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="ItemBorder" Property="BorderBrush" 
+                        Value="{DynamicResource AccentColor}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <!--#endregion-->
+
+    <!--#region Скроллбар-->
+    
+    <!-- Область сверху и снизу ползунка прокрутки. -->
+    <Style x:Key="ScrollBarPageButtonStyle" TargetType="RepeatButton">
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Border Width="{TemplateBinding Width}"
+                            Margin="{TemplateBinding Margin}"
+                            Background="{TemplateBinding Background}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Ползунок прокрутки. -->
+    <Style x:Key="ScrollBarThumbStyle" TargetType="Thumb">
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Focusable" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Rectangle Width="{TemplateBinding Width}"
+                               Margin="{TemplateBinding Margin}"
+                               Fill="{TemplateBinding Foreground}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Шаблон скроллбара. -->
+    <ControlTemplate x:Key="ScrollBar" TargetType="ScrollBar">
+        <Grid>
+            <Track Name="PART_Track" IsDirectionReversed="True">
+                <Track.DecreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource ScrollBarPageButtonStyle}"
+                                  Width="{TemplateBinding Width}"
+                                  Margin="{TemplateBinding Padding}"
+                                  Background="{TemplateBinding Background}"
+                                  Command="ScrollBar.PageUpCommand"/>
+                </Track.DecreaseRepeatButton>
+                <Track.Thumb>
+                    <Thumb Style="{StaticResource ScrollBarThumbStyle}"
+                           Width="{TemplateBinding Width}"
+                           Margin="{TemplateBinding Padding}"
+                           Foreground="{TemplateBinding Foreground}"/>
+                </Track.Thumb>
+                <Track.IncreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource ScrollBarPageButtonStyle}"
+                                  Width="{TemplateBinding Width}"
+                                  Margin="{TemplateBinding Padding}"
+                                  Background="{TemplateBinding Background}"
+                                  Command="ScrollBar.PageDownCommand"/>
+                </Track.IncreaseRepeatButton>
+            </Track>
+        </Grid>
+    </ControlTemplate>
+    <!--#endregion-->
 </ResourceDictionary>

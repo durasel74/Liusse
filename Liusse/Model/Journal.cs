@@ -14,13 +14,13 @@ namespace Liusse
 		public void AddElement(string result, string example)
 		{
 			JournalElement newElement = new JournalElement(result, example);
-			elements.Add(newElement);
+			elements.Insert(0, newElement);
 		}
 
 		// | - |
 		public JournalElement GetLastElement()
 		{
-			return elements[elements.Count - 1];
+			return elements[0];
 		}
 
 		// | - |
@@ -38,7 +38,7 @@ namespace Liusse
 		// | - |
 		public void RemoveLastElement()
 		{
-			elements.RemoveAt(elements.Count - 1);
+			elements.RemoveAt(0);
 		}
 
 		// | - |
