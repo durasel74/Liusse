@@ -20,6 +20,8 @@ namespace Liusse
 	// | - |
 	public partial class MainWindow : Window
 	{
+		private ViewModel viewModel;
+
 		private bool menuPanelOpen = false;
 		private bool journalPanelOpen = false;
 		private double panelOpenAnimationDuration = 0.2;
@@ -43,6 +45,7 @@ namespace Liusse
 			InitializeAnimation();
 			InitializePanels();
 			DataContext = new ViewModel();
+			viewModel = (ViewModel)DataContext;
 		}
 
 		// | - |
@@ -202,6 +205,95 @@ namespace Liusse
 			MenuPanelCloseAnimation();
 			JournalPanelCloseAnimation();
 		}
+		#endregion
+
+		#region Ввод через клавиатуру
+		private void KeyInput(object sender, KeyEventArgs key)
+		{
+			if (menuPanelOpen || journalPanelOpen)
+				return;
+
+			Key pressedKey = key.Key;
+
+			if ((Keyboard.IsKeyDown(Key.LeftShift)
+				&& pressedKey == Key.Back) || pressedKey == Key.R)
+			{
+				viewModel.InputCommand.Execute("C");
+			}
+			else if (pressedKey == Key.Back)
+			{
+				viewModel.InputCommand.Execute("Backspace");
+			}
+			else if ((Keyboard.IsKeyDown(Key.LeftShift) ||
+				Keyboard.IsKeyDown(Key.RightShift)) && key.Key == Key.D9)
+			{
+				viewModel.InputCommand.Execute("()");
+			}
+			else if ((Keyboard.IsKeyDown(Key.LeftShift) ||
+				Keyboard.IsKeyDown(Key.RightShift)) && key.Key == Key.D0)
+			{
+				viewModel.InputCommand.Execute("()");
+			}
+			else if (pressedKey == Key.OemPeriod ||
+				pressedKey == Key.OemComma ||
+				pressedKey == Key.Decimal)
+			{
+				viewModel.InputCommand.Execute(",");
+			}
+			else if ((Keyboard.IsKeyDown(Key.LeftShift) &&
+				pressedKey == Key.OemMinus) || 
+				((Keyboard.IsKeyDown(Key.LeftShift) &&
+				pressedKey == Key.Subtract)))
+			{
+				viewModel.InputCommand.Execute("±");
+			}
+
+			else if (((Keyboard.IsKeyDown(Key.LeftShift) ||
+				Keyboard.IsKeyDown(Key.RightShift)) &&
+				pressedKey == Key.D8) || pressedKey == Key.Multiply)
+			{
+				viewModel.InputCommand.Execute("×");
+			}
+			else if (pressedKey == Key.OemQuestion || 
+				pressedKey == Key.Divide)
+			{
+				viewModel.InputCommand.Execute("÷");
+			}
+			else if (pressedKey == Key.OemPlus || pressedKey == Key.Add)
+			{
+				viewModel.InputCommand.Execute("+");
+			}
+			else if (pressedKey == Key.OemMinus || pressedKey == Key.Subtract)
+			{
+				viewModel.InputCommand.Execute("-");
+			}
+			else if (pressedKey == Key.Enter)
+			{
+				viewModel.InputCommand.Execute("=");
+			}
+
+			else if (pressedKey == Key.D0 || pressedKey == Key.NumPad0)
+				viewModel.InputCommand.Execute("0");
+			else if (pressedKey == Key.D1 || pressedKey == Key.NumPad1)
+				viewModel.InputCommand.Execute("1");
+			else if (pressedKey == Key.D2 || pressedKey == Key.NumPad2)
+				viewModel.InputCommand.Execute("2");
+			else if (pressedKey == Key.D3 || pressedKey == Key.NumPad3)
+				viewModel.InputCommand.Execute("3");
+			else if (pressedKey == Key.D4 || pressedKey == Key.NumPad4)
+				viewModel.InputCommand.Execute("4");
+			else if (pressedKey == Key.D5 || pressedKey == Key.NumPad5)
+				viewModel.InputCommand.Execute("5");
+			else if (pressedKey == Key.D6 || pressedKey == Key.NumPad6)
+				viewModel.InputCommand.Execute("6");
+			else if (pressedKey == Key.D7 || pressedKey == Key.NumPad7)
+				viewModel.InputCommand.Execute("7");
+			else if (pressedKey == Key.D8 || pressedKey == Key.NumPad8)
+				viewModel.InputCommand.Execute("8");
+			else if (pressedKey == Key.D9 || pressedKey == Key.NumPad9)
+				viewModel.InputCommand.Execute("9");
+		}
+
 		#endregion
 
 		#region Временно !!!!!!

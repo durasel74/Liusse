@@ -7,7 +7,8 @@
         xmlns:Templ="clr-namespace:Liusse.Templates"
         mc:Ignorable="d"
         Title="Liusse" MinHeight="350" MinWidth="250"
-        Height="500" Width="350" Background="{DynamicResource MainColor}">
+        Height="500" Width="350" Background="{DynamicResource MainColor}"
+        KeyDown="KeyInput">
 
     <!--#region Подключение всех шаблонов и стилей к окну-->
     <Window.Resources>
@@ -45,6 +46,7 @@
             <Setter Property="Width" Value="35"/>
             <Setter Property="Height" Value="35"/>
             <Setter Property="Padding" Value="5"/>
+            <Setter Property="Focusable" Value="False"/>
             <Setter Property="Background" Value="{StaticResource MainColor}"/>
         </Style>
 
