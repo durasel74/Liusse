@@ -58,8 +58,10 @@
                         Value="0"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
-                <Setter TargetName="buttonField" Property="Background"
-                        Value="Black"/>
+                <Setter TargetName="buttonField" Property="Opacity"
+                        Value="0"/>
+                <Setter TargetName="buttonContent" Property="Opacity"
+                        Value="0"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

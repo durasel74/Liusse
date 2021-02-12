@@ -10,6 +10,7 @@ namespace Liusse
 	{
 		private Core parser;
 		private ButtonCommand inputCommand;
+		private ButtonCommand clearJournalCommand;
 
 		public ObservableCollection<JournalElement> Journal { get; set; }
 
@@ -27,6 +28,22 @@ namespace Liusse
 						if (symbol != null)
 							parser.Receiver(symbol);
 					}));
+			}
+		}
+
+		/// <summary>
+		/// Команда очистки журнала
+		/// </summary>
+		public ButtonCommand ClearJournalCommand
+		{ 
+			get
+			{
+				return clearJournalCommand ??
+					(clearJournalCommand = new ButtonCommand(obj =>
+					{
+						parser.Journal.Clear();
+					},
+					(obj) => Journal.Count > 0));
 			}
 		}
 
