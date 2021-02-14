@@ -7,13 +7,21 @@ namespace CalcParse
 	// | - - |
 	public static class Parse
 	{
+		// | - - |
+		public static char GetLastSymbol(string expression)
+		{
+			char lastSymbol = ' ';
+			if (expression.Length > 0)
+				lastSymbol = expression[expression.Length - 1];
+
+			return lastSymbol;
+		}
+
 		// | + - |
 		public static string AddSymbol(string expression, char symbol)
 		{
 			string result = expression;
-			char lastSymbol = ' ';
-			if (expression.Length > 0)
-				lastSymbol = expression[expression.Length - 1];
+			char lastSymbol = GetLastSymbol(expression);
 
 			if (lastSymbol == ')' && Contains.ToNumbers(symbol))
 				result = expression + '×' + symbol;
@@ -37,10 +45,21 @@ namespace CalcParse
 		public static string AddBracket(string expression)
 		{
 			int openBracketLeft = CountOpenBrackets(expression);
+			char lastSymbol = GetLastSymbol(expression);
 
-			char lastSymbol = ' ';
-			if (expression.Length > 0)
-				lastSymbol = expression[expression.Length - 1];
+			if (openBracketLeft == 0)
+				return AddOpenBracket(expression);
+			else if (lastSymbol == ')' || Contains.ToNumbers(lastSymbol))
+				return AddCloseBracket(expression);
+			else
+				return AddOpenBracket(expression);
+		}
+
+		// | + - |
+		public static string AddOpenBracket(string expression)
+		{
+			int openBracketLeft = CountOpenBrackets(expression);
+			char lastSymbol = GetLastSymbol(expression);
 
 			if (lastSymbol == ' ')
 				return expression + '(';
@@ -49,17 +68,30 @@ namespace CalcParse
 			else if (!Contains.ToNumbers(lastSymbol) &&
 					!Contains.ToAllOperators(lastSymbol))
 				return expression;
-			else if (openBracketLeft <= 0 && (lastSymbol == ')' || 
-					Contains.ToNumbers(lastSymbol)))
+			else if (lastSymbol == ')' || Contains.ToNumbers(lastSymbol))
 				return expression + '×' + '(';
-			else if (openBracketLeft == 0)
+			else if (Contains.ToAllOperators(lastSymbol))
 				return expression + '(';
+			return expression;
+		}
+
+		// | + - |
+		public static string AddCloseBracket(string expression)
+		{
+			int openBracketLeft = CountOpenBrackets(expression);
+			char lastSymbol = GetLastSymbol(expression);
+
+			if (openBracketLeft <= 0)
+				return expression;
+			if (lastSymbol == '.' || lastSymbol == ',')
+				return expression;
+			else if (!Contains.ToNumbers(lastSymbol) &&
+					!Contains.ToAllOperators(lastSymbol))
+				return expression;
 			else if (Contains.ToNumbers(lastSymbol))
 				return expression + ')';
 			else if (openBracketLeft > 0 && lastSymbol == ')')
 				return expression + ')';
-			else if (Contains.ToAllOperators(lastSymbol))
-				return expression + '(';
 			return expression;
 		}
 

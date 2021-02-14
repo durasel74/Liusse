@@ -215,8 +215,8 @@ namespace Liusse
 
 			Key pressedKey = key.Key;
 
-			if ((Keyboard.IsKeyDown(Key.LeftShift)
-				&& pressedKey == Key.Back) || pressedKey == Key.R)
+			if ((Keyboard.IsKeyDown(Key.LeftCtrl) && 
+				pressedKey == Key.Back) || pressedKey == Key.R)
 			{
 				viewModel.InputCommand.Execute("C");
 			}
@@ -227,12 +227,12 @@ namespace Liusse
 			else if ((Keyboard.IsKeyDown(Key.LeftShift) ||
 				Keyboard.IsKeyDown(Key.RightShift)) && key.Key == Key.D9)
 			{
-				viewModel.InputCommand.Execute("()");
+				viewModel.InputCommand.Execute("(");
 			}
 			else if ((Keyboard.IsKeyDown(Key.LeftShift) ||
 				Keyboard.IsKeyDown(Key.RightShift)) && key.Key == Key.D0)
 			{
-				viewModel.InputCommand.Execute("()");
+				viewModel.InputCommand.Execute(")");
 			}
 			else if (pressedKey == Key.OemPeriod ||
 				pressedKey == Key.OemComma ||

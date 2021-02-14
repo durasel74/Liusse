@@ -21,11 +21,12 @@
                     Value="{DynamicResource PrimaryTextColor}"/>
             <Setter Property="Text" Value="{Binding Expression}"/>
         </Style>
-        
+
         <Style TargetType="Button">
             <Setter Property="Template" Value="{StaticResource InputButton}"/>
             <Setter Property="Command" Value="{Binding InputCommand}"/>
             <Setter Property="Margin" Value="1"/>
+            <Setter Property="Focusable" Value="False"/>
             <Setter Property="Background" 
                     Value="{DynamicResource ComplementaryColor}"/>
             <Setter Property="BorderBrush" 

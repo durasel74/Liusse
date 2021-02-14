@@ -221,7 +221,7 @@ namespace CalcParseTests
 
 			Assert.AreEqual(expected, actual);
 		}
-		[TestCase(")")]
+		[TestCase("()")]
 		[TestCase("(5+5)")]
 		[TestCase("5")]
 		[TestCase("5+5")]
@@ -233,6 +233,88 @@ namespace CalcParseTests
 
 			string temp = Parse.AddBracket(expression);
 			string actual = temp.Substring(temp.Length - 2, 2);
+
+			Assert.AreEqual(expected, actual);
+		}
+		#endregion
+
+		#region AddOpenBracket
+		[TestCase("")]
+		[TestCase("(")]
+		[TestCase("5+")]
+		[TestCase("5+5")]
+		[TestCase("(10-10)")]
+		[TestCase("5")]
+		[TestCase("5*(")]
+		[TestCase("(5*(5+5)+")]
+		[Category("CalcParse.Parse.AddOpenBracket")]
+		public void AddOpenBracket_AddBracket_LastSymbolEqualLeftBracket(string expression)
+		{
+			char expected = '(';
+
+			string temp = Parse.AddOpenBracket(expression);
+			char actual = temp[temp.Length - 1];
+
+			Assert.AreEqual(expected, actual);
+		}
+		[TestCase("5.")]
+		[TestCase("123,554,")]
+		[TestCase("adfs")]
+		[TestCase("234+32x")]
+		[Category("CalcParse.Parse.AddOpenBracket")]
+		public void AddOpenBracket_DontAddBracket_Expression(string expression)
+		{
+			string expected = expression;
+
+			string temp = Parse.AddOpenBracket(expression);
+			string actual = temp;
+
+			Assert.AreEqual(expected, actual);
+		}
+		[TestCase("()")]
+		[TestCase("(5+5)")]
+		[TestCase("5")]
+		[TestCase("5+5")]
+		[TestCase("(10+(5+5))")]
+		[Category("CalcParse.Parse.AddOpenBracket")]
+		public void AddOpenBracket_AssumedLeftBracketAndMultiply_LastSymbolEqualRightBracketAndMultiply(string expression)
+		{
+			string expected = "×(";
+
+			string temp = Parse.AddOpenBracket(expression);
+			string actual = temp.Substring(temp.Length - 2, 2);
+
+			Assert.AreEqual(expected, actual);
+		}
+		#endregion
+
+		#region AddCloseBracket
+		[TestCase("(5")]
+		[TestCase("(5+5")]
+		[TestCase("((10-10)")]
+		[TestCase("5*(10+10")]
+		[TestCase("(5*(5+5)+5")]
+		[Category("CalcParse.Parse.AddCloseBracket")]
+		public void AddCloseBracket_AssumedRightBracket_LastSymbolEqualRightBracket(string expression)
+		{
+			char expected = ')';
+
+			string temp = Parse.AddCloseBracket(expression);
+			char actual = temp[temp.Length - 1];
+
+			Assert.AreEqual(expected, actual);
+		}
+		[TestCase("5.")]
+		[TestCase("123,554,")]
+		[TestCase("adfs")]
+		[TestCase("234+32x")]
+		[Category("CalcParse.Parse.AddCloseBracket")]
+		public void AddCloseBracket_DontAddBracket_Expression(string expression)
+		{
+			string expected = expression;
+
+			string temp = Parse.AddCloseBracket(expression);
+			string actual = temp;
 
 			Assert.AreEqual(expected, actual);
 		}
