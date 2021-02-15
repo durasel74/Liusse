@@ -4,9 +4,140 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Liusse"
+        xmlns:Templ="clr-namespace:Liusse.Templates"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Liusse" MinHeight="350" MinWidth="250"
+        Height="500" Width="350" Background="{DynamicResource MainColor}"
+        KeyDown="KeyInput">
 
+    <!--#region Подключение всех шаблонов и стилей к окну-->
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" 
+                    Value="{DynamicResource SecondaryTextColor}"/>
+            <Setter Property="SelectionBrush" 
+                    Value="{DynamicResource PrimaryTextColor}"/>
+            <Setter Property="Text" Value="{Binding Expression}"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Template" Value="{StaticResource InputButton}"/>
+            <Setter Property="Command" Value="{Binding InputCommand}"/>
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Background" 
+                    Value="{DynamicResource ComplementaryColor}"/>
+            <Setter Property="BorderBrush" 
+                    Value="{DynamicResource AccentColor}"/>
+            <Setter Property="Foreground" 
+                    Value="{DynamicResource PrimaryTextColor}"/>
+        </Style>
+        
+        <Style TargetType="Path">
+            <Setter Property="Stroke" 
+                    Value="{DynamicResource PrimaryTextColor}"/>
+            <Setter Property="Fill" 
+                    Value="{DynamicResource PrimaryTextColor}"/>
+        </Style>
+        
+        <Style TargetType="Button" x:Key="PanelButtonStyle">
+            <Setter Property="Template" Value="{StaticResource PanelButton}"/>
+            <Setter Property="Width" Value="35"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Background" Value="{StaticResource MainColor}"/>
+        </Style>
+
+        <Style TargetType="Border" x:Key="Panel">
+            <Setter Property="Panel.ZIndex" Value="1"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Padding" Value="0,35,0,0"/>
+            <Setter Property="Background" 
+                    Value="{StaticResource MainColor}"/>
+            <Setter Property="BorderBrush" 
+                    Value="{StaticResource SecondaryTextColor}"/>
+            <Setter Property="Visibility" Value="Collapsed"/>
+        </Style>
+
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Template" Value="{StaticResource ListBoxItem}"/>
+            <Setter Property="ListBoxItem.HorizontalContentAlignment"
+                    Value="Right"/>
+            <Setter Property="ListBoxItem.VerticalContentAlignment"
+                    Value="Center"/>
+            <Setter Property="ListBoxItem.Padding" Value="6"/>
+            <Setter Property="ListBoxItem.Margin" Value="0,0,0,10"/>
+            <Setter Property="ListBoxItem.BorderThickness" Value="1"/>
+            <Setter Property="ListBoxItem.Background" 
+                    Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="ListBoxItem.Foreground" 
+                    Value="{StaticResource SecondaryTextColor}"/>
+        </Style>
+
+        <Style TargetType="ScrollBar">
+            <Setter Property="Template" 
+                    Value="{StaticResource ScrollBar}"/>
+            <Setter Property="Padding" Value="4,0,4,0"/>
+            <Setter Property="Margin" Value="-2,4,-4,4"/>
+            <Setter Property="Width" Value="15"/>
+            <Setter Property="Background" 
+                    Value="{StaticResource ComplementaryColor}"/>
+            <Setter Property="Foreground" 
+                    Value="{StaticResource AccentColor}"/>
+        </Style>
+    </Window.Resources>
+    <!--#endregion-->
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="320*"/>
+        </Grid.RowDefinitions>
+
+        <!--#region Кнопки панелей-->
+        <DockPanel LastChildFill="False" Panel.ZIndex="2">
+            <Button Style="{StaticResource PanelButtonStyle}"
+                    DockPanel.Dock="Left" Click="MenuButtonClick">
+                <Path Data="{StaticResource MenuSymbol}"/>
+            </Button>
+            <Button Style="{StaticResource PanelButtonStyle}" 
+                    DockPanel.Dock="Right" Click="JournalButtonClick">
+                <Path Data="{StaticResource HistorySymbol}"/>
+            </Button>
+        </DockPanel>
+        <!--#endregion-->
+
+        <!--#region Основная область-->
+        <Templ:StandardOutput Grid.Row="1" Margin="5" 
+                              DataContext="{Binding Parser}"/>
+
+        <Templ:StandardInput Grid.Row="2" Margin="2"/>
+        <!--#endregion-->
+
+        <!--#region Выезжающие панели-->
+        <Border x:Name="BlackArea" Grid.RowSpan="3" Visibility="Collapsed" 
+                Opacity="0" MouseLeftButtonDown="BlackAreaClick" 
+                Background="Black">
+        </Border>
+
+        <Border x:Name="MenuPanel" Grid.RowSpan="3" Margin="-200,0,0,0"
+                Style="{StaticResource Panel}" HorizontalAlignment="Left"
+                BorderThickness="0,0,1,0">
+            <Button x:Name="slimeButton1" Width="50" Height="50"
+                    Click="SlimeButtonClickTest"/>
+        </Border>
+
+        <Border x:Name="JournalPanel" Grid.RowSpan="3" Margin="0,0,-200,0"
+                Style="{StaticResource Panel}" HorizontalAlignment="Right"
+                BorderThickness="1,0,0,0">
+            <Templ:JournalPanel/>
+        </Border>
+        <!--#endregion-->
     </Grid>
 </Window>
+ 

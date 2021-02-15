@@ -1,0 +1,564 @@
+﻿<Window x:Class="Liusse.DesignDocument"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Liusse"
+        mc:Ignorable="d"
+        Title="DesignDocument" MinHeight="350" MinWidth="250"
+        Height="500" Width="350">
+    <Window.Resources>
+        <!--#region Цвета-->
+        <SolidColorBrush x:Key="MainColor" Color="#D0D5DF"/>
+        <SolidColorBrush x:Key="AccentColor" Color="#5F8FDF"/>
+        <SolidColorBrush x:Key="ComplementaryColor" Color="#1155CA"/>
+        <SolidColorBrush x:Key="TextColor1" Color="#58D"/>
+        <SolidColorBrush x:Key="TextColor2" Color="#56A"/>
+
+        <SolidColorBrush x:Key="BtnFg" Color="#DFF"/>
+        <SolidColorBrush x:Key="DopBtnFg" Opacity="0.6" Color="#1155CA"/>
+        <!--#endregion--> <!--X-->
+        
+        <!--#region Основные кнопки-->
+        <ControlTemplate x:Key="CalcBtn" TargetType="Button">
+            <Border x:Name="buttonBorder" BorderThickness="6" 
+                    CornerRadius="10" 
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}">
+                <Viewbox Margin="{TemplateBinding Padding}">
+                    <ContentControl x:Name="buttonContent"
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" 
+                        Foreground="{TemplateBinding Foreground}"
+                        Content="{TemplateBinding Content}"/>
+                </Viewbox>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter TargetName="buttonBorder" 
+                            Property="BorderThickness" Value="3"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter TargetName="buttonBorder" Property="Background"
+                            Value="#DFB55F"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Foreground" Value="Gray"/>
+                    <Setter TargetName="buttonBorder" Property="Background" 
+                            Value="LightGray"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <!--#endregion--> <!--X-->
+
+        <!--#region Дополнительные кнопки-->
+        <ControlTemplate x:Key="DopBtn" TargetType="Button">
+            <Border x:Name="DopBtnBg" CornerRadius="0" BorderThickness="0" 
+                    Background="Transparent">
+                <ContentControl x:Name="DopBtnFg" 
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Foreground="{StaticResource DopBtnFg}"
+                                Content="{TemplateBinding Content}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter TargetName="DopBtnBg" Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Opacity="0.6" Color="#CDF"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter TargetName="DopBtnFg" Property="Foreground">
+                        <Setter.Value>
+                            <SolidColorBrush Opacity="0.9" Color="#1155CA"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter TargetName="DopBtnBg" 
+                            Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Opacity="1" Color="#CDF"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter TargetName="DopBtnFg" Property="Foreground">
+                        <Setter.Value>
+                            <SolidColorBrush Opacity="1" Color="#1155CA"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Foreground" Value="Gray"/>
+                    <Setter TargetName="DopBtnBg" Property="Background" 
+                            Value="LightGray"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <!--#endregion--> <!--X-->
+
+        <!--#region Скроллбар-->
+        <Style x:Key="ScrollBarPageButtonStyle" 
+               TargetType="{x:Type RepeatButton}">
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Border Background="Transparent" 
+                                BorderThickness="0"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ScrollBarThumbStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Margin" Value="0,0,-5,0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Rectangle Fill="{StaticResource ComplementaryColor}"
+                                   Width="5"></Rectangle>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="VerticalScrollBar" 
+                         TargetType="{x:Type ScrollBar}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Track Name="PART_Track" Grid.Row="0" 
+                   IsDirectionReversed="True">
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Command="ScrollBar.PageUpCommand" 
+                                      Style="{StaticResource ScrollBarPageButtonStyle}">
+                        </RepeatButton>
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource ScrollBarThumbStyle}">
+                        </Thumb>
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Command="ScrollBar.PageDownCommand" 
+                                      Style="{StaticResource ScrollBarPageButtonStyle}">
+                        </RepeatButton>
+                    </Track.IncreaseRepeatButton>
+                </Track>
+            </Grid>
+        </ControlTemplate>
+        <!--#endregion--> <!--X-->
+
+        <!--#region Разные стили-->
+        <Style TargetType="Button">
+            <Setter Property="Template" Value="{StaticResource CalcBtn}"/>
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="Background" 
+                    Value="{StaticResource AccentColor}"/>
+            <Setter Property="BorderBrush" 
+                    Value="{StaticResource ComplementaryColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource BtnFg}"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="SelectionBrush" Value="#68D"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" 
+                    Value="{StaticResource ComplementaryColor}"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+        </Style>
+        <Style TargetType="{x:Type ScrollBar}">
+            <Setter Property="Template" Value="{StaticResource VerticalScrollBar}"/>
+        </Style>
+        <!--#endregion--> <!--X-->
+    </Window.Resources>
+
+
+    <Grid Background="{StaticResource MainColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="103*"/>
+            <RowDefinition Height="331*"/>
+        </Grid.RowDefinitions>
+
+        <!--#region Затемнение основной области-->
+        <Border Grid.RowSpan="3" Panel.ZIndex="1" Visibility="Collapsed" 
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Border.Background>
+                <SolidColorBrush x:Name="BlackGlass" Color="Black" 
+                                 Opacity="0.2"/>
+            </Border.Background>
+        </Border>
+        <!--#endregion--> <!--X-->
+
+        <!--#region Панель режимов-->
+        <Border Grid.RowSpan="3" Panel.ZIndex="2" Width="200"  
+                  VerticalAlignment="Stretch" HorizontalAlignment="Left" 
+                  Margin="-200,0,0,0" Background="{StaticResource MainColor}"
+                  BorderBrush="{StaticResource ComplementaryColor}"
+                  BorderThickness="0" Visibility="Collapsed">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <ListBox Grid.Row="1" Background="Transparent" 
+                         BorderThickness="0" 
+                         VirtualizingPanel.ScrollUnit="Pixel">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="ListBoxItem.Background" 
+                                    Value="Transparent"/>
+                            <Setter Property="ListBoxItem.Margin" 
+                                    Value="1"/>
+                            <Setter Property="ListBoxItem.Padding" 
+                                    Value="5"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                        <Border
+                                                Background="{TemplateBinding Background}"
+                                                Margin="{TemplateBinding Margin}"
+                                                Padding="{TemplateBinding Padding}"
+                                                BorderThickness="0">
+                                            <ContentPresenter/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Opacity="0.6" Color="#CDF"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Opacity="1" Color="#CDF"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <TextBlock Text="Обычный"/>
+                    <TextBlock Text="Расширенный"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                </ListBox>
+
+                <Button Grid.Row="2" Template="{StaticResource DopBtn}"
+                        Content="О Программе" HorizontalAlignment="Stretch"
+                        FontSize="20" HorizontalContentAlignment="Left"
+                        Height="30" FontFamily="Arial" Padding="3"/>
+            </Grid>
+        </Border>
+        <!--#endregion-->
+
+        <!--#region Панель журнала-->
+        <Border Grid.RowSpan="3" Panel.ZIndex="2" Width="200"  
+                VerticalAlignment="Stretch" HorizontalAlignment="Right" 
+                Margin="0,0,-200,0" Background="{StaticResource MainColor}"
+                BorderBrush="{StaticResource ComplementaryColor}"
+                BorderThickness="0" Visibility="Collapsed">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="35"/>
+                </Grid.RowDefinitions>
+
+                <ListBox Grid.Row="1" Background="Transparent" 
+                         BorderThickness="0" 
+                         VirtualizingPanel.ScrollUnit="Pixel"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="ListBoxItem.Background" 
+                                    Value="Transparent"/>
+                            <Setter Property="ListBoxItem.Margin" 
+                                    Value="1"/>
+                            <Setter Property="ListBoxItem.Padding" 
+                                    Value="5"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                        <Border
+                                                Background="{TemplateBinding Background}"
+                                                Margin="{TemplateBinding Margin}"
+                                                Padding="{TemplateBinding Padding}"
+                                                BorderThickness="0">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="2*"/>
+                                                    <RowDefinition Height="5*"/>
+                                                </Grid.RowDefinitions>
+                                                <Viewbox Grid.Row="0" Height="30"
+                                                         HorizontalAlignment="Right">
+                                                    <TextBlock FontSize="20" MaxWidth="200"
+                                                           TextAlignment="Right"
+                                                           Foreground="{StaticResource TextColor2}"
+                                                           TextWrapping="Wrap"
+                                                           Text="1+1"/>
+                                                </Viewbox>
+                                                <Viewbox Grid.Row="1" Height="40"
+                                                         HorizontalAlignment="Right"
+                                                         VerticalAlignment="Top">
+                                                    <TextBlock FontSize="30"
+                                                           TextAlignment="Right"
+                                                           Foreground="{StaticResource TextColor1}"
+                                                           Text="234234"/>
+                                                </Viewbox>
+                                            </Grid>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Opacity="0.6" Color="#CDF"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Opacity="1" Color="#CDF"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <TextBlock Text="Обычный"/>
+                    <TextBlock Text="Расширенный"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                </ListBox>
+
+                <Button Grid.Row="2" Template="{StaticResource DopBtn}"
+                        Content="♲" HorizontalAlignment="Right" Width="35"
+                        FontSize="20" HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        FontFamily="Arial" FontWeight="Bold"/>
+            </Grid>
+        </Border>
+        <!--#endregion--> <!--X-->
+
+        <!--#region Окно журнал-->
+        <Border Grid.RowSpan="3" Panel.ZIndex="10"  
+                VerticalAlignment="Stretch"
+                Margin="0,0,0,0" Background="{StaticResource MainColor}"
+                BorderBrush="{StaticResource ComplementaryColor}"
+                BorderThickness="0" Visibility="Collapsed">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="35"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Журнал" Margin="5"/>
+                <ListBox Grid.Row="1" Background="Transparent" 
+                         BorderThickness="0" 
+                         VirtualizingPanel.ScrollUnit="Pixel"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="ListBoxItem.Background" 
+                                    Value="Transparent"/>
+                            <Setter Property="ListBoxItem.Margin" 
+                                    Value="1"/>
+                            <Setter Property="ListBoxItem.Padding" 
+                                    Value="5"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                        <Border
+                                                Background="{TemplateBinding Background}"
+                                                Margin="{TemplateBinding Margin}"
+                                                Padding="{TemplateBinding Padding}"
+                                                BorderThickness="0">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="2*"/>
+                                                    <RowDefinition Height="5*"/>
+                                                </Grid.RowDefinitions>
+                                                <Viewbox Grid.Row="0" Height="30"
+                                                         HorizontalAlignment="Right">
+                                                    <TextBlock FontSize="20" 
+                                                           TextAlignment="Right"
+                                                           Foreground="{StaticResource TextColor2}"
+                                                           TextWrapping="Wrap"
+                                                           Text="1+1+1+1+1+1+1+1+1"/>
+                                                </Viewbox>
+                                                <Viewbox Grid.Row="1" Height="40"
+                                                         HorizontalAlignment="Right"
+                                                         VerticalAlignment="Top">
+                                                    <TextBlock FontSize="30"
+                                                           TextAlignment="Right"
+                                                           Foreground="{StaticResource TextColor1}"
+                                                           Text="234234"/>
+                                                </Viewbox>
+                                            </Grid>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Opacity="0.6" Color="#CDF"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Opacity="1" Color="#CDF"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <TextBlock Text="Обычный"/>
+                    <TextBlock Text="Расширенный"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                    <TextBlock Text="Режим"/>
+                </ListBox>
+
+                <Button Grid.Row="2" Template="{StaticResource DopBtn}"
+                        Content="♲" HorizontalAlignment="Right" Width="35"
+                        FontSize="20" HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        FontFamily="Arial" FontWeight="Bold"/>
+            </Grid>
+        </Border>
+        <!--#endregion-->
+
+        <!--#region Основная область-->
+        <DockPanel LastChildFill="False" Panel.ZIndex="2">
+            <Button DockPanel.Dock="Left" Content="≡" Width="35"
+                    Template="{StaticResource DopBtn}" FontSize="30"
+                    FontWeight="Bold" FontFamily="Times New Roman"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"/>
+            <Button DockPanel.Dock="Right" Content="◷" Width="35" 
+                    Template="{StaticResource DopBtn}" FontSize="30"
+                    FontWeight="Bold" FontFamily="Times New Roman"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"/>
+        </DockPanel>
+
+        <Grid Grid.Row="1" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+
+            <Viewbox Grid.Row="0" HorizontalAlignment="Right"
+                     VerticalAlignment="Bottom">
+                <TextBox Padding="0,-2,0,-3" Text="3+5+10+2+6=" 
+                         Foreground="{StaticResource TextColor2}"/>
+            </Viewbox>
+            <Viewbox Grid.Row="1" HorizontalAlignment="Right"
+                     VerticalAlignment="Top">
+                <TextBox Padding="0,0,-2,0" Text="366666645345" 
+                         Foreground="{StaticResource TextColor1}"/>
+            </Viewbox>
+        </Grid>
+
+        <Grid Margin="2" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0" Content="C"/>
+            <Button Grid.Row="0" Grid.Column="1" Content="( )"/>
+            <Button Grid.Row="0" Grid.Column="2" Content="⌫"/>
+            <Button Grid.Row="0" Grid.Column="3" Content="÷"/>
+            <Button Grid.Row="1" Grid.Column="0" Content="7"/>
+            <Button Grid.Row="1" Grid.Column="1"  Content="8"/>
+            <Button Grid.Row="1" Grid.Column="2" Content="9"/>
+            <Button Grid.Row="1" Grid.Column="3" Content="×"/>
+            <Button Grid.Row="2" Grid.Column="0" Content="4"/>
+            <Button Grid.Row="2" Grid.Column="1" Content="5"/>
+            <Button Grid.Row="2" Grid.Column="2" Content="6"/>
+            <Button Grid.Row="2" Grid.Column="3" Content="-"/>
+            <Button Grid.Row="3" Grid.Column="0" Content="1"/>
+            <Button Grid.Row="3" Grid.Column="1" Content="2"/>
+            <Button Grid.Row="3" Grid.Column="2" Content="3"/>
+            <Button Grid.Row="3" Grid.Column="3" Content="+"/>
+            <Button Grid.Row="4" Grid.Column="0" Content="±"/>
+            <Button Grid.Row="4" Grid.Column="1" Content="0"/>
+            <Button Grid.Row="4" Grid.Column="2" Content=","/>
+            <Button Grid.Row="4" Grid.Column="3" Content="="/>
+        </Grid>
+        <!--#endregion--> <!--X-->
+    </Grid>
+</Window>

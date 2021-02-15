@@ -1,0 +1,726 @@
+<Playlist Version="2.0">
+  <Rule Name="Includes" Match="Any">
+    <Rule Match="All">
+      <Property Name="Solution" />
+      <Rule Match="Any">
+        <Rule Match="All">
+          <Property Name="Project" Value="CalcParseTests" />
+          <Rule Match="Any">
+            <Rule Match="All">
+              <Property Name="Namespace" Value="CalcParseTests" />
+              <Rule Match="Any">
+                <Rule Match="All">
+                  <Property Name="Class" Value="ParseTests" />
+                  <Rule Match="Any">
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddBracket_AssumedLeftBracketAndMultiply_LastSymbolEqualRightBracketAndMultiply" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddBracket_AssumedLeftBracketAndMultiply_LastSymbolEqualRightBracketAndMultiply(&quot;(10+(5+5))&quot;)" />
+                        <Property Name="DisplayName" Value="AddBracket_AssumedLeftBracketAndMultiply_LastSymbolEqualRightBracketAndMultiply(&quot;5&quot;)" />
+                        <Property Name="DisplayName" Value="AddBracket_AssumedLeftBracketAndMultiply_LastSymbolEqualRightBracketAndMultiply(&quot;()&quot;)" />
+                        <Property Name="DisplayName" Value="AddBracket_AssumedLeftBracketAndMultiply_LastSymbolEqualRightBracketAndMultiply(&quot;(5+5)&quot;)" />
+                        <Property Name="DisplayName" Value="AddBracket_AssumedLeftBracketAndMultiply_LastSymbolEqualRightBracketAndMultiply(&quot;5+5&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddBracket_AssumedLeftBracket_LastSymbolEqualLeftBracket" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddBracket_AssumedLeftBracket_LastSymbolEqualLeftBracket(&quot;&quot;)" />
+                        <Property Name="DisplayName" Value="AddBracket_AssumedLeftBracket_LastSymbolEqualLeftBracket(&quot;(&quot;)" />
+                        <Property Name="DisplayName" Value="AddBracket_AssumedLeftBracket_LastSymbolEqualLeftBracket(&quot;5+&quot;)" />
+                        <Property Name="DisplayName" Value="AddBracket_AssumedLeftBracket_LastSymbolEqualLeftBracket(&quot;5+5&quot;)" />
+                        <Property Name="DisplayName" Value="AddBracket_AssumedLeftBracket_LastSymbolEqualLeftBracket(&quot;(10-10)&quot;)" />
+                        <Property Name="DisplayName" Value="AddBracket_AssumedLeftBracket_LastSymbolEqualLeftBracket(&quot;5&quot;)" />
+                        <Property Name="DisplayName" Value="AddBracket_AssumedLeftBracket_LastSymbolEqualLeftBracket(&quot;5*(&quot;)" />
+                        <Property Name="DisplayName" Value="AddBracket_AssumedLeftBracket_LastSymbolEqualLeftBracket(&quot;(5*(5+5)+&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddBracket_AssumedRightBracket_LastSymbolEqualRightBracket" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddBracket_AssumedRightBracket_LastSymbolEqualRightBracket(&quot;((10-10)&quot;)" />
+                        <Property Name="DisplayName" Value="AddBracket_AssumedRightBracket_LastSymbolEqualRightBracket(&quot;5*(10+10&quot;)" />
+                        <Property Name="DisplayName" Value="AddBracket_AssumedRightBracket_LastSymbolEqualRightBracket(&quot;(5*(5+5)+5&quot;)" />
+                        <Property Name="DisplayName" Value="AddBracket_AssumedRightBracket_LastSymbolEqualRightBracket(&quot;(5&quot;)" />
+                        <Property Name="DisplayName" Value="AddBracket_AssumedRightBracket_LastSymbolEqualRightBracket(&quot;(5+5&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddBracket_DontAddBracket_Expression" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddBracket_DontAddBracket_Expression(&quot;5.&quot;)" />
+                        <Property Name="DisplayName" Value="AddBracket_DontAddBracket_Expression(&quot;123,554,&quot;)" />
+                        <Property Name="DisplayName" Value="AddBracket_DontAddBracket_Expression(&quot;adfs&quot;)" />
+                        <Property Name="DisplayName" Value="AddBracket_DontAddBracket_Expression(&quot;234+32x&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddSymbol_AddToCloseBrackets_AddSymbol" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddSymbol_AddToCloseBrackets_AddSymbol('+')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToCloseBrackets_AddSymbol('/')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToCloseBrackets_AddSymbol('×')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToCloseBrackets_AddSymbol('÷')" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddSymbol_AddToCloseBrackets_AddSymbolAndMultiply" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddSymbol_AddToCloseBrackets_AddSymbolAndMultiply('0')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToCloseBrackets_AddSymbolAndMultiply('1')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToCloseBrackets_AddSymbolAndMultiply('2')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToCloseBrackets_AddSymbolAndMultiply('5')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToCloseBrackets_AddSymbolAndMultiply('9')" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddSymbol_AddToCloseBrackets_DontAddSymbol" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddSymbol_AddToCloseBrackets_DontAddSymbol('.')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToCloseBrackets_DontAddSymbol(',')" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddSymbol_AddToEmpty_AddSymbol" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddSymbol_AddToEmpty_AddSymbol('0')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToEmpty_AddSymbol('1')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToEmpty_AddSymbol('2')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToEmpty_AddSymbol('5')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToEmpty_AddSymbol('9')" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddSymbol_AddToEmpty_DontAddSymbol" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddSymbol_AddToEmpty_DontAddSymbol('.')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToEmpty_DontAddSymbol(',')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToEmpty_DontAddSymbol('+')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToEmpty_DontAddSymbol('/')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToEmpty_DontAddSymbol('×')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToEmpty_DontAddSymbol('÷')" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddSymbol_AddToNumber_AddSymbol" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddSymbol_AddToNumber_AddSymbol('0')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToNumber_AddSymbol('1')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToNumber_AddSymbol('5')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToNumber_AddSymbol('9')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToNumber_AddSymbol('-')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToNumber_AddSymbol('*')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToNumber_AddSymbol('×')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToNumber_AddSymbol('.')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToNumber_AddSymbol(',')" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddSymbol_AddToOpenBrackets_AddSymbol" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOpenBrackets_AddSymbol('5')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOpenBrackets_AddSymbol('2')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOpenBrackets_AddSymbol('1')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOpenBrackets_AddSymbol('0')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOpenBrackets_AddSymbol('9')" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddSymbol_AddToOpenBrackets_DontAddSymbol" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOpenBrackets_DontAddSymbol('×')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOpenBrackets_DontAddSymbol('+')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOpenBrackets_DontAddSymbol('.')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOpenBrackets_DontAddSymbol('÷')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOpenBrackets_DontAddSymbol('/')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOpenBrackets_DontAddSymbol(',')" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddSymbol_AddToOperator_AddSymbol" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOperator_AddSymbol('0')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOperator_AddSymbol('1')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOperator_AddSymbol('2')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOperator_AddSymbol('5')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOperator_AddSymbol('9')" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddSymbol_AddToOperator_DontAddSymbol" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOperator_DontAddSymbol('.')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOperator_DontAddSymbol(',')" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddSymbol_AddToOperator_ReplaceLastSymbol" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOperator_ReplaceLastSymbol('÷')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOperator_ReplaceLastSymbol('/')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOperator_ReplaceLastSymbol('+')" />
+                        <Property Name="DisplayName" Value="AddSymbol_AddToOperator_ReplaceLastSymbol('×')" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddSeparator_CorrectExpression_SeparatorAdd" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddSeparator_CorrectExpression_SeparatorAdd(&quot;-3&quot;)" />
+                        <Property Name="DisplayName" Value="AddSeparator_CorrectExpression_SeparatorAdd(&quot;(10+(5-3)*80&quot;)" />
+                        <Property Name="DisplayName" Value="AddSeparator_CorrectExpression_SeparatorAdd(&quot;5+5&quot;)" />
+                        <Property Name="DisplayName" Value="AddSeparator_CorrectExpression_SeparatorAdd(&quot;55555&quot;)" />
+                        <Property Name="DisplayName" Value="AddSeparator_CorrectExpression_SeparatorAdd(&quot;(.1.0+(.5.-.3)*80&quot;)" />
+                        <Property Name="DisplayName" Value="AddSeparator_CorrectExpression_SeparatorAdd(&quot;(5+(1&quot;)" />
+                        <Property Name="DisplayName" Value="AddSeparator_CorrectExpression_SeparatorAdd(&quot;*55555&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddSeparator_NotCorrectExpression_AddNullAndSeparator" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddSeparator_NotCorrectExpression_AddNullAndSeparator(&quot;(5+(1+&quot;)" />
+                        <Property Name="DisplayName" Value="AddSeparator_NotCorrectExpression_AddNullAndSeparator(&quot;*&quot;)" />
+                        <Property Name="DisplayName" Value="AddSeparator_NotCorrectExpression_AddNullAndSeparator(&quot;10*(&quot;)" />
+                        <Property Name="DisplayName" Value="AddSeparator_NotCorrectExpression_AddNullAndSeparator(&quot;5+5+&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddSeparator_NotCorrectExpression_DontAddSeparator" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddSeparator_NotCorrectExpression_DontAddSeparator(&quot;(10+(5.-3)*8.0&quot;)" />
+                        <Property Name="DisplayName" Value="AddSeparator_NotCorrectExpression_DontAddSeparator(&quot;500.000&quot;)" />
+                        <Property Name="DisplayName" Value="AddSeparator_NotCorrectExpression_DontAddSeparator(&quot;0.&quot;)" />
+                        <Property Name="DisplayName" Value="AddSeparator_NotCorrectExpression_DontAddSeparator(&quot;-3.&quot;)" />
+                        <Property Name="DisplayName" Value="AddSeparator_NotCorrectExpression_DontAddSeparator(&quot;55/(5+5)&quot;)" />
+                        <Property Name="DisplayName" Value="AddSeparator_NotCorrectExpression_DontAddSeparator(&quot;-3,&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddCloseBracket_AssumedRightBracket_LastSymbolEqualRightBracket" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddCloseBracket_AssumedRightBracket_LastSymbolEqualRightBracket(&quot;5*(10+10&quot;)" />
+                        <Property Name="DisplayName" Value="AddCloseBracket_AssumedRightBracket_LastSymbolEqualRightBracket(&quot;((10-10)&quot;)" />
+                        <Property Name="DisplayName" Value="AddCloseBracket_AssumedRightBracket_LastSymbolEqualRightBracket(&quot;(5+5&quot;)" />
+                        <Property Name="DisplayName" Value="AddCloseBracket_AssumedRightBracket_LastSymbolEqualRightBracket(&quot;(5&quot;)" />
+                        <Property Name="DisplayName" Value="AddCloseBracket_AssumedRightBracket_LastSymbolEqualRightBracket(&quot;(5*(5+5)+5&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddCloseBracket_DontAddBracket_Expression" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddCloseBracket_DontAddBracket_Expression(&quot;234+32x&quot;)" />
+                        <Property Name="DisplayName" Value="AddCloseBracket_DontAddBracket_Expression(&quot;123,554,&quot;)" />
+                        <Property Name="DisplayName" Value="AddCloseBracket_DontAddBracket_Expression(&quot;adfs&quot;)" />
+                        <Property Name="DisplayName" Value="AddCloseBracket_DontAddBracket_Expression(&quot;5.&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.InvertNumber_Invert_Minus" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Minus(&quot;50000.0000&quot;,&quot;-50000.0000&quot;)" />
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Minus(&quot;5.&quot;,&quot;-5.&quot;)" />
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Minus(&quot;(10+(&quot;,&quot;(10+(-&quot;)" />
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Minus(&quot;10/+2&quot;,&quot;10/-2&quot;)" />
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Minus(&quot;10/&quot;,&quot;10/-&quot;)" />
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Minus(&quot;5+5&quot;,&quot;5-5&quot;)" />
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Minus(&quot;&quot;,&quot;-&quot;)" />
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Minus(&quot;(10+5)&quot;,&quot;(10+5)-&quot;)" />
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Minus(&quot;(&quot;,&quot;(-&quot;)" />
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Minus(&quot;10/2&quot;,&quot;10/-2&quot;)" />
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Minus(&quot;5+5+&quot;,&quot;5+5-&quot;)" />
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Minus(&quot;+&quot;,&quot;-&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.InvertNumber_Invert_Plus" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Plus(&quot;-5.&quot;,&quot;5.&quot;)" />
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Plus(&quot;(10+5)-&quot;,&quot;(10+5)+&quot;)" />
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Plus(&quot;(10+(-&quot;,&quot;(10+(&quot;)" />
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Plus(&quot;10/-2&quot;,&quot;10/2&quot;)" />
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Plus(&quot;10/-&quot;,&quot;10/&quot;)" />
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Plus(&quot;5+5-&quot;,&quot;5+5+&quot;)" />
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Plus(&quot;-50000.0000&quot;,&quot;50000.0000&quot;)" />
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Plus(&quot;5-5&quot;,&quot;5+5&quot;)" />
+                        <Property Name="DisplayName" Value="InvertNumber_Invert_Plus(&quot;-&quot;,&quot;&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.IsCorrect_CorrectExpression_True" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="IsCorrect_CorrectExpression_True(&quot;5--5&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_CorrectExpression_True(&quot;5+5&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_CorrectExpression_True(&quot;-3&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_CorrectExpression_True(&quot;5,123&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_CorrectExpression_True(&quot;(1+(1+(1+(1/(1*(1+-(-1+((5/-5)))))))))&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_CorrectExpression_True(&quot;(10/-(5+2))&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_CorrectExpression_True(&quot;5+5*10&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_CorrectExpression_True(&quot;-9.33333&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_CorrectExpression_True(&quot;5*-5&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_CorrectExpression_True(&quot;(1+(1+(1+(1+(-1+(1-(5+5)))))))&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_CorrectExpression_True(&quot;(10/-2*(5+2))&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_CorrectExpression_True(&quot;(-10*(100/2))&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_CorrectExpression_True(&quot;5+-5&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.IsCorrect_NotCorrectBrackets_False" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectBrackets_False(&quot;5(+)5&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectBrackets_False(&quot;10(/(10+10))&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectBrackets_False(&quot;(10/(10+10)&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectBrackets_False(&quot;(5+5))&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectBrackets_False(&quot;(((((()&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectBrackets_False(&quot;)&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.IsCorrect_NotCorrectOperators_False" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectOperators_False(&quot;(1+(1+(1+(1/(1*(+-(-1+((5/-5)))))))))&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectOperators_False(&quot;(10/(/10*5))&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectOperators_False(&quot;*5-10&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectOperators_False(&quot;5*/+5&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectOperators_False(&quot;5*+5&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectOperators_False(&quot;5*+&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectOperators_False(&quot;*&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectOperators_False(&quot;&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectOperators_False(&quot;-&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectOperators_False(&quot;5---5&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectOperators_False(&quot;5*/5&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectOperators_False(&quot;5*-&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectOperators_False(&quot;5+5/&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectOperators_False(&quot;5-/5&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.IsCorrect_NotCorrectSeparator_False" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectSeparator_False(&quot;5..67&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectSeparator_False(&quot;(10-(4+4),/10)&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectSeparator_False(&quot;(10-(4+4.)/10)&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectSeparator_False(&quot;(10.-(4+4)/10)&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectSeparator_False(&quot;.555&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectSeparator_False(&quot;-5.&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrect_NotCorrectSeparator_False(&quot;5.,67&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.Format_CorrectExpression_FormatExpression" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Format_CorrectExpression_FormatExpression(&quot;+&quot;,&quot;+&quot;)" />
+                        <Property Name="DisplayName" Value="Format_CorrectExpression_FormatExpression(&quot;&quot;,&quot;&quot;)" />
+                        <Property Name="DisplayName" Value="Format_CorrectExpression_FormatExpression(&quot;((10 + (((1)))) + ((2+2)) - ((4)))&quot;,&quot;((10+1)+((2+2))-4)&quot;)" />
+                        <Property Name="DisplayName" Value="Format_CorrectExpression_FormatExpression(&quot;(100) + (5 - (-1) + 1)&quot;,&quot;100+(5+1+1)&quot;)" />
+                        <Property Name="DisplayName" Value="Format_CorrectExpression_FormatExpression(&quot;10 * 2.55 / 3+2&quot;,&quot;10*2,55/3+2&quot;)" />
+                        <Property Name="DisplayName" Value="Format_CorrectExpression_FormatExpression(&quot;-(-(-(-(-(-5)))))&quot;,&quot;5&quot;)" />
+                        <Property Name="DisplayName" Value="Format_CorrectExpression_FormatExpression(&quot; ( 5+5)&quot;,&quot;(5+5)&quot;)" />
+                        <Property Name="DisplayName" Value="Format_CorrectExpression_FormatExpression(&quot;5---2&quot;,&quot;5+-2&quot;)" />
+                        <Property Name="DisplayName" Value="Format_CorrectExpression_FormatExpression(&quot;5.55&quot;,&quot;5,55&quot;)" />
+                        <Property Name="DisplayName" Value="Format_CorrectExpression_FormatExpression(&quot;(((((&quot;,&quot;&quot;)" />
+                        <Property Name="DisplayName" Value="Format_CorrectExpression_FormatExpression(&quot;6&quot;,&quot;6&quot;)" />
+                        <Property Name="DisplayName" Value="Format_CorrectExpression_FormatExpression(&quot;((10 + (((1)))) + ((2+2)) - ((4))&quot;,&quot;((10+1)+((2+2))-4)&quot;)" />
+                        <Property Name="DisplayName" Value="Format_CorrectExpression_FormatExpression(&quot;(-100.555) + (10-(-0.111))&quot;,&quot;-100,555+(10+0,111)&quot;)" />
+                        <Property Name="DisplayName" Value="Format_CorrectExpression_FormatExpression(&quot;(10 + (5 + 5 ) )&quot;,&quot;(10+(5+5))&quot;)" />
+                        <Property Name="DisplayName" Value="Format_CorrectExpression_FormatExpression(&quot;(10+(5+5&quot;,&quot;(10+(5+5))&quot;)" />
+                        <Property Name="DisplayName" Value="Format_CorrectExpression_FormatExpression(&quot;((5)+(5))&quot;,&quot;(5+5)&quot;)" />
+                        <Property Name="DisplayName" Value="Format_CorrectExpression_FormatExpression(&quot;-(-(-5))&quot;,&quot;-5&quot;)" />
+                        <Property Name="DisplayName" Value="Format_CorrectExpression_FormatExpression(&quot;5 + 5&quot;,&quot;5+5&quot;)" />
+                        <Property Name="DisplayName" Value="Format_CorrectExpression_FormatExpression(&quot;(((5)))&quot;,&quot;5&quot;)" />
+                        <Property Name="DisplayName" Value="Format_CorrectExpression_FormatExpression(&quot;()&quot;,&quot;&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.FindNearestOperator_EmptyString_NoIndex" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="FindNearestOperator_EmptyString_NoIndex" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.FindNearestOperator_EndOperator_Index" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="FindNearestOperator_EndOperator_Index" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.FindNearestOperator_FirstOperator_Index" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="FindNearestOperator_FirstOperator_Index" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.FindNearestOperator_MiddleOperator_Index" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="FindNearestOperator_MiddleOperator_Index" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.FindNearestOperator_NoOperators_NoIndex" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="FindNearestOperator_NoOperators_NoIndex" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddSeparator_NotCorrectSeparator_Exception" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddSeparator_NotCorrectSeparator_Exception(&quot;5+5&quot;,'d')" />
+                        <Property Name="DisplayName" Value="AddSeparator_NotCorrectSeparator_Exception(&quot;*55555&quot;,'5')" />
+                        <Property Name="DisplayName" Value="AddSeparator_NotCorrectSeparator_Exception(&quot;55555&quot;,'g')" />
+                        <Property Name="DisplayName" Value="AddSeparator_NotCorrectSeparator_Exception(&quot;-3&quot;,'+')" />
+                        <Property Name="DisplayName" Value="AddSeparator_NotCorrectSeparator_Exception(&quot;(5+(1&quot;,'-')" />
+                        <Property Name="DisplayName" Value="AddSeparator_NotCorrectSeparator_Exception(&quot;(10+(5-3)*80&quot;,'a')" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddOpenBracket_AddBracket_LastSymbolEqualLeftBracket" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddOpenBracket_AddBracket_LastSymbolEqualLeftBracket(&quot;(5*(5+5)+&quot;)" />
+                        <Property Name="DisplayName" Value="AddOpenBracket_AddBracket_LastSymbolEqualLeftBracket(&quot;5&quot;)" />
+                        <Property Name="DisplayName" Value="AddOpenBracket_AddBracket_LastSymbolEqualLeftBracket(&quot;5+5&quot;)" />
+                        <Property Name="DisplayName" Value="AddOpenBracket_AddBracket_LastSymbolEqualLeftBracket(&quot;(&quot;)" />
+                        <Property Name="DisplayName" Value="AddOpenBracket_AddBracket_LastSymbolEqualLeftBracket(&quot;5*(&quot;)" />
+                        <Property Name="DisplayName" Value="AddOpenBracket_AddBracket_LastSymbolEqualLeftBracket(&quot;(10-10)&quot;)" />
+                        <Property Name="DisplayName" Value="AddOpenBracket_AddBracket_LastSymbolEqualLeftBracket(&quot;5+&quot;)" />
+                        <Property Name="DisplayName" Value="AddOpenBracket_AddBracket_LastSymbolEqualLeftBracket(&quot;&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddOpenBracket_AssumedLeftBracketAndMultiply_LastSymbolEqualRightBracketAndMultiply" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddOpenBracket_AssumedLeftBracketAndMultiply_LastSymbolEqualRightBracketAndMultiply(&quot;()&quot;)" />
+                        <Property Name="DisplayName" Value="AddOpenBracket_AssumedLeftBracketAndMultiply_LastSymbolEqualRightBracketAndMultiply(&quot;5+5&quot;)" />
+                        <Property Name="DisplayName" Value="AddOpenBracket_AssumedLeftBracketAndMultiply_LastSymbolEqualRightBracketAndMultiply(&quot;(5+5)&quot;)" />
+                        <Property Name="DisplayName" Value="AddOpenBracket_AssumedLeftBracketAndMultiply_LastSymbolEqualRightBracketAndMultiply(&quot;(10+(5+5))&quot;)" />
+                        <Property Name="DisplayName" Value="AddOpenBracket_AssumedLeftBracketAndMultiply_LastSymbolEqualRightBracketAndMultiply(&quot;5&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.AddOpenBracket_DontAddBracket_Expression" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddOpenBracket_DontAddBracket_Expression(&quot;adfs&quot;)" />
+                        <Property Name="DisplayName" Value="AddOpenBracket_DontAddBracket_Expression(&quot;5.&quot;)" />
+                        <Property Name="DisplayName" Value="AddOpenBracket_DontAddBracket_Expression(&quot;234+32x&quot;)" />
+                        <Property Name="DisplayName" Value="AddOpenBracket_DontAddBracket_Expression(&quot;123,554,&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.IsCorrectBracket_CorrectBracket_True" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="IsCorrectBracket_CorrectBracket_True(&quot;10/(5+(5+(5+(5+(5+5)))))&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrectBracket_CorrectBracket_True(&quot;(5+5)&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrectBracket_CorrectBracket_True(&quot;(-10.3333*(100/2))&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrectBracket_CorrectBracket_True(&quot;()&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.IsCorrectBracket_NotCorrectBracket_False" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="IsCorrectBracket_NotCorrectBracket_False(&quot;10/(5+(5+(5+(5+(5+5))))))&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrectBracket_NotCorrectBracket_False(&quot;(((((5+5&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrectBracket_NotCorrectBracket_False(&quot;(&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrectBracket_NotCorrectBracket_False(&quot;(-10.3333*(100/2)&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrectBracket_NotCorrectBracket_False(&quot;((5+5)&quot;)" />
+                        <Property Name="DisplayName" Value="IsCorrectBracket_NotCorrectBracket_False(&quot;&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.CountOpenBracket_EndOperator_Index" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="CountOpenBracket_EndOperator_Index(&quot;((()((&quot;,4)" />
+                        <Property Name="DisplayName" Value="CountOpenBracket_EndOperator_Index(&quot;5+(10/2)+(10+(5+(10-5+5&quot;,3)" />
+                        <Property Name="DisplayName" Value="CountOpenBracket_EndOperator_Index(&quot;(5+&quot;,1)" />
+                        <Property Name="DisplayName" Value="CountOpenBracket_EndOperator_Index(&quot;((5+5)*10)&quot;,0)" />
+                        <Property Name="DisplayName" Value="CountOpenBracket_EndOperator_Index(&quot;&quot;,0)" />
+                        <Property Name="DisplayName" Value="CountOpenBracket_EndOperator_Index(&quot;(()(()(&quot;,3)" />
+                        <Property Name="DisplayName" Value="CountOpenBracket_EndOperator_Index(&quot;(((((&quot;,5)" />
+                        <Property Name="DisplayName" Value="CountOpenBracket_EndOperator_Index(&quot;5+(10/2)+(10+(5+(10-5)+5&quot;,2)" />
+                        <Property Name="DisplayName" Value="CountOpenBracket_EndOperator_Index(&quot;(5+5&quot;,1)" />
+                        <Property Name="DisplayName" Value="CountOpenBracket_EndOperator_Index(&quot;5+3*2/10+&quot;,0)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.ReplaceOperator_EndOperator_True" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="ReplaceOperator_EndOperator_True('+')" />
+                        <Property Name="DisplayName" Value="ReplaceOperator_EndOperator_True('*')" />
+                        <Property Name="DisplayName" Value="ReplaceOperator_EndOperator_True('-')" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.ReplaceOperator_FirstOperator_True" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="ReplaceOperator_FirstOperator_True('*')" />
+                        <Property Name="DisplayName" Value="ReplaceOperator_FirstOperator_True('-')" />
+                        <Property Name="DisplayName" Value="ReplaceOperator_FirstOperator_True('+')" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.ReplaceOperator_MiddleOperator_True" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="ReplaceOperator_MiddleOperator_True('+')" />
+                        <Property Name="DisplayName" Value="ReplaceOperator_MiddleOperator_True('*')" />
+                        <Property Name="DisplayName" Value="ReplaceOperator_MiddleOperator_True('-')" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.ParseTests.ReplaceOperator_NotOperator_Exception" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="ReplaceOperator_NotOperator_Exception('f')" />
+                        <Property Name="DisplayName" Value="ReplaceOperator_NotOperator_Exception('5')" />
+                        <Property Name="DisplayName" Value="ReplaceOperator_NotOperator_Exception('0')" />
+                        <Property Name="DisplayName" Value="ReplaceOperator_NotOperator_Exception('h')" />
+                        <Property Name="DisplayName" Value="ReplaceOperator_NotOperator_Exception('9')" />
+                        <Property Name="DisplayName" Value="ReplaceOperator_NotOperator_Exception('1')" />
+                      </Rule>
+                    </Rule>
+                  </Rule>
+                </Rule>
+                <Rule Match="All">
+                  <Property Name="Class" Value="CalculateTests" />
+                  <Rule Match="Any">
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.CalculateTests.ALU_CorrectExpression_Result" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="ALU_CorrectExpression_Result(&quot;-555.434&quot;,&quot;-555,434&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_CorrectExpression_Result(&quot;5+5&quot;,&quot;10&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_CorrectExpression_Result(&quot;0/10&quot;,&quot;0&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_CorrectExpression_Result(&quot;5*-(5+5)&quot;,&quot;-50&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_CorrectExpression_Result(&quot;10 / 5 + 3&quot;,&quot;5&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_CorrectExpression_Result(&quot;5.4 + 5.5&quot;,&quot;10,9&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_CorrectExpression_Result(&quot;-(-1--(-5--3))&quot;,&quot;3&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_CorrectExpression_Result(&quot;10 / (5 + 3)&quot;,&quot;1,25&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_CorrectExpression_Result(&quot;1--(-1--(-5--3))&quot;,&quot;-2&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_CorrectExpression_Result(&quot;10-((-1--(-2+1)))&quot;,&quot;12&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_CorrectExpression_Result(&quot;(((5-5)) + ((5+5)))&quot;,&quot;10&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_CorrectExpression_Result(&quot;0 * 10 * (0.55 + 0.01)&quot;,&quot;0&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_CorrectExpression_Result(&quot;10 / 4 + (2 - 1.25)&quot;,&quot;3,25&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_CorrectExpression_Result(&quot;(1+(1+(-1+-(1+(1+(5+5))))))&quot;,&quot;-11&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_CorrectExpression_Result(&quot;0.999+(((100 * 2 --1) / 200) - 1,004)&quot;,&quot;1&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_CorrectExpression_Result(&quot;((10+10) + -(10+10) / (-10 + 11)) * (10 - (10/5) + 2)&quot;,&quot;0&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_CorrectExpression_Result(&quot;((10+10) + -(10+10) / (-10 + 11)) * (...&quot;,&quot;0&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.CalculateTests.ALU_DivideByZero_Exception" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="ALU_DivideByZero_Exception(&quot;10/0&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_DivideByZero_Exception(&quot;(10 * 0) / ((10-20) + 10)&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_DivideByZero_Exception(&quot;((10+10) + -(10+10) / (-10 + 10)) * (10 - (10/5) + 2)&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_DivideByZero_Exception(&quot;((10+10) + -(10+10) / (-10 + 10)) * (...&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.CalculateTests.ALU_NotCorrectExpression_Exception" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="ALU_NotCorrectExpression_Exception(&quot;(5+5,&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_NotCorrectExpression_Exception(&quot;&quot;)" />
+                        <Property Name="DisplayName" Value="ALU_NotCorrectExpression_Exception(&quot;(5 - 5) + (10, - (5-2)&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.CalculateTests.PriorityOfOperations_Brackets_Index" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="PriorityOfOperations_Brackets_Index(&quot;(5+5)&quot;,2)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_Brackets_Index(&quot;(10/(5.5+5))&quot;,8)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_Brackets_Index(&quot;((10.666+5)/(10*5))&quot;,8)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_Brackets_Index(&quot;(15.666/(10*5))&quot;,11)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_Brackets_Index(&quot;(50+(-100/2))&quot;,9)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_Brackets_Index(&quot;(50+(-100/-2))&quot;,9)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_Brackets_Index(&quot;(50/(-100+2))&quot;,9)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_Brackets_Index(&quot;(50/(-100+2*2))&quot;,11)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_Brackets_Index(&quot;(1+(1+(1+(-1+(-1+(1-1))))))&quot;,19)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.CalculateTests.PriorityOfOperations_CorrectExpression_Index" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="PriorityOfOperations_CorrectExpression_Index(&quot;5+5&quot;,1)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_CorrectExpression_Index(&quot;5--5&quot;,1)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_CorrectExpression_Index(&quot;5+5/2&quot;,3)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_CorrectExpression_Index(&quot;5+5/-2&quot;,3)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_CorrectExpression_Index(&quot;10/2*5-2+5&quot;,2)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_CorrectExpression_Index(&quot;10÷2*5-2+5&quot;,2)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_CorrectExpression_Index(&quot;10+2-5/2*5&quot;,6)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_CorrectExpression_Index(&quot;10-2+5+2-5&quot;,2)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_CorrectExpression_Index(&quot;654+20-10*0&quot;,9)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_CorrectExpression_Index(&quot;654+20/10+0*20&quot;,6)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.CalculateTests.PriorityOfOperations_NoOperators_NotIndex" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="PriorityOfOperations_NoOperators_NotIndex(&quot;500000&quot;)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_NoOperators_NotIndex(&quot;5.000.000&quot;)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_NoOperators_NotIndex(&quot;-55555&quot;)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_NoOperators_NotIndex(&quot;(4034)&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.CalculateTests.PriorityOfOperations_NotCorrect_Exception" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="PriorityOfOperations_NotCorrect_Exception(&quot;&quot;)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_NotCorrect_Exception(&quot;(5+5&quot;)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_NotCorrect_Exception(&quot;5*5/&quot;)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_NotCorrect_Exception(&quot;(10/(5.+5))&quot;)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_NotCorrect_Exception(&quot;((10.666+5)-/(10*5))&quot;)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_NotCorrect_Exception(&quot;(15.666/(10*))&quot;)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_NotCorrect_Exception(&quot;(50+-100/2))&quot;)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_NotCorrect_Exception(&quot;(50+(-100/-2-))&quot;)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_NotCorrect_Exception(&quot;(50,/(-100+2))&quot;)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_NotCorrect_Exception(&quot;50/-100+2*2))&quot;)" />
+                        <Property Name="DisplayName" Value="PriorityOfOperations_NotCorrect_Exception(&quot;(1+(1+(1+(-+(-1+(1-1))))))&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.CalculateTests.Selector_CorrectExpressionAndBrackets_Select" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Selector_CorrectExpressionAndBrackets_Select(&quot;(5.3-5.1)&quot;,4,&quot;5.3-5.1&quot;)" />
+                        <Property Name="DisplayName" Value="Selector_CorrectExpressionAndBrackets_Select(&quot;(10/(5.5+4.5))&quot;,8,&quot;5.5+4.5&quot;)" />
+                        <Property Name="DisplayName" Value="Selector_CorrectExpressionAndBrackets_Select(&quot;(10+5-5/(5+5))&quot;,10,&quot;5+5&quot;)" />
+                        <Property Name="DisplayName" Value="Selector_CorrectExpressionAndBrackets_Select(&quot;((10+(5-5))/(5+5))&quot;,7,&quot;5-5&quot;)" />
+                        <Property Name="DisplayName" Value="Selector_CorrectExpressionAndBrackets_Select(&quot;1000.9999/(5*5.5-(10+0.5))&quot;,20,&quot;10+0.5&quot;)" />
+                        <Property Name="DisplayName" Value="Selector_CorrectExpressionAndBrackets_Select(&quot;(1+(1+(1+(-1/(1+(1-(-1*(5+-0.1))))))))&quot;,25,&quot;5+-0.1&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.CalculateTests.Selector_CorrectExpression_Select" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Selector_CorrectExpression_Select(&quot;5+5&quot;,1,&quot;5+5&quot;)" />
+                        <Property Name="DisplayName" Value="Selector_CorrectExpression_Select(&quot;-5--5&quot;,2,&quot;-5--5&quot;)" />
+                        <Property Name="DisplayName" Value="Selector_CorrectExpression_Select(&quot;-5*10&quot;,2,&quot;-5*10&quot;)" />
+                        <Property Name="DisplayName" Value="Selector_CorrectExpression_Select(&quot;5+5/2&quot;,3,&quot;5/2&quot;)" />
+                        <Property Name="DisplayName" Value="Selector_CorrectExpression_Select(&quot;5+5/-2&quot;,3,&quot;5/-2&quot;)" />
+                        <Property Name="DisplayName" Value="Selector_CorrectExpression_Select(&quot;10/2*5-2+5&quot;,2,&quot;10/2&quot;)" />
+                        <Property Name="DisplayName" Value="Selector_CorrectExpression_Select(&quot;10+2--5/2*5&quot;,7,&quot;-5/2&quot;)" />
+                        <Property Name="DisplayName" Value="Selector_CorrectExpression_Select(&quot;10+2--5/2*5&quot;,4,&quot;2--5&quot;)" />
+                        <Property Name="DisplayName" Value="Selector_CorrectExpression_Select(&quot;10-2.0+5+2-5&quot;,2,&quot;10-2.0&quot;)" />
+                        <Property Name="DisplayName" Value="Selector_CorrectExpression_Select(&quot;654+20-10*0&quot;,9,&quot;10*0&quot;)" />
+                        <Property Name="DisplayName" Value="Selector_CorrectExpression_Select(&quot;654+20-10×0&quot;,9,&quot;10×0&quot;)" />
+                        <Property Name="DisplayName" Value="Selector_CorrectExpression_Select(&quot;654+2.99/10+0*20&quot;,8,&quot;2.99/10&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.CalculateTests.Selector_NotCorrectExpression_Exception" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Selector_NotCorrectExpression_Exception(&quot;5+&quot;,1)" />
+                        <Property Name="DisplayName" Value="Selector_NotCorrectExpression_Exception(&quot;5---5&quot;,2)" />
+                        <Property Name="DisplayName" Value="Selector_NotCorrectExpression_Exception(&quot;/10&quot;,0)" />
+                        <Property Name="DisplayName" Value="Selector_NotCorrectExpression_Exception(&quot;(10*(5+5)&quot;,3)" />
+                        <Property Name="DisplayName" Value="Selector_NotCorrectExpression_Exception(&quot;5000.+10&quot;,5)" />
+                        <Property Name="DisplayName" Value="Selector_NotCorrectExpression_Exception(&quot;10-*5)&quot;,2)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.CalculateTests.Selector_NotCorrectIndex_Exception" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Selector_NotCorrectIndex_Exception(&quot;5+5&quot;,2)" />
+                        <Property Name="DisplayName" Value="Selector_NotCorrectIndex_Exception(&quot;5--5&quot;,0)" />
+                        <Property Name="DisplayName" Value="Selector_NotCorrectIndex_Exception(&quot;50/10&quot;,3)" />
+                        <Property Name="DisplayName" Value="Selector_NotCorrectIndex_Exception(&quot;(10*(5+5))&quot;,4)" />
+                        <Property Name="DisplayName" Value="Selector_NotCorrectIndex_Exception(&quot;(10*-5.6)&quot;,6)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.CalculateTests.Selector_NotCorrectOperator_Exception" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Selector_NotCorrectOperator_Exception(&quot;5--5&quot;,2)" />
+                        <Property Name="DisplayName" Value="Selector_NotCorrectOperator_Exception(&quot;(10/(-10+2))&quot;,5)" />
+                        <Property Name="DisplayName" Value="Selector_NotCorrectOperator_Exception(&quot;10/-10&quot;,3)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.CalculateTests.Converter_CorrectExpression_Result" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Converter_CorrectExpression_Result(&quot;-10.5*0.5&quot;,['*', -10.5d, 0.5d])" />
+                        <Property Name="DisplayName" Value="Converter_CorrectExpression_Result(&quot;-10.5×0.5&quot;,['×', -10.5d, 0.5d])" />
+                        <Property Name="DisplayName" Value="Converter_CorrectExpression_Result(&quot;-5000.99999/0.123&quot;,['/', -5000.99999d, 0.123d])" />
+                        <Property Name="DisplayName" Value="Converter_CorrectExpression_Result(&quot;-5000.99999÷0.123&quot;,['÷', -5000.99999d, 0.123d])" />
+                        <Property Name="DisplayName" Value="Converter_CorrectExpression_Result(&quot;5+5&quot;,['+', 5, 5])" />
+                        <Property Name="DisplayName" Value="Converter_CorrectExpression_Result(&quot;5--5&quot;,['-', 5, -5])" />
+                        <Property Name="DisplayName" Value="Converter_CorrectExpression_Result(&quot;-5--5&quot;,['-', -5, -5])" />
+                        <Property Name="DisplayName" Value="Converter_CorrectExpression_Result(&quot;5+5&quot;,System.Object[])" />
+                        <Property Name="DisplayName" Value="Converter_CorrectExpression_Result(&quot;5--5&quot;,System.Object[])" />
+                        <Property Name="DisplayName" Value="Converter_CorrectExpression_Result(&quot;-5--5&quot;,System.Object[])" />
+                        <Property Name="DisplayName" Value="Converter_CorrectExpression_Result(&quot;-10.5*0.5&quot;,System.Object[])" />
+                        <Property Name="DisplayName" Value="Converter_CorrectExpression_Result(&quot;-10.5×0.5&quot;,System.Object[])" />
+                        <Property Name="DisplayName" Value="Converter_CorrectExpression_Result(&quot;-5000.99999/0.123&quot;,System.Object[])" />
+                        <Property Name="DisplayName" Value="Converter_CorrectExpression_Result(&quot;-5000.99999÷0.123&quot;,System.Object[])" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.CalculateTests.Converter_NotCorrectExpression_Exception" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Converter_NotCorrectExpression_Exception(&quot;5+&quot;)" />
+                        <Property Name="DisplayName" Value="Converter_NotCorrectExpression_Exception(&quot;(5+5&quot;)" />
+                        <Property Name="DisplayName" Value="Converter_NotCorrectExpression_Exception(&quot;5---5&quot;)" />
+                        <Property Name="DisplayName" Value="Converter_NotCorrectExpression_Exception(&quot;10.2/.3&quot;)" />
+                        <Property Name="DisplayName" Value="Converter_NotCorrectExpression_Exception(&quot;3.&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.CalculateTests.Converter_NotCorrectInput_Exception" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Converter_NotCorrectInput_Exception(&quot;(10+(5+5))&quot;)" />
+                        <Property Name="DisplayName" Value="Converter_NotCorrectInput_Exception(&quot;5+5+5+5+5&quot;)" />
+                        <Property Name="DisplayName" Value="Converter_NotCorrectInput_Exception(&quot;50000.0&quot;)" />
+                        <Property Name="DisplayName" Value="Converter_NotCorrectInput_Exception(&quot;5&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.CalculateTests.Arithmetic_CorrectExpression_Result" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Arithmetic_CorrectExpression_Result(['×', -10, 6],&quot;-60&quot;)" />
+                        <Property Name="DisplayName" Value="Arithmetic_CorrectExpression_Result(['+', 5, 5],&quot;10&quot;)" />
+                        <Property Name="DisplayName" Value="Arithmetic_CorrectExpression_Result(['÷', 100, 2],&quot;50&quot;)" />
+                        <Property Name="DisplayName" Value="Arithmetic_CorrectExpression_Result(['+', 0.5d, 4.5d],&quot;5&quot;)" />
+                        <Property Name="DisplayName" Value="Arithmetic_CorrectExpression_Result(['-', 5, -5],&quot;10&quot;)" />
+                        <Property Name="DisplayName" Value="Arithmetic_CorrectExpression_Result(['/', 100, 2],&quot;50&quot;)" />
+                        <Property Name="DisplayName" Value="Arithmetic_CorrectExpression_Result(['/', 10, 3],&quot;3,3333333333333333333333333333&quot;)" />
+                        <Property Name="DisplayName" Value="Arithmetic_CorrectExpression_Result(['*', -10, 6],&quot;-60&quot;)" />
+                        <Property Name="DisplayName" Value="Arithmetic_CorrectExpression_Result(System.Object[],&quot;10&quot;)" />
+                        <Property Name="DisplayName" Value="Arithmetic_CorrectExpression_Result(System.Object[],&quot;-60&quot;)" />
+                        <Property Name="DisplayName" Value="Arithmetic_CorrectExpression_Result(System.Object[],&quot;50&quot;)" />
+                        <Property Name="DisplayName" Value="Arithmetic_CorrectExpression_Result(System.Object[],&quot;5&quot;)" />
+                        <Property Name="DisplayName" Value="Arithmetic_CorrectExpression_Result(System.Object[],&quot;3,3333333333333333333333333333&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.CalculateTests.Arithmetic_NotCorrectExpression_Exception" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Arithmetic_NotCorrectExpression_Exception('+',5,5,5)" />
+                        <Property Name="DisplayName" Value="Arithmetic_NotCorrectExpression_Exception('+',&quot;5&quot;,&quot;H&quot;)" />
+                        <Property Name="DisplayName" Value="Arithmetic_NotCorrectExpression_Exception(5,5,5)" />
+                        <Property Name="DisplayName" Value="Arithmetic_NotCorrectExpression_Exception('*')" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.CalculateTests.Replacer_CorrectExpression_ResultExpression" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Replacer_CorrectExpression_ResultExpression(&quot;5 + 5&quot;,&quot;5 + 5&quot;,&quot;10&quot;,&quot;10&quot;)" />
+                        <Property Name="DisplayName" Value="Replacer_CorrectExpression_ResultExpression(&quot;-(-1--1)&quot;,&quot;-1--1&quot;,&quot;0&quot;,&quot;0&quot;)" />
+                        <Property Name="DisplayName" Value="Replacer_CorrectExpression_ResultExpression(&quot;1--5*2&quot;,&quot;-5*2&quot;,&quot;-10&quot;,&quot;1+10&quot;)" />
+                        <Property Name="DisplayName" Value="Replacer_CorrectExpression_ResultExpression(&quot;10*5/2+5&quot;,&quot;10*5&quot;,&quot;50&quot;,&quot;50/2+5&quot;)" />
+                        <Property Name="DisplayName" Value="Replacer_CorrectExpression_ResultExpression(&quot;-1--(-1-2)&quot;,&quot;-1-2&quot;,&quot;-3&quot;,&quot;-1+-3&quot;)" />
+                        <Property Name="DisplayName" Value="Replacer_CorrectExpression_ResultExpression(&quot;(10 + (5-5))&quot;,&quot;5-5&quot;,&quot;0&quot;,&quot;(10+0)&quot;)" />
+                        <Property Name="DisplayName" Value="Replacer_CorrectExpression_ResultExpression(&quot;-((((-3--5))) - ((10)))&quot;,&quot;-3--5&quot;,&quot;2&quot;,&quot;-(2-10)&quot;)" />
+                        <Property Name="DisplayName" Value="Replacer_CorrectExpression_ResultExpression(&quot;10,5/50*(10-(5,5+5))&quot;,&quot;5,5+5&quot;,&quot;10,5&quot;,&quot;10,5/50*(10-10,5)&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="CalcParseTests.CalculateTests.Replacer_NotCorrectExpression_Exception" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Replacer_NotCorrectExpression_Exception(&quot;5- + 5&quot;,&quot;5- +5&quot;,&quot;10&quot;)" />
+                        <Property Name="DisplayName" Value="Replacer_NotCorrectExpression_Exception(&quot;-(-1---1)&quot;,&quot;-1---1&quot;,&quot;-2&quot;)" />
+                        <Property Name="DisplayName" Value="Replacer_NotCorrectExpression_Exception(&quot;(10 + *(5-5))&quot;,&quot;5 - 5&quot;,&quot;0&quot;)" />
+                        <Property Name="DisplayName" Value="Replacer_NotCorrectExpression_Exception(&quot;-((((-3--5)) - ((10)))&quot;,&quot;-3--5&quot;,&quot;2&quot;)" />
+                      </Rule>
+                    </Rule>
+                  </Rule>
+                </Rule>
+              </Rule>
+            </Rule>
+          </Rule>
+        </Rule>
+      </Rule>
+    </Rule>
+  </Rule>
+</Playlist>
