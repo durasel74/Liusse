@@ -1,0 +1,83 @@
+<Playlist Version="2.0">
+  <Rule Name="Includes" Match="Any">
+    <Rule Match="All">
+      <Property Name="Solution" />
+      <Rule Match="Any">
+        <Rule Match="All">
+          <Property Name="Project" Value="LiusseTests" />
+          <Rule Match="Any">
+            <Rule Match="All">
+              <Property Name="Namespace" Value="LiusseTests" />
+              <Rule Match="Any">
+                <Rule Match="All">
+                  <Property Name="Class" Value="CoreTests" />
+                  <Rule Match="Any">
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="LiusseTests.CoreTests.Receiver_AddOperation_TrueAllResult" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Receiver_AddOperation_TrueAllResult(&quot;55&quot;)" />
+                        <Property Name="DisplayName" Value="Receiver_AddOperation_TrueAllResult(&quot;55,54&quot;)" />
+                        <Property Name="DisplayName" Value="Receiver_AddOperation_TrueAllResult(&quot;(5+5)&quot;)" />
+                        <Property Name="DisplayName" Value="Receiver_AddOperation_TrueAllResult(&quot;(10+(54)&quot;)" />
+                        <Property Name="DisplayName" Value="Receiver_AddOperation_TrueAllResult(&quot;(40-353*(434+43))&quot;)" />
+                        <Property Name="DisplayName" Value="Receiver_AddOperation_TrueAllResult(&quot;(54&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="LiusseTests.CoreTests.Receiver_DontAddOperation_TrueAllResult" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Receiver_DontAddOperation_TrueAllResult(&quot;&quot;)" />
+                        <Property Name="DisplayName" Value="Receiver_DontAddOperation_TrueAllResult(&quot;0,&quot;)" />
+                        <Property Name="DisplayName" Value="Receiver_DontAddOperation_TrueAllResult(&quot;(10+(&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="LiusseTests.CoreTests.Receiver_ReplaceOperation_TrueAllResult" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Receiver_ReplaceOperation_TrueAllResult(&quot;104+&quot;)" />
+                        <Property Name="DisplayName" Value="Receiver_ReplaceOperation_TrueAllResult(&quot;-104-&quot;)" />
+                        <Property Name="DisplayName" Value="Receiver_ReplaceOperation_TrueAllResult(&quot;(43543+43×&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="LiusseTests.CoreTests.Receiver_AddNumbersAndMultiply_TrueAllResult" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Receiver_AddNumbersAndMultiply_TrueAllResult(&quot;(5+5)&quot;)" />
+                        <Property Name="DisplayName" Value="Receiver_AddNumbersAndMultiply_TrueAllResult(&quot;(10+(54)&quot;)" />
+                        <Property Name="DisplayName" Value="Receiver_AddNumbersAndMultiply_TrueAllResult(&quot;(40-353*(434+43))&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="LiusseTests.CoreTests.Receiver_AddNumbers_TrueAllResult" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Receiver_AddNumbers_TrueAllResult(&quot;&quot;)" />
+                        <Property Name="DisplayName" Value="Receiver_AddNumbers_TrueAllResult(&quot;55&quot;)" />
+                        <Property Name="DisplayName" Value="Receiver_AddNumbers_TrueAllResult(&quot;0,&quot;)" />
+                        <Property Name="DisplayName" Value="Receiver_AddNumbers_TrueAllResult(&quot;55,54&quot;)" />
+                        <Property Name="DisplayName" Value="Receiver_AddNumbers_TrueAllResult(&quot;(10+(&quot;)" />
+                        <Property Name="DisplayName" Value="Receiver_AddNumbers_TrueAllResult(&quot;104+&quot;)" />
+                        <Property Name="DisplayName" Value="Receiver_AddNumbers_TrueAllResult(&quot;-104-&quot;)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="LiusseTests.CoreTests.Receiver_NormalTest_TrueAllResult" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Receiver_NormalTest_TrueAllResult" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="LiusseTests.CoreTests.Receiver_HardTest_TrueAllResult" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Receiver_HardTest_TrueAllResult" />
+                      </Rule>
+                    </Rule>
+                  </Rule>
+                </Rule>
+              </Rule>
+            </Rule>
+          </Rule>
+        </Rule>
+      </Rule>
+    </Rule>
+  </Rule>
+</Playlist>

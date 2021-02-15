@@ -60,20 +60,17 @@
     <!--#endregion-->
 
     <!--#region Тема 4-->
-    <!--<SolidColorBrush x:Key="AccentColor" Opacity="1" Color="#3F25D0"/>
-        -->
-    <!--<SolidColorBrush x:Key="ComplementaryColor" Opacity="1" 
-                         Color="#12107F"/>-->
-    <!--
-        <LinearGradientBrush x:Key="ComplementaryColor" Opacity="1"
+    <!--<SolidColorBrush x:Key="MainColor" Opacity="1" Color="#DDD"/>
+
+    <LinearGradientBrush x:Key="AccentColor" Opacity="1"
                              StartPoint="0, 0.5" EndPoint="1, 0.5">
-            <GradientStop Offset="0" Color="#191919"/>
-            <GradientStop Offset="0.06" Color="#12107F"/>
-        </LinearGradientBrush>
-        <SolidColorBrush x:Key="ButtonSymbolColor" Opacity="1"
-                         Color="#4A47EB"/>
-        <SolidColorBrush x:Key="Text1Color" Opacity="1" Color="#1B16E3"/>
-        <SolidColorBrush x:Key="Text2Color" Opacity="1" Color="#1B16E3"/>-->
+        <GradientStop Offset="0" Color="#191919"/>
+        <GradientStop Offset="0.06" Color="#12107F"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="ComplementaryColor" Opacity="1" Color="#3F25D0"/>
+    
+    <SolidColorBrush x:Key="PrimaryTextColor" Opacity="1" Color="#1B16E3"/>
+    <SolidColorBrush x:Key="SecondaryTextColor" Opacity="1" Color="#1B16E3"/>-->
     <!--#endregion-->
 </ResourceDictionary>
-    
+ 

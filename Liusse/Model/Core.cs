@@ -5,15 +5,18 @@ using CalcParse;
 
 namespace Liusse
 {
-	// | - - |
+	/// <summary>
+	/// Ядро калькулятора. Хранит выражение, принимает команды и оставляет 
+	/// записи в журнале.
+	/// </summary>
 	public class Core : INotifyPropertyChanged
 	{
-		private string currentExpression = "";
-		private string example = "";
-		private Journal journal = new Journal();
+		private string currentExpression;
+		private string example;
+		public Journal Journal { get; }
 
 		/// <summary>
-		/// Текущее выражение. Выражение над которым идет работа.
+		/// Выражение над которым идет работа.
 		/// </summary>
 		public string CurrentExpression
 		{
@@ -41,67 +44,49 @@ namespace Liusse
 			}
 		}
 
-		// | - |
-		public Journal Journal
+		public Core()
 		{
-			get { return journal; }
+			currentExpression = "";
+			example = "";
+			Journal = new Journal();
 		}
 
-		// | - - |
-		public void Receiver(string symbol)
+		/// <summary>
+		/// Принимает команду и определяет, что дальше делать.
+		/// </summary>
+		/// <param name="input">Команда на действие</param>
+		public void Receiver(string command)
 		{
 			if (CurrentExpression == "Деление на ноль невозможно")
 				CurrentExpression = "";
-			if (Example != "" && symbol == "=")
+			if (Example != "" && command == "Result")
 				return;
 
 			Example = "";
 
-			if (symbol == "C")
-				Clear();
-			else if (symbol == "Backspace")
-				DeleteSymbol();
-			else if (symbol == "±")
-				PlusMinus();
-			else if (symbol == "=")
+			if (command == "Result")
 				Result();
-			else if (symbol == "()")
+			else if (command == "Backspace")
+				DeleteSymbol();
+			else if (command == "Clear")
+				Clear();
+			else if (command == "PlusMinus")
+				PlusMinus();
+			else if (command == "Brackets")
 				AddBracket();
-			else if (symbol == "(")
+			else if (command == "OpenBracket")
 				AddOpenBracket();
-			else if (symbol == ")")
+			else if (command == "CloseBracket")
 				AddCloseBracket();
-			else if (symbol == "," || symbol == ".")
-				AddSeparator(symbol);
-			else
-				AddSymbol(symbol);
+			else if (command == "Separator")
+				AddSeparator();
+			else if (command.Length == 1)
+				AddSymbol(command);
 		}
 
-		// | - |
-		private void Clear()
-		{
-			CurrentExpression = "";
-		}
-
-		// | - |
-		private void DeleteSymbol()
-		{
-			if (CurrentExpression.Length > 0)
-			{
-				CurrentExpression = CurrentExpression.Remove(
-					CurrentExpression.Length - 1);
-			}
-		}
-
-		// | - |
-		private void PlusMinus()
-		{
-			string result = Parse.InvertNumber(CurrentExpression);
-			if (CurrentExpression != result)
-				CurrentExpression = result;
-		}
-
-		// | - |
+		/// <summary>
+		/// Решает текущее выражение.
+		/// </summary>
 		private void Result()
 		{
 			try
@@ -111,52 +96,93 @@ namespace Liusse
 				{
 					Example = Parse.AddingMissingBrackets(CurrentExpression) + '=';
 					CurrentExpression = result;
-					journal.AddElement(CurrentExpression, Example);
+					Journal.AddElement(CurrentExpression, Example);
 				}
 			}
 			catch (NotCorrectException) { }
-			catch (OverflowException) { }
+			catch (OverflowException) { } // Убрать после добавления экспоненты!!!!!!!!!!!!!!!!
 			catch (DivideByZeroException)
 			{
-				Example = CurrentExpression + '=';
+				Example = Parse.AddingMissingBrackets(CurrentExpression) + '=';
 				CurrentExpression = "Деление на ноль невозможно";
 			}
 		}
 
-		// | - |
+		/// <summary>
+		/// Удаляет последний введенный символ.
+		/// </summary>
+		private void DeleteSymbol()
+		{
+			if (CurrentExpression.Length > 0)
+			{
+				CurrentExpression = CurrentExpression.Remove(
+					CurrentExpression.Length - 1);
+			}
+		}
+
+		/// <summary>
+		/// Полностью очищает текущее выражение.
+		/// </summary>
+		private void Clear()
+		{
+			CurrentExpression = "";
+		}
+
+		/// <summary>
+		/// Меняет знак числа на противоположный
+		/// </summary>
+		private void PlusMinus()
+		{
+			string result = Parse.InvertNumber(CurrentExpression);
+			if (CurrentExpression != result)
+				CurrentExpression = result;
+		}
+
+		/// <summary>
+		/// Добавляет скобку в конец выражения. 
+		/// Нужная скобка определяется автоматически.
+		/// </summary>
 		private void AddBracket()
 		{
-			string result = CurrentExpression;
-			result = Parse.AddBracket(CurrentExpression);
+			string result = Parse.AddBracket(CurrentExpression);
 			if (CurrentExpression != result)
 				CurrentExpression = result;
 		}
+
+		/// <summary>
+		/// Добавляет открытую скобку в конец выражения.
+		/// </summary>
 		private void AddOpenBracket()
 		{
-			string result = CurrentExpression;
-			result = Parse.AddOpenBracket(CurrentExpression);
+			string result = Parse.AddOpenBracket(CurrentExpression);
 			if (CurrentExpression != result)
 				CurrentExpression = result;
 		}
+
+		/// <summary>
+		/// Добавляет закрытую скобку в конец выражения.
+		/// </summary>
 		private void AddCloseBracket()
 		{
-			string result = CurrentExpression;
-			result = Parse.AddCloseBracket(CurrentExpression);
+			string result = Parse.AddCloseBracket(CurrentExpression);
 			if (CurrentExpression != result)
 				CurrentExpression = result;
 		}
 
-		// | - |
-		private void AddSeparator(string symbol)
+		/// <summary>
+		/// Добавляет разделитель дроби в конец выражения.
+		/// </summary>
+		private void AddSeparator()
 		{
-			string result = CurrentExpression;
-			char charSymbol = symbol[0];
-			result = Parse.AddSeparator(CurrentExpression, charSymbol);
+			string result = Parse.AddSeparator(CurrentExpression);
 			if (CurrentExpression != result)
 				CurrentExpression = result;
 		}
 
-		// | - |
+		/// <summary>
+		/// Добавляет символ в конец выражения.
+		/// </summary>
+		/// <param name="symbol">Число или знак операции.</param>
 		private void AddSymbol(string symbol)
 		{
 			char charSymbol = symbol[0];

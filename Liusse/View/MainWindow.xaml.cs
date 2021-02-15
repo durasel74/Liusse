@@ -17,7 +17,6 @@ using System.Windows.Media.Animation;
 
 namespace Liusse
 {
-	// | - |
 	public partial class MainWindow : Window
 	{
 		private ViewModel viewModel;
@@ -42,20 +41,17 @@ namespace Liusse
 		public MainWindow()
 		{
 			InitializeComponent();
-			InitializeAnimation();
 			InitializePanels();
+			InitializeAnimation();
 			DataContext = new ViewModel();
 			viewModel = (ViewModel)DataContext;
 		}
 
-		// | - |
 		private void InitializePanels()
 		{
 			MenuPanel.Visibility = Visibility.Visible;
 			JournalPanel.Visibility = Visibility.Visible;
 		}
-
-		// | - |
 		private void InitializeAnimation()
 		{
 			menuPanelOpenAnimation = new ThicknessAnimation();
@@ -104,51 +100,39 @@ namespace Liusse
 		#endregion
 
 		#region Анимация
-
-		// | - |
 		private void MenuPanelOpenAnimation()
 		{
 			MenuPanel.BeginAnimation(MarginProperty,
 				menuPanelOpenAnimation);
 		}
-
-		// | - |
 		private void MenuPanelCloseAnimation()
 		{
 			MenuPanel.BeginAnimation(MarginProperty,
 				menuPanelCloseAnimation);
 		}
 
-		// | - |
 		private void JournalPanelOpenAnimation()
 		{
 			JournalPanel.BeginAnimation(MarginProperty,
 				journalPanelOpenAnimation);
 		}
-
-		// | - |
 		private void JournalPanelCloseAnimation()
 		{
 			JournalPanel.BeginAnimation(MarginProperty,
 				journalPanelCloseAnimation);
 		}
 
-		// | - |
 		private void BlackAreaOpenAnimation()
 		{
 			BlackArea.Visibility = Visibility.Visible;
 			BlackArea.BeginAnimation(OpacityProperty,
 				blackAreaOpenAnimation);
 		}
-
-		// | - |
 		private void BlackAreaCloseAnimation()
 		{
 			BlackArea.BeginAnimation(Border.OpacityProperty,
 				blackAreaCloseAnimation);
 		}
-
-		// | - |
 		public void BlackAreaAnimationComplited(object sender, EventArgs e)
 		{
 			BlackArea.Visibility = Visibility.Collapsed;
@@ -156,27 +140,24 @@ namespace Liusse
 		#endregion
 
 		#region Обработчики кнопок панелей
-
-		// | - |
 		public void MenuButtonClick(object sender, RoutedEventArgs e)
 		{
 			if (!menuPanelOpen)
 			{
 				menuPanelOpen = true;
 				journalPanelOpen = false;
+				JournalPanelCloseAnimation();
 				BlackAreaOpenAnimation();
 				MenuPanelOpenAnimation();
-				JournalPanelCloseAnimation();
 			}
 			else
 			{
 				menuPanelOpen = false;
-				BlackAreaCloseAnimation();
 				MenuPanelCloseAnimation();
+				BlackAreaCloseAnimation();
 			}
 		}
 
-		// | - |
 		public void JournalButtonClick(object sender, RoutedEventArgs e)
 		{
 
@@ -184,26 +165,25 @@ namespace Liusse
 			{
 				journalPanelOpen = true;
 				menuPanelOpen = false;
+				MenuPanelCloseAnimation();
 				BlackAreaOpenAnimation();
 				JournalPanelOpenAnimation();
-				MenuPanelCloseAnimation();
 			}
 			else
 			{
 				journalPanelOpen = false;
-				BlackAreaCloseAnimation();
 				JournalPanelCloseAnimation();
+				BlackAreaCloseAnimation();
 			}
 		}
 
-		// | - |
 		public void BlackAreaClick(object sender, MouseButtonEventArgs e)
 		{
 			menuPanelOpen = false;
 			journalPanelOpen = false;
-			BlackAreaCloseAnimation();
 			MenuPanelCloseAnimation();
 			JournalPanelCloseAnimation();
+			BlackAreaCloseAnimation();
 		}
 		#endregion
 
@@ -218,39 +198,33 @@ namespace Liusse
 			if ((Keyboard.IsKeyDown(Key.LeftCtrl) && 
 				pressedKey == Key.Back) || pressedKey == Key.R)
 			{
-				viewModel.InputCommand.Execute("C");
+				viewModel.InputCommand.Execute("Clear");
 			}
 			else if (pressedKey == Key.Back)
 			{
 				viewModel.InputCommand.Execute("Backspace");
 			}
-			else if ((Keyboard.IsKeyDown(Key.LeftShift) ||
-				Keyboard.IsKeyDown(Key.RightShift)) && key.Key == Key.D9)
+			else if (IsShiftDown() && key.Key == Key.D9)
 			{
-				viewModel.InputCommand.Execute("(");
+				viewModel.InputCommand.Execute("OpenBracket");
 			}
-			else if ((Keyboard.IsKeyDown(Key.LeftShift) ||
-				Keyboard.IsKeyDown(Key.RightShift)) && key.Key == Key.D0)
+			else if (IsShiftDown() && key.Key == Key.D0)
 			{
-				viewModel.InputCommand.Execute(")");
+				viewModel.InputCommand.Execute("CloseBracket");
 			}
-			else if (pressedKey == Key.OemPeriod ||
-				pressedKey == Key.OemComma ||
-				pressedKey == Key.Decimal)
+			else if (pressedKey == Key.Decimal || pressedKey == Key.OemComma 
+				|| pressedKey == Key.OemPeriod)
 			{
-				viewModel.InputCommand.Execute(",");
+				viewModel.InputCommand.Execute("Separator");
 			}
-			else if ((Keyboard.IsKeyDown(Key.LeftShift) &&
-				pressedKey == Key.OemMinus) || 
-				((Keyboard.IsKeyDown(Key.LeftShift) &&
-				pressedKey == Key.Subtract)))
+			else if ((IsShiftDown() && pressedKey == Key.OemMinus) || 
+				(IsShiftDown() && pressedKey == Key.Subtract))
 			{
-				viewModel.InputCommand.Execute("±");
+				viewModel.InputCommand.Execute("PlusMinus");
 			}
 
-			else if (((Keyboard.IsKeyDown(Key.LeftShift) ||
-				Keyboard.IsKeyDown(Key.RightShift)) &&
-				pressedKey == Key.D8) || pressedKey == Key.Multiply)
+			else if (IsShiftDown() && (pressedKey == Key.D8 || 
+				pressedKey == Key.Multiply))
 			{
 				viewModel.InputCommand.Execute("×");
 			}
@@ -269,7 +243,7 @@ namespace Liusse
 			}
 			else if (pressedKey == Key.Enter)
 			{
-				viewModel.InputCommand.Execute("=");
+				viewModel.InputCommand.Execute("Result");
 			}
 
 			else if (pressedKey == Key.D0 || pressedKey == Key.NumPad0)
@@ -293,7 +267,15 @@ namespace Liusse
 			else if (pressedKey == Key.D9 || pressedKey == Key.NumPad9)
 				viewModel.InputCommand.Execute("9");
 		}
-
+		private bool IsShiftDown()
+		{
+			if (Keyboard.IsKeyDown(Key.LeftShift) ||
+				Keyboard.IsKeyDown(Key.RightShift))
+			{
+				return true;
+			}
+			return false;
+		}
 		#endregion
 
 		#region Временно !!!!!!

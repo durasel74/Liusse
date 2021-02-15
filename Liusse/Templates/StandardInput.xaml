@@ -21,9 +21,9 @@
         </Grid.ColumnDefinitions>
 
         <Button Grid.Row="0" Grid.Column="0" Content="C"
-                CommandParameter="C"/>
+                CommandParameter="Clear"/>
         <Button Grid.Row="0" Grid.Column="1" Content="( )"
-                Padding="0,-1,0,5" CommandParameter="()"/>
+                Padding="0,-1,0,5" CommandParameter="Brackets"/>
         <Button Grid.Row="0" Grid.Column="2" Padding="10,0,10,5"
                 CommandParameter="Backspace">
             <Path Data="{StaticResource BackspaceSymbol}"/>
@@ -59,14 +59,15 @@
                 Padding="0,-10,0,0" CommandParameter="+"/>
 
         <Button Grid.Row="4" Grid.Column="0" Padding="8" 
-                CommandParameter="±">
+                CommandParameter="PlusMinus">
             <Path Data="{StaticResource PlusMinusSymbol}"/>
         </Button>
         <Button Grid.Row="4" Grid.Column="1" Content="0"
                 CommandParameter="0"/>
         <Button x:Name="SeparatorBtn" Grid.Row="4" Grid.Column="2" 
-                Padding="0,-10,0,10" Content="," CommandParameter=","/>
+                Padding="0,-10,0,10" Content="," 
+                CommandParameter="Separator"/>
         <Button Grid.Row="4" Grid.Column="3" Content="="
-                Padding="0,-8,0,0" CommandParameter="="/>
+                Padding="0,-8,0,0" CommandParameter="Result"/>
     </Grid>
 </UserControl>

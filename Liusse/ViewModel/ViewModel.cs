@@ -11,7 +11,6 @@ namespace Liusse
 		private Core parser;
 		private ButtonCommand inputCommand;
 		private ButtonCommand clearJournalCommand;
-
 		public ObservableCollection<JournalElement> Journal { get; set; }
 
 		/// <summary>
@@ -47,14 +46,15 @@ namespace Liusse
 			}
 		}
 
-		// | - |
+		/// <summary>
+		/// Свойство для доступа к ядру.
+		/// </summary>
 		public Core Parser
 		{
 			get { return parser; }
 			set { }
 		}
 
-		// | - |
 		public ViewModel()
 		{
 			parser = new Core();

@@ -251,8 +251,7 @@ namespace CalcParse
 
 				i++;
 			}
-			throw new Exception("Количество попыток посчитать пример " +
-				"закончилось.");
+			throw new Exception("Лимит попыток посчитать пример превышен.");
 		}
 	}
 }

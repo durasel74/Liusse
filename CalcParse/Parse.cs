@@ -31,7 +31,9 @@ namespace CalcParse
 					Contains.ToNumbers(symbol))
 				result = expression + symbol;
 			else if (Contains.ToMathOperators(lastSymbol) &&
-				Contains.ToMathOperators(symbol))
+				Contains.ToMathOperators(symbol) && 
+				(Contains.ToNumbers(expression[expression.Length - 2]) || 
+				expression[expression.Length - 2] == ')'))
 			{
 				result = ReplaceOperator(expression, expression.Length-1, 
 					symbol);
@@ -96,11 +98,10 @@ namespace CalcParse
 		}
 
 		// | + - |
-		public static string AddSeparator(string expression, char separator)
+		public static string AddSeparator(string expression)
 		{
-			if (!Contains.ToSeparators(separator))
-				throw new Exception("Символ не является разделителем дроби.");
-
+			string symbol = NumberFormatInfo.CurrentInfo.CurrencyDecimalSeparator;
+			char separator = symbol[0];
 			string result = expression;
 			bool correctLast = false;
 

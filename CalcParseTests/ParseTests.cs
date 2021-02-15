@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using NUnit.Framework;
 using CalcParse;
 
@@ -331,10 +332,10 @@ namespace CalcParseTests
 		[Category("CalcParse.Parse.AddSeparator")]
 		public void AddSeparator_CorrectExpression_SeparatorAdd(string expression)
 		{
-			char separator = '.';
-			string expected = expression + separator;
+			string expected = expression + 
+				NumberFormatInfo.CurrentInfo.CurrencyDecimalSeparator;
 
-			string actual = Parse.AddSeparator(expression, separator);
+			string actual = Parse.AddSeparator(expression);
 
 			Assert.AreEqual(expected, actual);
 		}
@@ -347,10 +348,9 @@ namespace CalcParseTests
 		[Category("CalcParse.Parse.AddSeparator")]
 		public void AddSeparator_NotCorrectExpression_DontAddSeparator(string expression)
 		{
-			char separator = '.';
 			string expected = expression;
 
-			string actual = Parse.AddSeparator(expression, separator);
+			string actual = Parse.AddSeparator(expression);
 
 			Assert.AreEqual(expected, actual);
 		}
@@ -361,24 +361,12 @@ namespace CalcParseTests
 		[Category("CalcParse.Parse.AddSeparator")]
 		public void AddSeparator_NotCorrectExpression_AddNullAndSeparator(string expression)
 		{
-			char separator = ',';
-			string expected = expression + "0,";
+			string expected = expression + "0" + 
+				NumberFormatInfo.CurrentInfo.CurrencyDecimalSeparator;
 
-			string actual = Parse.AddSeparator(expression, separator);
+			string actual = Parse.AddSeparator(expression);
 
 			Assert.AreEqual(expected, actual);
-		}
-		[TestCase("-3", '+')]
-		[TestCase("55555", 'g')]
-		[TestCase("*55555", '5')]
-		[TestCase("5+5", 'd')]
-		[TestCase("(5+(1", '-')]
-		[TestCase("(10+(5-3)*80", 'a')]
-		[Category("CalcParse.Calculate.AddSeparator")]
-		public void AddSeparator_NotCorrectSeparator_Exception(string expression,
-			char separator)
-		{
-			Assert.Throws<Exception>(() => Parse.AddSeparator(expression, separator));
 		}
 		#endregion
 
