@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using NLog;
 using CalcParse;
 
 namespace Liusse
@@ -11,6 +12,7 @@ namespace Liusse
 	/// </summary>
 	public class Core : INotifyPropertyChanged
 	{
+		private Logger logger = LogManager.GetCurrentClassLogger();
 		private string currentExpression;
 		private string example;
 		public Journal Journal { get; }
@@ -28,6 +30,8 @@ namespace Liusse
 					currentExpression = value;
 					OnPropertyChanged("CurrentExpression");
 				}
+				else
+					logger.Trace("Превышен размер выражения");
 			}
 		}
 
@@ -49,6 +53,7 @@ namespace Liusse
 			currentExpression = "";
 			example = "";
 			Journal = new Journal();
+			logger.Trace("Приложение запущено");
 		}
 
 		/// <summary>
@@ -89,15 +94,46 @@ namespace Liusse
 		/// </summary>
 		private void Result()
 		{
+			logger.Trace("Вычисление результата...");
 			try
 			{
-				string result = Calculate.ALU(CurrentExpression);
-				if (CurrentExpression != result)
+				string expression = CurrentExpression;
+				int priorityIndex;
+				string expressionFragment;
+				string result;
+
+				int i = 0;
+				while (i < Int32.MaxValue)
 				{
-					Example = Parse.AddingMissingBrackets(CurrentExpression) + '=';
-					CurrentExpression = result;
-					Journal.AddElement(CurrentExpression, Example);
+					expression = Parse.Format(expression);
+					logger.Trace($"{expression} =>");
+
+					priorityIndex = Calculate.PriorityOfOperations(expression);
+					if (priorityIndex == -1)
+					{
+						expression = Parse.FormatResult(expression);
+						if (expression != CurrentExpression)
+						{
+							Example = Parse.AddingMissingBrackets(CurrentExpression) + '=';
+							CurrentExpression = expression;
+							Journal.AddElement(CurrentExpression, Example);
+							logger.Trace($"Ответ: {Example+CurrentExpression}");
+						}
+						break;
+					}
+
+					expressionFragment = Calculate.Selector(expression, priorityIndex);
+
+					result = Calculate.Arithmetic(Calculate.Converter(expressionFragment));
+
+					expression = Calculate.Replacer(expression,
+						expressionFragment, result);
+
+					i++;
 				}
+				if (i == Int32.MaxValue)
+					throw new Exception("Лимит попыток посчитать пример превышен.");
+				logger.Trace("Вычисление закончилось успешно...");
 			}
 			catch (NotCorrectException) { }
 			catch (OverflowException) { } // Убрать после добавления экспоненты!!!!!!!!!!!!!!!!
@@ -105,6 +141,12 @@ namespace Liusse
 			{
 				Example = Parse.AddingMissingBrackets(CurrentExpression) + '=';
 				CurrentExpression = "Деление на ноль невозможно";
+			}
+			catch (Exception error)
+			{
+				logger.Error("ОШИБКА: |" + error.Message + "|\n " +
+					"\t\t\t\t\t Приложение было принудительно остановлено.");
+				Environment.Exit(0);
 			}
 		}
 
@@ -117,6 +159,7 @@ namespace Liusse
 			{
 				CurrentExpression = CurrentExpression.Remove(
 					CurrentExpression.Length - 1);
+				logger.Trace("Последний символ удален");
 			}
 		}
 
@@ -126,6 +169,7 @@ namespace Liusse
 		private void Clear()
 		{
 			CurrentExpression = "";
+			logger.Trace("Выражение очищено");
 		}
 
 		/// <summary>
@@ -135,7 +179,10 @@ namespace Liusse
 		{
 			string result = Parse.InvertNumber(CurrentExpression);
 			if (CurrentExpression != result)
+			{
 				CurrentExpression = result;
+				logger.Trace("Знак изменен");
+			}
 		}
 
 		/// <summary>
@@ -146,7 +193,10 @@ namespace Liusse
 		{
 			string result = Parse.AddBracket(CurrentExpression);
 			if (CurrentExpression != result)
+			{
 				CurrentExpression = result;
+				logger.Trace("Добавлена скобка");
+			}
 		}
 
 		/// <summary>
@@ -156,7 +206,10 @@ namespace Liusse
 		{
 			string result = Parse.AddOpenBracket(CurrentExpression);
 			if (CurrentExpression != result)
+			{
 				CurrentExpression = result;
+				logger.Trace("Добавлена открывающая скобка");
+			}
 		}
 
 		/// <summary>
@@ -166,7 +219,10 @@ namespace Liusse
 		{
 			string result = Parse.AddCloseBracket(CurrentExpression);
 			if (CurrentExpression != result)
+			{
 				CurrentExpression = result;
+				logger.Trace("Добавлена закрывающая скобка");
+			}
 		}
 
 		/// <summary>
@@ -176,7 +232,10 @@ namespace Liusse
 		{
 			string result = Parse.AddSeparator(CurrentExpression);
 			if (CurrentExpression != result)
+			{
 				CurrentExpression = result;
+				logger.Trace("Добавлен разделитель дроби");
+			}
 		}
 
 		/// <summary>
@@ -188,7 +247,10 @@ namespace Liusse
 			char charSymbol = symbol[0];
 			string result = Parse.AddSymbol(CurrentExpression, charSymbol);
 			if (CurrentExpression != result)
+			{
 				CurrentExpression = result;
+				logger.Trace($"Добавлен символ {charSymbol}");
+			}
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;

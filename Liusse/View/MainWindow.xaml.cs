@@ -14,12 +14,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Globalization;
 using System.Windows.Media.Animation;
+using NLog;
 
 namespace Liusse
 {
 	public partial class MainWindow : Window
 	{
 		private ViewModel viewModel;
+		private Logger logger = LogManager.GetCurrentClassLogger();
 
 		private bool menuPanelOpen = false;
 		private bool journalPanelOpen = false;
@@ -40,11 +42,21 @@ namespace Liusse
 		#region Инициализация окна
 		public MainWindow()
 		{
-			InitializeComponent();
-			InitializePanels();
-			InitializeAnimation();
-			DataContext = new ViewModel();
-			viewModel = (ViewModel)DataContext;
+			try
+			{
+				logger.Trace("Запуск...");
+				InitializeComponent();
+				InitializePanels();
+				InitializeAnimation();
+				DataContext = new ViewModel();
+				viewModel = (ViewModel)DataContext;
+			}
+			catch (Exception error)
+			{
+				logger.Error("ОШИБКА: |" + error.Message + "|\n " +
+					"\t\t\t\t\t Приложение было принудительно остановлено.");
+				Environment.Exit(0);
+			}
 		}
 
 		private void InitializePanels()
@@ -136,6 +148,17 @@ namespace Liusse
 		public void BlackAreaAnimationComplited(object sender, EventArgs e)
 		{
 			BlackArea.Visibility = Visibility.Collapsed;
+		}
+		#endregion
+
+		#region Обработка событий окна
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			logger.Trace("Завершение работы");
+		}
+		private void Window_Closed(object sender, EventArgs e)
+		{
+			logger.Trace("Приложение завершило работу...\n");
 		}
 		#endregion
 

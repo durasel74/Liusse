@@ -330,6 +330,19 @@ namespace CalcParse
 		}
 
 		// | - - |
+		public static string FormatResult(string expression)
+		{
+			int priorityIndex = Calculate.PriorityOfOperations(expression);
+			if (priorityIndex == -1)
+			{
+				decimal temp = Convert.ToDecimal(expression);
+				temp = Decimal.Round(temp, 15);
+				expression = temp.ToString("G29");
+			}
+			return expression;
+		}
+
+		// | - - |
 		public static string RemoveUnnecessaryBrackets(string expression)
 		{
 			string currentExpression = expression;
