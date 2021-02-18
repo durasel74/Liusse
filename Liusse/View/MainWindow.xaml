@@ -62,22 +62,6 @@
             <Setter Property="Visibility" Value="Collapsed"/>
         </Style>
 
-        <Style TargetType="ListBoxItem">
-            <Setter Property="Template" Value="{StaticResource ListBoxItem}"/>
-            <Setter Property="ListBoxItem.HorizontalContentAlignment"
-                    Value="Right"/>
-            <Setter Property="ListBoxItem.VerticalContentAlignment"
-                    Value="Center"/>
-            <Setter Property="ListBoxItem.Padding" Value="6"/>
-            <Setter Property="ListBoxItem.Margin" Value="0,0,0,10"/>
-            <Setter Property="ListBoxItem.BorderThickness" Value="1"/>
-            <Setter Property="ListBoxItem.Background" 
-                    Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="ListBoxItem.Foreground" 
-                    Value="{StaticResource SecondaryTextColor}"/>
-        </Style>
-
         <Style TargetType="ScrollBar">
             <Setter Property="Template" 
                     Value="{StaticResource ScrollBar}"/>
@@ -113,10 +97,14 @@
         <!--#endregion-->
 
         <!--#region Основная область-->
-        <Templ:StandardOutput Grid.Row="1" Margin="5" 
-                              DataContext="{Binding Parser}"/>
+        <ContentControl x:Name="OutputSlot" Grid.Row="1" Margin="5" 
+                        DataContext="{Binding Parser}">
+            <Templ:StandardOutput/>
+        </ContentControl>
 
-        <Templ:StandardInput Grid.Row="2" Margin="2"/>
+        <ContentControl x:Name="InputSlot" Grid.Row="2" Margin="2">
+            <Templ:StandardInput/>
+        </ContentControl>
         <!--#endregion-->
 
         <!--#region Выезжающие панели-->
@@ -125,11 +113,11 @@
                 Background="Black">
         </Border>
 
-        <Border x:Name="MenuPanel" Grid.RowSpan="3" Margin="-200,0,0,0"
+        <Border x:Name="MenuModePanel" Grid.RowSpan="3" Margin="-200,0,0,0"
                 Style="{StaticResource Panel}" HorizontalAlignment="Left"
                 BorderThickness="0,0,1,0">
-            <Button x:Name="slimeButton1" Width="50" Height="50"
-                    Click="SlimeButtonClickTest"/>
+            <Templ:ModeMenuPanel x:Name="ModeMenuPanelTemplate"
+                DataContext="{Binding ModeManager}"/>
         </Border>
 
         <Border x:Name="JournalPanel" Grid.RowSpan="3" Margin="0,0,-200,0"

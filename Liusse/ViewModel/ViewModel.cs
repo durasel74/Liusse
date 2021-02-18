@@ -9,8 +9,10 @@ namespace Liusse
 	public class ViewModel : INotifyPropertyChanged
 	{
 		private Core parser;
+		private ModeManager modeManager;
 		private ButtonCommand inputCommand;
 		private ButtonCommand clearJournalCommand;
+
 		public ObservableCollection<JournalElement> Journal { get; set; }
 
 		/// <summary>
@@ -31,7 +33,7 @@ namespace Liusse
 		}
 
 		/// <summary>
-		/// Команда очистки журнала
+		/// Команда очистки журнала.
 		/// </summary>
 		public ButtonCommand ClearJournalCommand
 		{ 
@@ -47,7 +49,7 @@ namespace Liusse
 		}
 
 		/// <summary>
-		/// Свойство для доступа к ядру.
+		/// Свойство для доступа к ядру калькулятора.
 		/// </summary>
 		public Core Parser
 		{
@@ -55,10 +57,20 @@ namespace Liusse
 			set { }
 		}
 
+		/// <summary>
+		/// Свойство для доступа к менеджеру режимов.
+		/// </summary>
+		public ModeManager ModeManager
+		{
+			get { return modeManager; }
+			set { }
+		}
+
 		public ViewModel()
 		{
 			parser = new Core();
 			Journal = parser.Journal.GetJournal();
+			modeManager = new ModeManager();
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;

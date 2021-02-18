@@ -50,6 +50,11 @@ namespace Liusse
 				InitializeAnimation();
 				DataContext = new ViewModel();
 				viewModel = (ViewModel)DataContext;
+				ModeMenuPanelTemplate.ListBox.SelectionChanged += ModeChanged;
+				ModeMenuPanelTemplate.ListBox.PreviewMouseRightButtonDown += 
+					ListBox_PreviewRightMouseButtonDown;
+				ModeMenuPanelTemplate.ListBox.PreviewMouseLeftButtonUp +=
+					ListBox_PreviewLeftMouseButtonUp;
 			}
 			catch (Exception error)
 			{
@@ -61,7 +66,7 @@ namespace Liusse
 
 		private void InitializePanels()
 		{
-			MenuPanel.Visibility = Visibility.Visible;
+			MenuModePanel.Visibility = Visibility.Visible;
 			JournalPanel.Visibility = Visibility.Visible;
 		}
 		private void InitializeAnimation()
@@ -114,12 +119,12 @@ namespace Liusse
 		#region Анимация
 		private void MenuPanelOpenAnimation()
 		{
-			MenuPanel.BeginAnimation(MarginProperty,
+			MenuModePanel.BeginAnimation(MarginProperty,
 				menuPanelOpenAnimation);
 		}
 		private void MenuPanelCloseAnimation()
 		{
-			MenuPanel.BeginAnimation(MarginProperty,
+			MenuModePanel.BeginAnimation(MarginProperty,
 				menuPanelCloseAnimation);
 		}
 
@@ -145,13 +150,13 @@ namespace Liusse
 			BlackArea.BeginAnimation(Border.OpacityProperty,
 				blackAreaCloseAnimation);
 		}
-		public void BlackAreaAnimationComplited(object sender, EventArgs e)
+		private void BlackAreaAnimationComplited(object sender, EventArgs e)
 		{
 			BlackArea.Visibility = Visibility.Collapsed;
 		}
 		#endregion
 
-		#region Обработка событий окна
+		#region Обработчики событий окна
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			logger.Trace("Завершение работы");
@@ -163,7 +168,7 @@ namespace Liusse
 		#endregion
 
 		#region Обработчики кнопок панелей
-		public void MenuButtonClick(object sender, RoutedEventArgs e)
+		private void MenuButtonClick(object sender, RoutedEventArgs e)
 		{
 			if (!menuPanelOpen)
 			{
@@ -181,7 +186,7 @@ namespace Liusse
 			}
 		}
 
-		public void JournalButtonClick(object sender, RoutedEventArgs e)
+		private void JournalButtonClick(object sender, RoutedEventArgs e)
 		{
 
 			if (!journalPanelOpen)
@@ -200,12 +205,48 @@ namespace Liusse
 			}
 		}
 
-		public void BlackAreaClick(object sender, MouseButtonEventArgs e)
+		private void BlackAreaClick(object sender, MouseButtonEventArgs e)
 		{
 			menuPanelOpen = false;
 			journalPanelOpen = false;
 			MenuPanelCloseAnimation();
 			JournalPanelCloseAnimation();
+			BlackAreaCloseAnimation();
+		}
+		#endregion
+
+		#region Обработчики выбора режима
+		public void ModeChanged(object sender, SelectionChangedEventArgs e)
+		{
+			string selectMode = e.AddedItems[0].ToString();
+			switch (selectMode)
+			{
+				case "Обычный":
+					InputSlot.Content = new Templates.StandardInput();
+					OutputSlot.Content = new Templates.StandardOutput();
+					break;
+				case "Режим":
+					InputSlot.Content = new Templates.StandardInput();
+					OutputSlot.Content = new Templates.StandardOutput();
+					break;
+				case "None":
+					InputSlot.Content = null;
+					OutputSlot.Content = null;
+					break;
+			}
+			viewModel.InputCommand.Execute("Clear");
+			logger.Trace($"Переключено на режим: {selectMode}");
+		}
+		private void ListBox_PreviewRightMouseButtonDown(object sender, 
+			MouseButtonEventArgs e)
+		{
+			e.Handled = true;
+		}
+		private void ListBox_PreviewLeftMouseButtonUp(object sender, 
+			MouseButtonEventArgs e)
+		{
+			menuPanelOpen = false;
+			MenuPanelCloseAnimation();
 			BlackAreaCloseAnimation();
 		}
 		#endregion
@@ -298,77 +339,6 @@ namespace Liusse
 				return true;
 			}
 			return false;
-		}
-		#endregion
-
-		#region Временно !!!!!!
-		DoubleAnimation btnAnimationX;
-		DoubleAnimation btnAnimationY;
-		Button btn;
-		bool TestClicked = false;
-		public void SlimeButtonClickTest(object sender, RoutedEventArgs e)
-		{
-			btn = sender as Button;
-			if (btn != null && !TestClicked)
-			{
-				btnAnimationX = new DoubleAnimation();
-				btnAnimationX.To = 190;
-				btnAnimationX.DecelerationRatio = 1;
-				btnAnimationX.Duration =
-					TimeSpan.FromSeconds(0.5);
-				
-				btnAnimationY = new DoubleAnimation();
-				btnAnimationY.To = 200;
-				btnAnimationY.Duration =
-					TimeSpan.FromSeconds(0.5);
-				btnAnimationY.Completed += CompliteTestAnimation;
-
-				btn.BeginAnimation(WidthProperty, btnAnimationX);
-				btn.BeginAnimation(HeightProperty, btnAnimationY);
-
-				TestClicked = true;
-			}
-			else if (btn != null && TestClicked)
-			{
-				btnAnimationY = new DoubleAnimation();
-				btnAnimationY.To = 200;
-				btnAnimationY.Duration =
-					TimeSpan.FromSeconds(0.5);
-				btnAnimationY.Completed += CompliteTestAnimation;
-
-				btn.BeginAnimation(WidthProperty, btnAnimationX);
-				btn.BeginAnimation(HeightProperty, btnAnimationY);
-
-				TestClicked = false;
-			}
-		}
-
-		public void CompliteTestAnimation(object sender, EventArgs e)
-		{
-			if (TestClicked)
-			{
-				btnAnimationY.To = 410;
-				btnAnimationY.DecelerationRatio = 1;
-				btnAnimationY.Duration =
-					TimeSpan.FromSeconds(0.5);
-				btn.BeginAnimation(HeightProperty, btnAnimationY);
-			}
-			else
-			{
-				btnAnimationX.To = 50;
-				btnAnimationX.DecelerationRatio = 1;
-				btnAnimationX.Duration =
-					TimeSpan.FromSeconds(0.5);
-
-				btnAnimationY.To = 50;
-				btnAnimationY.DecelerationRatio = 1;
-				btnAnimationY.Duration =
-					TimeSpan.FromSeconds(0.5);
-
-				btn.BeginAnimation(WidthProperty, btnAnimationX);
-				btn.BeginAnimation(HeightProperty, btnAnimationY);
-			}
-			
 		}
 		#endregion
 	}

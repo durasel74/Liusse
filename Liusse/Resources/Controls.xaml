@@ -24,6 +24,27 @@
                 <Setter TargetName="buttonField" 
                         Property="Margin" Value="3"/>
             </Trigger>
+            <!--<EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="2" Duration="0:0:0.05"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="PreviewMouseLeftButtonDown">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ThicknessAnimation Storyboard.TargetProperty="Margin" To="3" Duration="0:0:0.05"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="PreviewMouseLeftButtonUp">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ThicknessAnimation Storyboard.TargetProperty="Margin" To="1" Duration="0:0:0.05"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>-->
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <!--#endregion-->
@@ -33,8 +54,9 @@
         <Border x:Name="buttonField" BorderThickness="1"
                 SnapsToDevicePixels="True" BorderBrush="Transparent"
                 Background="{TemplateBinding Background}">
-            <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" 
-                     Margin="{TemplateBinding Padding}">
+            <Viewbox Margin="{TemplateBinding Padding}"
+                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                 <ContentControl x:Name="buttonContent" Focusable="False"
                                 Foreground="{TemplateBinding Foreground}"
                                 Content="{TemplateBinding Content}"
@@ -67,8 +89,8 @@
     </ControlTemplate>
     <!--#endregion-->
     
-    <!--#region Элемент списка-->
-    <ControlTemplate x:Key="ListBoxItem" TargetType="ListBoxItem">
+    <!--#region Элемент списка журнала-->
+    <ControlTemplate x:Key="JournalItem" TargetType="ListBoxItem">
         <Border x:Name="ItemBorder" Padding="{TemplateBinding Padding}" 
                 Margin="{TemplateBinding Margin}"
                 BorderThickness="{TemplateBinding BorderThickness}"
@@ -85,8 +107,87 @@
                 <Setter TargetName="ItemBorder" Property="BorderBrush" 
                         Value="{DynamicResource AccentColor}"/>
             </Trigger>
+            <EventTrigger RoutedEvent="PreviewMouseLeftButtonDown">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                            To="#FF6014EB" Duration="0:0:0.1"/>
+                        <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                            To="#006014EB" Duration="0:0:0.4"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
+
+    <Style x:Key="JournalItemStyle" TargetType="ListBoxItem">
+        <Setter Property="Template" Value="{StaticResource JournalItem}"/>
+        <Setter Property="ListBoxItem.HorizontalContentAlignment"
+                    Value="Right"/>
+        <Setter Property="ListBoxItem.VerticalContentAlignment"
+                    Value="Center"/>
+        <Setter Property="ListBoxItem.Padding" Value="6"/>
+        <Setter Property="ListBoxItem.Margin" Value="0,0,0,10"/>
+        <Setter Property="ListBoxItem.BorderThickness" Value="1"/>
+        <Setter Property="ListBoxItem.Background" 
+                    Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="ListBoxItem.Foreground" 
+                    Value="{DynamicResource SecondaryTextColor}"/>
+    </Style>
+    <!--#endregion-->
+
+    <!--#region Элемент списка меню режимов-->
+    <ControlTemplate x:Key="ModeMenuItem" TargetType="ListBoxItem">
+        <Border x:Name="ItemBorder" Padding="{TemplateBinding Padding}" 
+                Margin="{TemplateBinding Margin}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}">
+            <ContentPresenter
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+        </Border>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="ItemBorder" Property="BorderBrush" 
+                        Value="{DynamicResource AccentColor}"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter TargetName="ItemBorder" Property="BorderBrush" 
+                        Value="{DynamicResource AccentColor}"/>
+            </Trigger>
+            <EventTrigger RoutedEvent="PreviewMouseLeftButtonDown">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                            To="#FF6014EB" Duration="0:0:0.1"/>
+                        <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                            To="#006014EB" Duration="0:0:0.4"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="ModeMenuItemStyle" TargetType="ListBoxItem">
+        <Setter Property="Template" Value="{StaticResource ModeMenuItem}"/>
+        <Setter Property="ListBoxItem.HorizontalContentAlignment"
+                    Value="Left"/>
+        <Setter Property="ListBoxItem.VerticalContentAlignment"
+                    Value="Center"/>
+        <Setter Property="ListBoxItem.Padding" Value="10"/>
+        <Setter Property="ListBoxItem.Margin" Value="0,0,0,2"/>
+        <Setter Property="ListBoxItem.BorderThickness" Value="1"/>
+        <Setter Property="ListBoxItem.FontSize" Value="20"/>
+        <Setter Property="ListBoxItem.Background" 
+                    Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="ListBoxItem.Foreground" 
+                    Value="{DynamicResource SecondaryTextColor}"/>
+    </Style>
     <!--#endregion-->
 
     <!--#region Скроллбар-->

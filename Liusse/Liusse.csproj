@@ -19,4 +19,10 @@
     <ProjectReference Include="..\CalcParse\CalcParse.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="Templates\ModeMenuPanel.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
 </Project>

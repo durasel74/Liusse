@@ -75,5 +75,15 @@
         -17.761,17.761 C513.093,680.309,504.212,671.337,504.212,661.45z">
     </PathGeometry>
     <!--#endregion-->
+
+    <!--#region О программе-->
+    <GeometryGroup x:Key="InfoSymbol">
+        <PathGeometry Figures="M64,1C29.3,1,1,29.3,1,64s28.3,63,63,63s63
+                      -28.3,63-63S98.7,1,64,1z M64,119C33.7,119,9,94.3,9,64
+                      S33.7,9,64,9   s55,24.7,55,55S94.3,119,64,119z"/>
+        <PathGeometry Figures="M58,55 L58,100 L73,100 L73,55 L58,55z"/>
+        <PathGeometry Figures="M58,30 L58,45 L73,45 L73,30 L58,30z"/>
+    </GeometryGroup>
+    <!--#endregion-->
 </ResourceDictionary>
     

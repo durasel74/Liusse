@@ -168,8 +168,11 @@ namespace Liusse
 		/// </summary>
 		private void Clear()
 		{
-			CurrentExpression = "";
-			logger.Trace("Выражение очищено");
+			if (CurrentExpression != "")
+			{
+				CurrentExpression = "";
+				logger.Trace("Выражение очищено");
+			}
 		}
 
 		/// <summary>
