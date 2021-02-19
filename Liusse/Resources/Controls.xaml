@@ -16,35 +16,36 @@
         </Border>
 
         <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="true">
-                <Setter TargetName="buttonField" 
-                        Property="BorderThickness" Value="2"/>
-            </Trigger>
-            <Trigger Property="IsPressed" Value="true">
-                <Setter TargetName="buttonField" 
-                        Property="Margin" Value="3"/>
-            </Trigger>
-            <!--<EventTrigger RoutedEvent="MouseEnter">
+            <EventTrigger RoutedEvent="MouseEnter">
                 <BeginStoryboard>
-                    <Storyboard>
-                        <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="2" Duration="0:0:0.05"/>
+                    <Storyboard TargetName="buttonField" 
+                                TargetProperty="BorderThickness">
+                        <ThicknessAnimation To="2" Duration="0:0:0.05"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard TargetName="buttonField" 
+                                TargetProperty="BorderThickness">
+                        <ThicknessAnimation To="5" Duration="0:0:0.1"/>
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
             <EventTrigger RoutedEvent="PreviewMouseLeftButtonDown">
                 <BeginStoryboard>
-                    <Storyboard>
-                        <ThicknessAnimation Storyboard.TargetProperty="Margin" To="3" Duration="0:0:0.05"/>
+                    <Storyboard TargetProperty="Margin">
+                        <ThicknessAnimation To="4" Duration="0:0:0.05"/>
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
             <EventTrigger RoutedEvent="PreviewMouseLeftButtonUp">
                 <BeginStoryboard>
-                    <Storyboard>
-                        <ThicknessAnimation Storyboard.TargetProperty="Margin" To="1" Duration="0:0:0.05"/>
+                    <Storyboard TargetProperty="Margin">
+                        <ThicknessAnimation To="1" Duration="0:0:0.2"/>
                     </Storyboard>
                 </BeginStoryboard>
-            </EventTrigger>-->
+            </EventTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <!--#endregion-->
