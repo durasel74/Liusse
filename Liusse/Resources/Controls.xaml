@@ -81,10 +81,7 @@
                         Value="0"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
-                <Setter TargetName="buttonField" Property="Opacity"
-                        Value="0"/>
-                <Setter TargetName="buttonContent" Property="Opacity"
-                        Value="0"/>
+                <Setter Property="Visibility" Value="Collapsed"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -110,11 +107,9 @@
             </Trigger>
             <EventTrigger RoutedEvent="PreviewMouseLeftButtonDown">
                 <BeginStoryboard>
-                    <Storyboard>
-                        <ColorAnimation Storyboard.TargetProperty="Background.Color"
-                            To="#FF6014EB" Duration="0:0:0.1"/>
-                        <ColorAnimation Storyboard.TargetProperty="Background.Color"
-                            To="#006014EB" Duration="0:0:0.4"/>
+                    <Storyboard TargetProperty="Background.Color">
+                        <ColorAnimation To="#FF6014EB" Duration="0:0:0.1"/>
+                        <ColorAnimation To="#006014EB" Duration="0:0:0.4"/>
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
@@ -162,11 +157,9 @@
             </Trigger>
             <EventTrigger RoutedEvent="PreviewMouseLeftButtonDown">
                 <BeginStoryboard>
-                    <Storyboard>
-                        <ColorAnimation Storyboard.TargetProperty="Background.Color"
-                            To="#FF6014EB" Duration="0:0:0.1"/>
-                        <ColorAnimation Storyboard.TargetProperty="Background.Color"
-                            To="#006014EB" Duration="0:0:0.4"/>
+                    <Storyboard TargetProperty="Background.Color">
+                        <ColorAnimation To="#FF6014EB" Duration="0:0:0.1"/>
+                        <ColorAnimation To="#006014EB" Duration="0:0:0.4"/>
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
@@ -180,7 +173,7 @@
         <Setter Property="ListBoxItem.VerticalContentAlignment"
                     Value="Center"/>
         <Setter Property="ListBoxItem.Padding" Value="10"/>
-        <Setter Property="ListBoxItem.Margin" Value="0,0,0,2"/>
+        <Setter Property="ListBoxItem.Margin" Value="0,0,1,2"/>
         <Setter Property="ListBoxItem.BorderThickness" Value="1"/>
         <Setter Property="ListBoxItem.FontSize" Value="20"/>
         <Setter Property="ListBoxItem.Background" 
@@ -192,8 +185,8 @@
     <!--#endregion-->
 
     <!--#region Скроллбар-->
-    
-    <!-- Область сверху и снизу ползунка прокрутки. -->
+
+    <!--#region Область сверху и снизу ползунка прокрутки -->
     <Style x:Key="ScrollBarPageButtonStyle" TargetType="RepeatButton">
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Focusable" Value="False"/>
@@ -208,8 +201,9 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <!--#endregion-->
 
-    <!-- Ползунок прокрутки. -->
+    <!--#region Ползунок прокрутки -->
     <Style x:Key="ScrollBarThumbStyle" TargetType="Thumb">
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Focusable" Value="True"/>
@@ -223,8 +217,9 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <!--#endregion-->
 
-    <!-- Шаблон скроллбара. -->
+    <!--#region Шаблон скроллбара -->
     <ControlTemplate x:Key="ScrollBar" TargetType="ScrollBar">
         <Grid>
             <Track Name="PART_Track" IsDirectionReversed="True">
@@ -251,5 +246,83 @@
             </Track>
         </Grid>
     </ControlTemplate>
+    <!--#endregion-->
+    
+    <!--#endregion-->
+
+    <!--#region Контекстное меню-->
+    
+    <!--#region Элемент меню -->
+    <Style TargetType="{x:Type MenuItem}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Padding" Value="6"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource SecondaryTextColor}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MenuItem}">
+                    <Border x:Name="Root" Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter Name="HeaderHost" ContentSource="Header" 
+                                          RecognizesAccessKey="True" 
+                                          HorizontalAlignment="Left" 
+                                          VerticalAlignment="Center"
+                                          Margin="{TemplateBinding Padding}" 
+                                          TextOptions.TextRenderingMode="ClearType" 
+                                          TextOptions.TextFormattingMode="Display"
+                                          TextBlock.FontSize="12" 
+                                          TextBlock.Foreground="{TemplateBinding Foreground}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Root" Property="BorderBrush"
+                                    Value="{DynamicResource AccentColor}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <EventTrigger RoutedEvent="PreviewMouseLeftButtonDown">
+                            <BeginStoryboard>
+                                <Storyboard TargetProperty="Background.Color">
+                                    <ColorAnimation To="#FF6014EB" Duration="0:0:0.1"/>
+                                    <ColorAnimation To="#006014EB" Duration="0:0:0.4"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--#endregion-->
+
+    <!--#region Контекстное меню -->
+    <Style TargetType="{x:Type ContextMenu}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Margin" Value="0,0,5,5"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="{DynamicResource ComplementaryColor}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource SecondaryTextColor}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContextMenu}">
+                    <Border Margin="{TemplateBinding Margin}" 
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                        <StackPanel KeyboardNavigation.DirectionalNavigation="Cycle" 
+                                    IsItemsHost="True" Margin="2"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--#endregion-->
+    
     <!--#endregion-->
 </ResourceDictionary>

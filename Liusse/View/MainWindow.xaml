@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         Title="Liusse" MinHeight="350" MinWidth="250"
         Height="500" Width="350" Background="{DynamicResource MainColor}"
-        KeyDown="KeyInput" Closing="Window_Closing" Closed="Window_Closed">
+        KeyDown="KeyInput" 
+        Closing="WindowClosing" Closed="WindowClosed">
 
     <!--#region Подключение всех шаблонов и стилей к окну-->
     <Window.Resources>
@@ -73,6 +74,19 @@
             <Setter Property="Foreground" 
                     Value="{StaticResource AccentColor}"/>
         </Style>
+
+        <!--<Style TargetType="ListBox">
+            <Setter Property="ContextMenu">
+                <Setter.Value>
+                    <ContextMenu>
+                        <MenuItem Header="Копировать" CommandParameter="Copy"
+                              Command="{Binding JournalContextCommand}"/>
+                        <MenuItem Header="Удалить" CommandParameter="Remove"
+                              Command="{Binding JournalContextCommand}"/>
+                    </ContextMenu>
+                </Setter.Value>
+            </Setter>
+        </Style>-->
     </Window.Resources>
     <!--#endregion-->
     
@@ -88,10 +102,23 @@
             <Button Style="{StaticResource PanelButtonStyle}"
                     DockPanel.Dock="Left" Click="MenuButtonClick">
                 <Path Data="{StaticResource MenuSymbol}"/>
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Открыть в другом окне"
+                                  Click="OpenNewWindow"/>
+                    </ContextMenu>
+                </Button.ContextMenu>
             </Button>
             <Button Style="{StaticResource PanelButtonStyle}" 
                     DockPanel.Dock="Right" Click="JournalButtonClick">
                 <Path Data="{StaticResource HistorySymbol}"/>
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Открыть журнал в окне"/>
+                        <MenuItem Header="Очистить журнал"
+                                  Command="{Binding ClearJournalCommand}"/>
+                    </ContextMenu>
+                </Button.ContextMenu>
             </Button>
         </DockPanel>
         <!--#endregion-->
@@ -123,7 +150,7 @@
         <Border x:Name="JournalPanel" Grid.RowSpan="3" Margin="0,0,-200,0"
                 Style="{StaticResource Panel}" HorizontalAlignment="Right"
                 BorderThickness="1,0,0,0">
-            <Templ:JournalPanel/>
+            <Templ:JournalPanel x:Name="JournalPanelTemplate"/>
         </Border>
         <!--#endregion-->
     </Grid>

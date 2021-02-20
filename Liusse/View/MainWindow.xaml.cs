@@ -50,6 +50,9 @@ namespace Liusse
 				InitializeAnimation();
 				DataContext = new ViewModel();
 				viewModel = (ViewModel)DataContext;
+
+				//JournalPanelTemplate.Journal.SelectionChanged += FindContextIndex;
+				ModeMenuPanelTemplate.ListBox.SelectionChanged += ModeChanged;
 				ModeMenuPanelTemplate.ListBox.SelectionChanged += ModeChanged;
 				ModeMenuPanelTemplate.ListBox.PreviewMouseRightButtonDown += 
 					ListBox_PreviewRightMouseButtonDown;
@@ -157,11 +160,16 @@ namespace Liusse
 		#endregion
 
 		#region Обработчики событий окна
-		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		private void OpenNewWindow(object sender, RoutedEventArgs e)
+		{
+			MainWindow window = new MainWindow();
+			window.Show();
+		}
+		private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			logger.Trace("Завершение работы");
 		}
-		private void Window_Closed(object sender, EventArgs e)
+		private void WindowClosed(object sender, EventArgs e)
 		{
 			logger.Trace("Приложение завершило работу...\n");
 		}
@@ -215,11 +223,24 @@ namespace Liusse
 		}
 		#endregion
 
-		#region Обработчики выбора режима
+		#region Обработчики журнала
+		//public void FindContextIndex(object sender, SelectionChangedEventArgs e)
+		//{
+		//	ListBox listBox = sender as ListBox;
+		//	if (listBox == null)
+		//		return;
+
+		//	int selectedItem = listBox.Items.IndexOf(e.AddedItems[0]);
+		//	viewModel.JournalContextCommand.Execute(selectedItem);
+		//}
+
+		#endregion
+
+		#region Обработчики меню режимов
 		public void ModeChanged(object sender, SelectionChangedEventArgs e)
 		{
-			string selectMode = e.AddedItems[0].ToString();
-			switch (selectMode)
+			string selectedMode = e.AddedItems[0].ToString();
+			switch (selectedMode)
 			{
 				case "Обычный":
 					InputSlot.Content = new Templates.StandardInput();
@@ -235,7 +256,7 @@ namespace Liusse
 					break;
 			}
 			viewModel.InputCommand.Execute("Clear");
-			logger.Trace($"Переключено на режим: {selectMode}");
+			logger.Trace($"Переключено на режим: {selectedMode}");
 		}
 		private void ListBox_PreviewRightMouseButtonDown(object sender, 
 			MouseButtonEventArgs e)

@@ -3,6 +3,28 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
+
+
+
+
+
+
+
+
+
+
+using System.Windows;
+
+
+
+
+
+
+
+
+
+
+
 namespace Liusse
 {
 	// | - - |
@@ -12,6 +34,8 @@ namespace Liusse
 		private ModeManager modeManager;
 		private ButtonCommand inputCommand;
 		private ButtonCommand clearJournalCommand;
+		//private ButtonCommand journalContextCommand;
+		//private int selectedJournalItem = 0;
 
 		public ObservableCollection<JournalElement> Journal { get; set; }
 
@@ -47,6 +71,30 @@ namespace Liusse
 					(obj) => Journal.Count > 0));
 			}
 		}
+
+		//// | - |
+		//public ButtonCommand JournalContextCommand
+		//{
+		//	get
+		//	{
+		//		return journalContextCommand ??
+		//			(journalContextCommand = new ButtonCommand(obj =>
+		//			{
+		//				int? itemIndex = obj as int?;
+		//				if (itemIndex != null)
+		//					selectedJournalItem = (int)itemIndex;
+
+		//				string command = obj as string;
+		//				if (command != null)
+		//				{
+		//					if (command == "Copy")
+		//						itemIndex = null;
+		//					else if (command == "Remove")
+		//						parser.Journal.RemoveElement(selectedJournalItem);
+		//				}
+		//			}));
+		//	}
+		//}
 
 		/// <summary>
 		/// Свойство для доступа к ядру калькулятора.
