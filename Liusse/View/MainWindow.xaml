@@ -74,19 +74,6 @@
             <Setter Property="Foreground" 
                     Value="{StaticResource AccentColor}"/>
         </Style>
-
-        <!--<Style TargetType="ListBox">
-            <Setter Property="ContextMenu">
-                <Setter.Value>
-                    <ContextMenu>
-                        <MenuItem Header="Копировать" CommandParameter="Copy"
-                              Command="{Binding JournalContextCommand}"/>
-                        <MenuItem Header="Удалить" CommandParameter="Remove"
-                              Command="{Binding JournalContextCommand}"/>
-                    </ContextMenu>
-                </Setter.Value>
-            </Setter>
-        </Style>-->
     </Window.Resources>
     <!--#endregion-->
     

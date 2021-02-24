@@ -51,7 +51,6 @@ namespace Liusse
 				DataContext = new ViewModel();
 				viewModel = (ViewModel)DataContext;
 
-				//JournalPanelTemplate.Journal.SelectionChanged += FindContextIndex;
 				ModeMenuPanelTemplate.ListBox.SelectionChanged += ModeChanged;
 				ModeMenuPanelTemplate.ListBox.SelectionChanged += ModeChanged;
 				ModeMenuPanelTemplate.ListBox.PreviewMouseRightButtonDown += 
@@ -221,19 +220,6 @@ namespace Liusse
 			JournalPanelCloseAnimation();
 			BlackAreaCloseAnimation();
 		}
-		#endregion
-
-		#region Обработчики журнала
-		//public void FindContextIndex(object sender, SelectionChangedEventArgs e)
-		//{
-		//	ListBox listBox = sender as ListBox;
-		//	if (listBox == null)
-		//		return;
-
-		//	int selectedItem = listBox.Items.IndexOf(e.AddedItems[0]);
-		//	viewModel.JournalContextCommand.Execute(selectedItem);
-		//}
-
 		#endregion
 
 		#region Обработчики меню режимов

@@ -3,41 +3,17 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-
-
-
-
-
-
-
-
-
-
-using System.Windows;
-
-
-
-
-
-
-
-
-
-
-
 namespace Liusse
 {
 	// | - - |
 	public class ViewModel : INotifyPropertyChanged
 	{
-		private Core parser;
-		private ModeManager modeManager;
 		private ButtonCommand inputCommand;
 		private ButtonCommand clearJournalCommand;
-		//private ButtonCommand journalContextCommand;
-		//private int selectedJournalItem = 0;
 
+		public Core Parser { get; set; }
 		public ObservableCollection<JournalElement> Journal { get; set; }
+		public ModeManager ModeManager { get; set; }
 
 		/// <summary>
 		/// Команда ввода символа.
@@ -51,7 +27,7 @@ namespace Liusse
 					{
 						string symbol = obj as string;
 						if (symbol != null)
-							parser.Receiver(symbol);
+							Parser.Receiver(symbol);
 					}));
 			}
 		}
@@ -66,59 +42,17 @@ namespace Liusse
 				return clearJournalCommand ??
 					(clearJournalCommand = new ButtonCommand(obj =>
 					{
-						parser.Journal.Clear();
+						Parser.Journal.Clear();
 					},
 					(obj) => Journal.Count > 0));
 			}
 		}
 
-		//// | - |
-		//public ButtonCommand JournalContextCommand
-		//{
-		//	get
-		//	{
-		//		return journalContextCommand ??
-		//			(journalContextCommand = new ButtonCommand(obj =>
-		//			{
-		//				int? itemIndex = obj as int?;
-		//				if (itemIndex != null)
-		//					selectedJournalItem = (int)itemIndex;
-
-		//				string command = obj as string;
-		//				if (command != null)
-		//				{
-		//					if (command == "Copy")
-		//						itemIndex = null;
-		//					else if (command == "Remove")
-		//						parser.Journal.RemoveElement(selectedJournalItem);
-		//				}
-		//			}));
-		//	}
-		//}
-
-		/// <summary>
-		/// Свойство для доступа к ядру калькулятора.
-		/// </summary>
-		public Core Parser
-		{
-			get { return parser; }
-			set { }
-		}
-
-		/// <summary>
-		/// Свойство для доступа к менеджеру режимов.
-		/// </summary>
-		public ModeManager ModeManager
-		{
-			get { return modeManager; }
-			set { }
-		}
-
 		public ViewModel()
 		{
-			parser = new Core();
-			Journal = parser.Journal.GetJournal();
-			modeManager = new ModeManager();
+			Parser = new Core();
+			Journal = Parser.Journal.GetJournal();
+			ModeManager = new ModeManager();
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
