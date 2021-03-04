@@ -62,8 +62,11 @@ namespace Liusse
 		/// <param name="input">Команда на действие</param>
 		public void Receiver(string command)
 		{
-			if (CurrentExpression == "Деление на ноль невозможно")
+			if (currentExpression == "Деление на ноль невозможно" ||
+				currentExpression ==  "Слишком большое число")
+			{
 				CurrentExpression = "";
+			}
 			if (Example != "" && command == "Result")
 				return;
 
@@ -97,7 +100,7 @@ namespace Liusse
 			logger.Trace("Вычисление результата...");
 			try
 			{
-				string expression = CurrentExpression;
+				string expression = currentExpression;
 				int priorityIndex;
 				string expressionFragment;
 				string result;
@@ -114,10 +117,10 @@ namespace Liusse
 						expression = Parse.FormatResult(expression);
 						if (expression != CurrentExpression)
 						{
-							Example = Parse.AddingMissingBrackets(CurrentExpression) + '=';
+							Example = Parse.AddingMissingBrackets(currentExpression) + '=';
 							CurrentExpression = expression;
-							Journal.AddElement(CurrentExpression, Example);
-							logger.Trace($"Ответ: {Example+CurrentExpression}");
+							Journal.AddElement(expression, Example);
+							logger.Trace($"Ответ: {Example + expression}");
 						}
 						break;
 					}
@@ -136,7 +139,7 @@ namespace Liusse
 				logger.Trace("Вычисление закончилось успешно...");
 			}
 			catch (NotCorrectException) { }
-			catch (OverflowException) { } // Убрать после добавления экспоненты!!!!!!!!!!!!!!!!
+			catch (OverflowException) { CurrentExpression = "Слишком большое число"; }
 			catch (DivideByZeroException)
 			{
 				Example = Parse.AddingMissingBrackets(CurrentExpression) + '=';
@@ -155,10 +158,10 @@ namespace Liusse
 		/// </summary>
 		private void DeleteSymbol()
 		{
-			if (CurrentExpression.Length > 0)
+			if (currentExpression.Length > 0)
 			{
-				CurrentExpression = CurrentExpression.Remove(
-					CurrentExpression.Length - 1);
+				CurrentExpression = currentExpression.Remove(
+					currentExpression.Length - 1);
 				logger.Trace("Последний символ удален");
 			}
 		}
@@ -168,7 +171,7 @@ namespace Liusse
 		/// </summary>
 		private void Clear()
 		{
-			if (CurrentExpression != "")
+			if (currentExpression != "")
 			{
 				CurrentExpression = "";
 				logger.Trace("Выражение очищено");
@@ -180,8 +183,8 @@ namespace Liusse
 		/// </summary>
 		private void PlusMinus()
 		{
-			string result = Parse.InvertNumber(CurrentExpression);
-			if (CurrentExpression != result)
+			string result = Parse.InvertNumber(currentExpression);
+			if (currentExpression != result)
 			{
 				CurrentExpression = result;
 				logger.Trace("Знак изменен");
@@ -194,8 +197,8 @@ namespace Liusse
 		/// </summary>
 		private void AddBracket()
 		{
-			string result = Parse.AddBracket(CurrentExpression);
-			if (CurrentExpression != result)
+			string result = Parse.AddBracket(currentExpression);
+			if (currentExpression != result)
 			{
 				CurrentExpression = result;
 				logger.Trace("Добавлена скобка");
@@ -207,8 +210,8 @@ namespace Liusse
 		/// </summary>
 		private void AddOpenBracket()
 		{
-			string result = Parse.AddOpenBracket(CurrentExpression);
-			if (CurrentExpression != result)
+			string result = Parse.AddOpenBracket(currentExpression);
+			if (currentExpression != result)
 			{
 				CurrentExpression = result;
 				logger.Trace("Добавлена открывающая скобка");
@@ -220,8 +223,8 @@ namespace Liusse
 		/// </summary>
 		private void AddCloseBracket()
 		{
-			string result = Parse.AddCloseBracket(CurrentExpression);
-			if (CurrentExpression != result)
+			string result = Parse.AddCloseBracket(currentExpression);
+			if (currentExpression != result)
 			{
 				CurrentExpression = result;
 				logger.Trace("Добавлена закрывающая скобка");
@@ -233,8 +236,8 @@ namespace Liusse
 		/// </summary>
 		private void AddSeparator()
 		{
-			string result = Parse.AddSeparator(CurrentExpression);
-			if (CurrentExpression != result)
+			string result = Parse.AddSeparator(currentExpression);
+			if (currentExpression != result)
 			{
 				CurrentExpression = result;
 				logger.Trace("Добавлен разделитель дроби");
@@ -248,8 +251,8 @@ namespace Liusse
 		private void AddSymbol(string symbol)
 		{
 			char charSymbol = symbol[0];
-			string result = Parse.AddSymbol(CurrentExpression, charSymbol);
-			if (CurrentExpression != result)
+			string result = Parse.AddSymbol(currentExpression, charSymbol);
+			if (currentExpression != result)
 			{
 				CurrentExpression = result;
 				logger.Trace($"Добавлен символ {charSymbol}");

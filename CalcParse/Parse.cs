@@ -336,8 +336,8 @@ namespace CalcParse
 			if (priorityIndex == -1)
 			{
 				decimal temp = Convert.ToDecimal(expression);
-				temp = Decimal.Round(temp, 15);
-				expression = temp.ToString("G29");
+				temp = Decimal.Round(temp, 10);
+				expression = String.Format("{0:0.##########}", temp);
 			}
 			return expression;
 		}

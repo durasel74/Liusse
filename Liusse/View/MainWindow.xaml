@@ -140,6 +140,7 @@
             <Templ:JournalPanel x:Name="JournalPanelTemplate"/>
         </Border>
         <!--#endregion-->
+        
     </Grid>
 </Window>
  
