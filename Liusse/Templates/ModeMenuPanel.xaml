@@ -22,8 +22,8 @@
         <!--#endregion-->
 
         <!--#region Кнопка О программе-->
-        <Button Grid.Row="1" Template="{StaticResource PanelButton}"
-                Height="35" Width="35"  Focusable="False"
+        <Button x:Name="InfoButton" Grid.Row="1" Height="35" Width="35"
+                Template="{StaticResource PanelButton}" Focusable="False"
                 HorizontalAlignment="Left" Padding="5"
                 Background="{StaticResource MainColor}"
                 Foreground="{DynamicResource PrimaryTextColor}">

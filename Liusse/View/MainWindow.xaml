@@ -8,8 +8,7 @@
         mc:Ignorable="d"
         Title="Liusse" MinHeight="350" MinWidth="250"
         Height="500" Width="350" Background="{DynamicResource MainColor}"
-        KeyDown="KeyInput" 
-        Closing="WindowClosing" Closed="WindowClosed">
+        KeyDown="KeyInput" Closing="WindowClosing" Closed="WindowClosed">
 
     <!--#region Подключение всех шаблонов и стилей к окну-->
     <Window.Resources>
@@ -101,7 +100,7 @@
                 <Path Data="{StaticResource HistorySymbol}"/>
                 <Button.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Открыть журнал в окне"/>
+                        <!--<MenuItem Header="Открыть журнал в окне"/>-->
                         <MenuItem Header="Очистить журнал"
                                   Command="{Binding ClearJournalCommand}"/>
                     </ContextMenu>
@@ -124,20 +123,27 @@
         <!--#region Выезжающие панели-->
         <Border x:Name="BlackArea" Grid.RowSpan="3" Visibility="Collapsed" 
                 Opacity="0" MouseLeftButtonDown="BlackAreaClick" 
-                Background="Black">
+                Background="Black" Panel.ZIndex="1">
         </Border>
 
         <Border x:Name="MenuModePanel" Grid.RowSpan="3" Margin="-200,0,0,0"
-                Style="{StaticResource Panel}" HorizontalAlignment="Left"
-                BorderThickness="0,0,1,0">
+                HorizontalAlignment="Left" BorderThickness="0,0,1,0" 
+                Style="{StaticResource Panel}">
             <Templ:ModeMenuPanel x:Name="ModeMenuPanelTemplate"
                 DataContext="{Binding ModeManager}"/>
         </Border>
 
         <Border x:Name="JournalPanel" Grid.RowSpan="3" Margin="0,0,-200,0"
-                Style="{StaticResource Panel}" HorizontalAlignment="Right"
-                BorderThickness="1,0,0,0">
+                HorizontalAlignment="Right" BorderThickness="1,0,0,0" 
+                Style="{StaticResource Panel}">
             <Templ:JournalPanel x:Name="JournalPanelTemplate"/>
+        </Border>
+
+        <Border x:Name="InfoPanel" Grid.Row="2" Margin="-200,0,0,39"
+                VerticalAlignment="Bottom" HorizontalAlignment="Left" 
+                BorderThickness="0,1,1,1" Style="{StaticResource Panel}"
+                Height="150" Padding="0">
+            <Templ:InfoPanel/>
         </Border>
         <!--#endregion-->
         

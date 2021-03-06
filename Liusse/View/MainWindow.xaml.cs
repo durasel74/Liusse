@@ -25,6 +25,7 @@ namespace Liusse
 
 		private bool menuPanelOpen = false;
 		private bool journalPanelOpen = false;
+		private bool infoPanelOpen = false;
 		private double panelOpenAnimationDuration = 0.2;
 		private double panelCloseAnimationDuration = 0.1;
 		private double decelerationAnimation = 1;
@@ -33,8 +34,12 @@ namespace Liusse
 		#region Переменные анимации
 		private ThicknessAnimation menuPanelOpenAnimation;
 		private ThicknessAnimation menuPanelCloseAnimation;
+		private ThicknessAnimation infoPanelOpenAnimation;
+		private ThicknessAnimation infoPanelCloseAnimation;
+
 		private ThicknessAnimation journalPanelOpenAnimation;
 		private ThicknessAnimation journalPanelCloseAnimation;
+
 		private DoubleAnimation blackAreaOpenAnimation;
 		private DoubleAnimation blackAreaCloseAnimation;
 		#endregion
@@ -57,6 +62,7 @@ namespace Liusse
 					ListBox_PreviewRightMouseButtonDown;
 				ModeMenuPanelTemplate.ListBox.PreviewMouseLeftButtonUp +=
 					ListBox_PreviewLeftMouseButtonUp;
+				ModeMenuPanelTemplate.InfoButton.Click += InfoButtonClick;
 			}
 			catch (Exception error)
 			{
@@ -69,6 +75,7 @@ namespace Liusse
 		private void InitializePanels()
 		{
 			MenuModePanel.Visibility = Visibility.Visible;
+			InfoPanel.Visibility = Visibility.Visible;
 			JournalPanel.Visibility = Visibility.Visible;
 		}
 		private void InitializeAnimation()
@@ -85,6 +92,20 @@ namespace Liusse
 			menuPanelCloseAnimation.AccelerationRatio = accelerationAnimation;
 			menuPanelCloseAnimation.DecelerationRatio = 0;
 			menuPanelCloseAnimation.Duration =
+				TimeSpan.FromSeconds(panelCloseAnimationDuration);
+
+			infoPanelOpenAnimation = new ThicknessAnimation();
+			infoPanelOpenAnimation.To = new Thickness(0, 0, 0, 39);
+			infoPanelOpenAnimation.AccelerationRatio = 0;
+			infoPanelOpenAnimation.DecelerationRatio = decelerationAnimation;
+			infoPanelOpenAnimation.Duration =
+				TimeSpan.FromSeconds(panelOpenAnimationDuration);
+
+			infoPanelCloseAnimation = new ThicknessAnimation();
+			infoPanelCloseAnimation.To = new Thickness(-200, 0, 0, 39);
+			infoPanelCloseAnimation.AccelerationRatio = accelerationAnimation;
+			infoPanelCloseAnimation.DecelerationRatio = 0;
+			infoPanelCloseAnimation.Duration =
 				TimeSpan.FromSeconds(panelCloseAnimationDuration);
 
 			journalPanelOpenAnimation = new ThicknessAnimation();
@@ -128,6 +149,16 @@ namespace Liusse
 		{
 			MenuModePanel.BeginAnimation(MarginProperty,
 				menuPanelCloseAnimation);
+		}
+		private void InfoPanelOpenAnimation()
+		{
+			InfoPanel.BeginAnimation(MarginProperty,
+				infoPanelOpenAnimation);
+		}
+		private void InfoPanelCloseAnimation()
+		{
+			InfoPanel.BeginAnimation(MarginProperty,
+				infoPanelCloseAnimation);
 		}
 
 		private void JournalPanelOpenAnimation()
@@ -180,7 +211,9 @@ namespace Liusse
 			if (!menuPanelOpen)
 			{
 				menuPanelOpen = true;
+				infoPanelOpen = false;
 				journalPanelOpen = false;
+				InfoPanelCloseAnimation();
 				JournalPanelCloseAnimation();
 				BlackAreaOpenAnimation();
 				MenuPanelOpenAnimation();
@@ -188,8 +221,23 @@ namespace Liusse
 			else
 			{
 				menuPanelOpen = false;
+				infoPanelOpen = false;
 				MenuPanelCloseAnimation();
+				InfoPanelCloseAnimation();
 				BlackAreaCloseAnimation();
+			}
+		}
+		private void InfoButtonClick(object sender, RoutedEventArgs e)
+		{
+			if (!infoPanelOpen)
+			{
+				infoPanelOpen = true;
+				InfoPanelOpenAnimation();
+			}
+			else
+			{
+				infoPanelOpen = false;
+				InfoPanelCloseAnimation();
 			}
 		}
 
@@ -200,7 +248,9 @@ namespace Liusse
 			{
 				journalPanelOpen = true;
 				menuPanelOpen = false;
+				infoPanelOpen = false;
 				MenuPanelCloseAnimation();
+				InfoPanelCloseAnimation();
 				BlackAreaOpenAnimation();
 				JournalPanelOpenAnimation();
 			}
@@ -215,8 +265,10 @@ namespace Liusse
 		private void BlackAreaClick(object sender, MouseButtonEventArgs e)
 		{
 			menuPanelOpen = false;
+			infoPanelOpen = false;
 			journalPanelOpen = false;
 			MenuPanelCloseAnimation();
+			InfoPanelCloseAnimation();
 			JournalPanelCloseAnimation();
 			BlackAreaCloseAnimation();
 		}
@@ -253,7 +305,9 @@ namespace Liusse
 			MouseButtonEventArgs e)
 		{
 			menuPanelOpen = false;
+			infoPanelOpen = false;
 			MenuPanelCloseAnimation();
+			InfoPanelCloseAnimation();
 			BlackAreaCloseAnimation();
 		}
 		#endregion

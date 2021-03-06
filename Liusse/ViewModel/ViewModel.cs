@@ -8,9 +8,11 @@ namespace Liusse
 	// | - - |
 	public class ViewModel : INotifyPropertyChanged
 	{
+		private const string version = "0.5.2";
 		private ButtonCommand inputCommand;
 		private ButtonCommand clearJournalCommand;
 
+		public string VERSION { get { return version; } set { } }
 		public Core Parser { get; set; }
 		public ObservableCollection<JournalElement> Journal { get; set; }
 		public ModeManager ModeManager { get; set; }
