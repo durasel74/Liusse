@@ -15,6 +15,10 @@ namespace Liusse
 		private Logger logger = LogManager.GetCurrentClassLogger();
 		private string currentExpression;
 		private string example;
+
+		/// <summary>
+		/// Содержит историю вычислений.
+		/// </summary>
 		public Journal Journal { get; }
 
 		/// <summary>

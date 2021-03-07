@@ -5,10 +5,12 @@ using System.Runtime.CompilerServices;
 
 namespace Liusse
 {
-	// | - - |
+	/// <summary>
+	/// Главная модель представления.
+	/// </summary>
 	public class ViewModel : INotifyPropertyChanged
 	{
-		private const string version = "0.5.3";
+		private const string version = "0.5.4";
 		private ButtonCommand inputCommand;
 		private ButtonCommand clearJournalCommand;
 		private ButtonCommand clearLastElementCommand;

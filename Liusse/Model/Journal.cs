@@ -4,7 +4,9 @@ using System.Collections.ObjectModel;
 namespace Liusse
 {
 	#region Класс - Журнал
-	// | - - |
+	/// <summary>
+	/// Предоставляет методы для ведения истории вычислений.
+	/// </summary>
 	public class Journal
 	{
 		private ObservableCollection<JournalElement> elements = 
@@ -30,16 +32,13 @@ namespace Liusse
 			return elements.Count;
 		}
 
-		// | - |
+		/// <summary>
+		/// Возвращает последний добавленный элемент.
+		/// </summary>
+		/// <returns>Элемент журнала</returns>
 		public JournalElement GetLastElement()
 		{
 			return elements[0];
-		}
-
-		// | - |
-		public JournalElement GetElement(int index)
-		{
-			return elements[index];
 		}
 
 		/// <summary>
@@ -51,16 +50,12 @@ namespace Liusse
 			return elements;
 		}
 
-		// | - |
+		/// <summary>
+		/// Удаляет последний добавленный элемент в журнал.
+		/// </summary>
 		public void RemoveLastElement()
 		{
 			elements.RemoveAt(0);
-		}
-
-		// | - |
-		public void RemoveElement(int index)
-		{
-			elements.RemoveAt(index);
 		}
 
 		/// <summary>
@@ -70,6 +65,20 @@ namespace Liusse
 		{
 			elements.Clear();
 		}
+
+		#region \Не было добавлено\
+		//// | - |
+		//public JournalElement GetElement(int index)
+		//{
+		//	return elements[index];
+		//}
+
+		//// | - |
+		//public void RemoveElement(int index)
+		//{
+		//	elements.RemoveAt(index);
+		//}
+		#endregion
 	}
 	#endregion
 

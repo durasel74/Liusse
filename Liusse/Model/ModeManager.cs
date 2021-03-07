@@ -18,7 +18,7 @@ namespace Liusse
 		public ObservableCollection<string> Modes { get; }
 
 		/// <summary>
-		/// Режим выбранный в данный момент.
+		/// Режим, выбранный в данный момент.
 		/// </summary>
 		public string Mode
 		{ 
