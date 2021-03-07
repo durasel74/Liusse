@@ -22,6 +22,7 @@ namespace Liusse
 	{
 		private ViewModel viewModel;
 		private Logger logger = LogManager.GetCurrentClassLogger();
+		private string lastMode = "Обычный";
 
 		private bool menuPanelOpen = false;
 		private bool journalPanelOpen = false;
@@ -275,7 +276,7 @@ namespace Liusse
 		#endregion
 
 		#region Обработчики меню режимов
-		public void ModeChanged(object sender, SelectionChangedEventArgs e)
+		private void ModeChanged(object sender, SelectionChangedEventArgs e)
 		{
 			string selectedMode = e.AddedItems[0].ToString();
 			switch (selectedMode)
@@ -293,8 +294,12 @@ namespace Liusse
 					OutputSlot.Content = null;
 					break;
 			}
-			viewModel.InputCommand.Execute("Clear");
-			logger.Trace($"Переключено на режим: {selectedMode}");
+			if (selectedMode != lastMode)
+			{
+				viewModel.InputCommand.Execute("Clear");
+				logger.Trace($"Переключено на режим: {selectedMode}");
+				lastMode = selectedMode;
+			}
 		}
 		private void ListBox_PreviewRightMouseButtonDown(object sender, 
 			MouseButtonEventArgs e)
@@ -392,10 +397,62 @@ namespace Liusse
 			else if (pressedKey == Key.D9 || pressedKey == Key.NumPad9)
 				viewModel.InputCommand.Execute("9");
 		}
+		#endregion
+
+		#region Горячие клавиши
+		private void Key_Shortcut(object sender, KeyEventArgs e)
+		{
+			Key pressedKey = e.Key;
+
+			if (IsCtrltDown() && pressedKey == Key.J)
+				JournalButtonClick(new object(), new RoutedEventArgs());
+			else if (IsCtrltDown() && IsShiftDown() && pressedKey == Key.D)
+				viewModel.ClearJournalCommand.Execute(null);
+			else if (IsCtrltDown() && pressedKey == Key.D)
+				viewModel.ClearLastElementCommand.Execute(null);
+
+			else if (IsCtrltDown() && IsShiftDown() && pressedKey == Key.M)
+				OpenNewWindow(new object(), new RoutedEventArgs());
+			else if (IsCtrltDown() && pressedKey == Key.M)
+				MenuButtonClick(new object(), new RoutedEventArgs());
+
+			else if (IsCtrltDown() && IsShiftDown() && pressedKey == Key.C)
+			{
+				string expression = viewModel.Parser.CurrentExpression;
+				string example = viewModel.Parser.Example;
+				if (example != "")
+				{
+					try { Clipboard.SetText(example + expression); }
+					catch { }
+				}
+			}
+			else if (IsCtrltDown() && pressedKey == Key.C)
+			{
+				var output = OutputSlot.Content as Templates.StandardOutput;
+				
+				if (output.expression.SelectionLength < 1)
+				{
+					try { Clipboard.SetText(viewModel.Parser.CurrentExpression); }
+					catch { }
+				}
+			}
+		}
+		#endregion
+
+		#region Разное
 		private bool IsShiftDown()
 		{
 			if (Keyboard.IsKeyDown(Key.LeftShift) ||
 				Keyboard.IsKeyDown(Key.RightShift))
+			{
+				return true;
+			}
+			return false;
+		}
+		private bool IsCtrltDown()
+		{
+			if (Keyboard.IsKeyDown(Key.LeftCtrl) ||
+				Keyboard.IsKeyDown(Key.RightCtrl))
 			{
 				return true;
 			}

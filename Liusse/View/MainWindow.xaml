@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         Title="Liusse" MinHeight="350" MinWidth="250"
         Height="500" Width="350" Background="{DynamicResource MainColor}"
-        KeyDown="KeyInput" Closing="WindowClosing" Closed="WindowClosed">
+        KeyDown="KeyInput" KeyUp="Key_Shortcut" Closing="WindowClosing" 
+        Closed="WindowClosed">
 
     <!--#region Подключение всех шаблонов и стилей к окну-->
     <Window.Resources>
@@ -112,7 +113,7 @@
         <!--#region Основная область-->
         <ContentControl x:Name="OutputSlot" Grid.Row="1" Margin="5" 
                         DataContext="{Binding Parser}">
-            <Templ:StandardOutput/>
+            <Templ:StandardOutput x:Name="Output"/>
         </ContentControl>
 
         <ContentControl x:Name="InputSlot" Grid.Row="2" Margin="2">

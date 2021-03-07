@@ -8,9 +8,10 @@ namespace Liusse
 	// | - - |
 	public class ViewModel : INotifyPropertyChanged
 	{
-		private const string version = "0.5.2";
+		private const string version = "0.5.3";
 		private ButtonCommand inputCommand;
 		private ButtonCommand clearJournalCommand;
+		private ButtonCommand clearLastElementCommand;
 
 		public string VERSION { get { return version; } set { } }
 		public Core Parser { get; set; }
@@ -44,7 +45,25 @@ namespace Liusse
 				return clearJournalCommand ??
 					(clearJournalCommand = new ButtonCommand(obj =>
 					{
-						Parser.Journal.Clear();
+						if (Journal.Count > 0)
+							Parser.Journal.Clear();
+					},
+					(obj) => Journal.Count > 0));
+			}
+		}
+
+		/// <summary>
+		/// Команда удаления последнего добавленного элемента в журнал.
+		/// </summary>
+		public ButtonCommand ClearLastElementCommand
+		{ 
+			get
+			{
+				return clearLastElementCommand ??
+					(clearLastElementCommand = new ButtonCommand(obj =>
+					{
+						if (Journal.Count > 0)
+							Parser.Journal.RemoveLastElement();
 					},
 					(obj) => Journal.Count > 0));
 			}

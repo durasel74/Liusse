@@ -21,9 +21,9 @@
         
         <Viewbox Grid.Row="1" HorizontalAlignment="Right"
                  VerticalAlignment="Top">
-            <TextBox Margin="0,-1,0,-2" MaxWidth="200" TextWrapping="Wrap"
-                     TextAlignment="Right" IsReadOnly="True"
-                     Text="{Binding CurrentExpression}"/>
+            <TextBox x:Name="expression" Margin="0,-1,0,-2" MaxWidth="200" 
+                     TextWrapping="Wrap" TextAlignment="Right" 
+                     IsReadOnly="True" Text="{Binding CurrentExpression}"/>
         </Viewbox>
         
     </Grid>
