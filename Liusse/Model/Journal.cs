@@ -42,7 +42,7 @@ namespace Liusse
 		}
 
 		/// <summary>
-		/// Отдает все записи журнала.
+		/// Возвращает все записи журнала.
 		/// </summary>
 		/// <returns>Список элементов журнала.</returns>
 		public ObservableCollection<JournalElement> GetJournal()
@@ -67,17 +67,14 @@ namespace Liusse
 		}
 
 		#region \Не было добавлено\
-		//// | - |
-		//public JournalElement GetElement(int index)
-		//{
-		//	return elements[index];
-		//}
-
-		//// | - |
-		//public void RemoveElement(int index)
-		//{
-		//	elements.RemoveAt(index);
-		//}
+		public JournalElement GetElement(int index)
+		{
+			return elements[index];
+		}
+		public void RemoveElement(int index)
+		{
+			elements.RemoveAt(index);
+		}
 		#endregion
 	}
 	#endregion

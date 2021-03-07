@@ -96,9 +96,6 @@ namespace Liusse
 				AddSymbol(command);
 		}
 
-		/// <summary>
-		/// Решает текущее выражение.
-		/// </summary>
 		private void Result()
 		{
 			logger.Trace("Вычисление результата...");
@@ -157,9 +154,6 @@ namespace Liusse
 			}
 		}
 
-		/// <summary>
-		/// Удаляет последний введенный символ.
-		/// </summary>
 		private void DeleteSymbol()
 		{
 			if (currentExpression.Length > 0)
@@ -170,9 +164,6 @@ namespace Liusse
 			}
 		}
 
-		/// <summary>
-		/// Полностью очищает текущее выражение.
-		/// </summary>
 		private void Clear()
 		{
 			if (currentExpression != "")
@@ -182,9 +173,6 @@ namespace Liusse
 			}
 		}
 
-		/// <summary>
-		/// Меняет знак числа на противоположный
-		/// </summary>
 		private void PlusMinus()
 		{
 			string result = Parse.InvertNumber(currentExpression);
@@ -195,10 +183,6 @@ namespace Liusse
 			}
 		}
 
-		/// <summary>
-		/// Добавляет скобку в конец выражения. 
-		/// Нужная скобка определяется автоматически.
-		/// </summary>
 		private void AddBracket()
 		{
 			string result = Parse.AddBracket(currentExpression);
@@ -209,9 +193,6 @@ namespace Liusse
 			}
 		}
 
-		/// <summary>
-		/// Добавляет открытую скобку в конец выражения.
-		/// </summary>
 		private void AddOpenBracket()
 		{
 			string result = Parse.AddOpenBracket(currentExpression);
@@ -222,9 +203,6 @@ namespace Liusse
 			}
 		}
 
-		/// <summary>
-		/// Добавляет закрытую скобку в конец выражения.
-		/// </summary>
 		private void AddCloseBracket()
 		{
 			string result = Parse.AddCloseBracket(currentExpression);
@@ -235,9 +213,6 @@ namespace Liusse
 			}
 		}
 
-		/// <summary>
-		/// Добавляет разделитель дроби в конец выражения.
-		/// </summary>
 		private void AddSeparator()
 		{
 			string result = Parse.AddSeparator(currentExpression);
@@ -248,10 +223,6 @@ namespace Liusse
 			}
 		}
 
-		/// <summary>
-		/// Добавляет символ в конец выражения.
-		/// </summary>
-		/// <param name="symbol">Число или знак операции.</param>
 		private void AddSymbol(string symbol)
 		{
 			char charSymbol = symbol[0];
