@@ -1,0 +1,306 @@
+{
+  "homepages": [],
+  "source_base_path": "D:/Work/Programming/Liusse/Liusse",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liusse.App.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liusse.App.html",
+          "hash": "Nm1Od4mwPgYiEWINLcL17w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liusse.ButtonCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liusse.ButtonCommand.html",
+          "hash": "Lv89kyi5BHnFGnOGedRbDQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liusse.Core.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liusse.Core.html",
+          "hash": "oSUqlJ9BK+5uAKi1ZmpilA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liusse.Journal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liusse.Journal.html",
+          "hash": "D0Hu5Tgph4vysa4yysPEYw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liusse.JournalElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liusse.JournalElement.html",
+          "hash": "qVferkTT6E2rac3uauxj0Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liusse.MainWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liusse.MainWindow.html",
+          "hash": "l7an1wdfAnwZRcr9z/0rFg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liusse.ModeManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liusse.ModeManager.html",
+          "hash": "YeSVeF098MsvRwVGkSyfxw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liusse.Templates.InfoPanel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liusse.Templates.InfoPanel.html",
+          "hash": "umusJURfy4OZshPbQO+3Wg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liusse.Templates.JournalPanel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liusse.Templates.JournalPanel.html",
+          "hash": "vY/VpCDiYULiRzYzrBaF3g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liusse.Templates.ModeMenuPanel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liusse.Templates.ModeMenuPanel.html",
+          "hash": "vFS2hPA58uaxOVqJdCeOmw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liusse.Templates.StandardInput.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liusse.Templates.StandardInput.html",
+          "hash": "ReCotNwxBnqG0wLgj81HFA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liusse.Templates.StandardOutput.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liusse.Templates.StandardOutput.html",
+          "hash": "9FSFIlm1LBkTiP3k/Ke0gQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liusse.Templates.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liusse.Templates.html",
+          "hash": "Do+EwYHgSu7Q/Xhlv/FYUA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liusse.ViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liusse.ViewModel.html",
+          "hash": "iobSH882kPq8lUAyBvttiA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liusse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liusse.html",
+          "hash": "stBbSAclEhLxEB3BRYoryg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "pSwceKhSkj2tahC9XBBamA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "nGUg/D2YmE3K4otsmX4oiQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "r9yGoUfaXHcEt0uz1N1rKg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "gB8AESyvNru97tzIZofEEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "loLArR4AibvxGgB5nK528g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "+rHUkRZHZRi5gd1aTU6lJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 3,
+          "skipped_file_count": 3
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 15,
+          "skipped_file_count": 15
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
