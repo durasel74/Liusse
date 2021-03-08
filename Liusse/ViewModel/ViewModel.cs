@@ -10,7 +10,7 @@ namespace Liusse
 	/// </summary>
 	public class ViewModel : INotifyPropertyChanged
 	{
-		private const string version = "0.5.7";
+		private const string version = "0.6.1";
 		private ButtonCommand inputCommand;
 		private ButtonCommand clearJournalCommand;
 		private ButtonCommand clearLastElementCommand;
