@@ -1,5 +1,5 @@
 Liusse
-https://img.shields.io/appveyor/build/durasel74/https://github.com/durasel74/Liusse.git?color=Blueviolet&label=Ok&logo=Ok&logoColor=Ok
+
 Описание 
 
 Liusse - это простой калькулятор, поддерживающий простые математические операции (сумма, разность, умножение, деление). Введенные выражения высчитываются по математическим правилам (приоритет операций, скобки).
