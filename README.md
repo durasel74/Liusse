@@ -1,5 +1,5 @@
 # Liusse #
-<div style="text-align:center">Liusse</div>
+<p2 align="center">Liusse</p2>
 
 Описание 
 
